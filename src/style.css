@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	.primary {
+		@apply bg-[#6C257A];
+	}
+
+	.background {
+		@apply bg-[#0E0410];
+	}
+}
