@@ -1,5 +1,3 @@
-'use client'
-
 import NavigationBar from "@/components/NavigationBar";
 import MovieCard from "@/components/cards/MovieCard";
 import { Movie } from "@/typescript/interfaces";
