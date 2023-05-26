@@ -1,12 +1,10 @@
 import MovieCard from "@/components/cards/MovieCard";
-import RecommendedCard from "@/components/cards/TrendingCard";
 import Image from "next/image";
 import axios from "axios";
 import { Movie, Trending } from "@/typescript/interfaces";
 import TrendingCard from "@/components/cards/TrendingCard";
 import HeroSection from "@/components/sections/HeroSection";
 import { NavigationLink, links } from "@/components/NavigationBar";
-import type { NavLink } from "@/components/NavigationBar";
 
 const fetchDiscoverMovies = async () => {
     const res = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
@@ -30,7 +28,6 @@ export default async function HomePage() {
 
     const movies = await fetchDiscoverMovies()
     const trending = await fetchTrendingMovies()
-    console.log(trending)
 
     return (
         <main className=" h-screen overflow-y-auto">
@@ -45,8 +42,8 @@ export default async function HomePage() {
                         </div>
                         <div className="flex items-center gap-x-8">
                             <ul className="flex items-center gap-x-8">
-                                {links.map((link: NavLink) => (
-                                    <NavigationLink key={link.href} href={link.href} title={link.title} />
+                                {links.map((link) => (
+                                    <NavigationLink key={link.href + link.title} href={link.href} title={link.title} />
                                 ))}
                             </ul >
                             <div className="h-10 w-28 primary rounded-sm grid place-items-center">
@@ -109,7 +106,11 @@ export default async function HomePage() {
     )
 }
 
-export function SectionHeadingLink({ title }: { title: string }) {
+interface SectionHeadingLinkProps {
+    title: string;
+}
+
+const SectionHeadingLink = ({ title }: SectionHeadingLinkProps) => {
     return (
         <li className="group cursor-pointer">
             <div className="flex flex-col">
