@@ -9,11 +9,10 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
     const trendingMovies = trending.slice(0, 5)
 
     let currentMovie = trendingMovies[0]
-    console.log(currentMovie)
 
     currentMovie = {
         ...currentMovie,
-        original_language: getLanguage(currentMovie?.original_language)?.english_name,
+        original_language: getLanguage(currentMovie?.original_language, 'english_name')
     };
 
 
