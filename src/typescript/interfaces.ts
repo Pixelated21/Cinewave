@@ -29,3 +29,9 @@ export interface Language {
     english_name: string;
     name: string;
 }
+
+export interface NavLink {
+    title: string,
+    href: string,
+    is_auth?: boolean
+}

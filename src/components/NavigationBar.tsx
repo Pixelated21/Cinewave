@@ -1,3 +1,4 @@
+import { NavLink } from "@/typescript/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -53,12 +54,6 @@ export default function NavigationBar({ className, ...props }: NavigationBarProp
             </div>
         </nav>
     )
-}
-
-export interface NavLink {
-    title: string,
-    href: string,
-    is_auth?: boolean
 }
 
 export const NavigationLink = (link: NavLink) => {
