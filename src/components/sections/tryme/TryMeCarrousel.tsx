@@ -11,8 +11,6 @@ interface TryMeCarrouselProps {
 export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
     const { movies } = data
 
-    console.log(movies)
-
     return (
         <section>
             <div className="h-[758px] relative">
