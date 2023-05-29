@@ -5,6 +5,8 @@ import { Movie, Trending } from "@/typescript/interfaces";
 import TrendingCard from "@/components/cards/TrendingCard";
 import HeroSection from "@/components/sections/HeroSection";
 import { NavigationLink, links } from "@/components/NavigationBar";
+import MovieGridLayout from "@/components/layouts/MovieGridLayout";
+import Link from "next/link";
 
 const fetchDiscoverMovies = async () => {
     const res = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
@@ -85,7 +87,7 @@ export default async function HomePage() {
 
             {/* Genres Section */}
             <section className="bg-[#18181B]">
-                <div className="mx-auto max-w-7xl py-[30px]">
+                <div className="mx-auto max-w-7xl py-[30px] px-4 sm:px-8 xl:px-2">
                     <div className="flex flex-col gap-y-5">
                         <ul className="flex flex-row items-center gap-x-10">
                             <SectionHeadingLink title="Action" />
@@ -94,11 +96,12 @@ export default async function HomePage() {
                             <SectionHeadingLink title="Romance" />
                         </ul>
 
-                        <div className="grid grid-cols-5 gap-x-7 gap-y-7">
+                        <MovieGridLayout>
                             {movies.results.map((movie: Movie) => (
                                 <MovieCard key={movie.id} movie={movie} />
                             ))}
-                        </div>
+                        </MovieGridLayout>
+
                     </div>
                 </div>
             </section>
