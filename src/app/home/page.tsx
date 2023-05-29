@@ -7,6 +7,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import { NavigationLink, links } from "@/components/NavigationBar";
 import MovieGridLayout from "@/components/layouts/MovieGridLayout";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const fetchDiscoverMovies = async () => {
     const res = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
@@ -48,9 +49,9 @@ export default async function HomePage() {
                                     <NavigationLink key={link.href + link.title} href={link.href} title={link.title} />
                                 ))}
                             </ul >
-                            <div className="h-10 w-28 primary rounded-sm grid place-items-center">
-                                <span className="text-sm font-bold text-white">Logout</span>
-                            </div>
+                            <Button className=" hover:bg-red-500 text-white font-semibold">
+                                Login
+                            </Button>
                         </div>
                     </div>
                 </nav>

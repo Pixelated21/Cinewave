@@ -3,6 +3,7 @@ import { getLanguage } from "@/lib/utils";
 import { Trending } from "@/typescript/interfaces";
 import Image from "next/image";
 import Breaker from "../utils/Breaker";
+import { Button } from "../ui/button";
 
 export default function HeroSection({ trending }: { trending: Trending[] }) {
 
@@ -66,19 +67,14 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                             <Breaker height="42px" />
 
                             <div className="flex gap-x-3 items-center">
-                                <div
-                                    className="h-10 w-28 primary rounded-sm grid place-items-center">
-                                    <span className="text-sm font-bold text-white">
-                                        More Details
-                                    </span>
-                                </div>
+                                <Button>
+                                    More Details
+                                </Button>
 
-                                <div
-                                    className="h-10 w-28 primary rounded-sm grid place-items-center">
-                                    <span className="text-sm font-bold text-white">
-                                        My Watchlist
-                                    </span>
-                                </div>
+                                <Button className="bg-purple-500 hover:bg-purple-700">
+                                    Add To Watchlist
+                                </Button>
+
                             </div>
                         </div>
                         <div className="flex flex-col gap-y-1.5 justify-end">

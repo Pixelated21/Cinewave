@@ -1,6 +1,7 @@
 import { NavLink } from "@/typescript/interfaces";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 export interface NavigationBarProps extends React.HTMLAttributes<HTMLDivElement> { }
 
@@ -46,9 +47,9 @@ export default function NavigationBar({ className, ...props }: NavigationBarProp
                                 <NavigationLink key={link.title} title={link.title} href={link.href} />
                             ))}
                         </ul>
-                        <div className="h-10 w-28 bg-white rounded-sm grid place-items-center">
-                            <span className="text-sm font-bold text-black">Logout</span>
-                        </div>
+                        <Button asChild className="bg-white hover:bg-gray-100  text-purple-700 font-semibold">
+                            <Link href="/home">Login</Link>
+                        </Button>
                     </div>
                 </div>
             </div>
