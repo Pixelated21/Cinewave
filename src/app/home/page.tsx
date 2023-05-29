@@ -8,6 +8,7 @@ import { NavigationLink, links } from "@/components/NavigationBar";
 import MovieGridLayout from "@/components/layouts/MovieGridLayout";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const fetchDiscoverMovies = async () => {
     const res = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
@@ -41,10 +42,12 @@ export default async function HomePage() {
                             <Link href="/">
                                 <Image className="object-contain" src={'/logo.svg'} alt="logo" width={189} height={40} />
                             </Link>
-                            <div className="h-10 w-44 bg-white"></div>
+                            <Input className="w-52 text-white" type="search" placeholder="Have something in mind?" />
+
+                            <div className="h-10  bg-white rounded-sm lg:block hidden"></div>
                         </div>
                         <div className="flex items-center gap-x-8">
-                            <ul className="flex items-center gap-x-8">
+                            <ul className="md:flex items-center gap-x-8 hidden">
                                 {links.map((link) => (
                                     <NavigationLink key={link.href + link.title} href={link.href} title={link.title} />
                                 ))}
