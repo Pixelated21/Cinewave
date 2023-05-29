@@ -93,7 +93,7 @@ export default async function HomePage() {
             <section className="bg-[#18181B]">
                 <div className="mx-auto max-w-7xl py-[30px] px-4 sm:px-8 xl:px-2">
                     <div className="flex flex-col gap-y-5">
-                        <ul className="flex flex-row items-center gap-x-10">
+                        <ul className="flex flex-row items-center gap-x-10 overflow-hidden">
                             <SectionHeadingLink title="Action" />
                             <SectionHeadingLink title="Comedy" />
                             <SectionHeadingLink title="Horror" />
