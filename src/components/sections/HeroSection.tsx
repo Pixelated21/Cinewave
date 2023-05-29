@@ -28,7 +28,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                     className="bg-gradient-to-b from-[#0E0410]/0 to-[#0E0410]/90 w-full h-80 absolute"></div>
 
                 <div className="max-w-7xl mx-auto absolute mb-14 h-1/2 left-0 right-0">
-                    <div className="flex justify-between h-full">
+                    <div className="flex justify-between h-full px-4 sm:px-8 xl:px-2">
                         <div className="flex flex-col justify-end">
                             <div className="gap-y-3 flex flex-col">
                                 <h1 className="text-5xl font-semibold text-white max-w-[600px]">

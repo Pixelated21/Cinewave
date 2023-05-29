@@ -1,13 +1,15 @@
 import { Trending } from "@/typescript/interfaces";
 import Image from "next/image";
 
+
 export default function TrendingCard({ item }: { item: Trending }) {
     return (
+        // TODO Change to w-[420px]
         <a
             href="#"
-            className="h-64 rounded-md group relative w-[420px] overflow-hidden bg-gray-800">
+            className="h-64 rounded-md flex-1 group relative w-full overflow-hidden bg-gray-800">
 
-            <Image className="absolute object-cover h-full w-full w-72 "
+            <Image className="absolute object-cover h-full w-full"
                 src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}
                 alt="eminence" fill />
 

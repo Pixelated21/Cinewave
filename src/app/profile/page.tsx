@@ -1,5 +1,7 @@
 import NavigationBar from "@/components/NavigationBar";
 import MovieCard from "@/components/cards/MovieCard";
+import MovieGridLayout from "@/components/layouts/MovieGridLayout";
+import { Progress } from "@/components/ui/progress";
 import { Movie } from "@/typescript/interfaces";
 import axios from "axios";
 import Image from "next/image";
@@ -18,12 +20,11 @@ export default async function Profile() {
     const movies = await fetchDiscoverMovies()
 
     return (
-        <main className="bg-[#18181B] h-screen">
-
+        <main className="bg-[#18181B] h-screen overflow-y-scroll">
             <NavigationBar className="primary" />
 
-            <section className="bg-[#18181B] ">
-                <div className="mx-auto max-w-7xl h-72 py-14">
+            <section className="">
+                <div className="mx-auto max-w-7xl h-72 py-14 px-4 sm:px-8 xl:px-2">
 
                     <div className="flex justify-between">
                         <div className="flex flex-row gap-x-10 items-center">
@@ -62,8 +63,8 @@ export default async function Profile() {
                 </div>
             </section>
 
-            <section className="bg-[#18181B]">
-                <div className="mx-auto max-w-7xl">
+            <section className="">
+                <div className="mx-auto max-w-7xl px-4 sm:px-8 xl:px-2">
                     <div className="grid grid-cols-2 gap-x-5">
                         <button className="border-gray-500 font-semibold bg-gray-600  text-gray-200 border-2 flex justify-center items-center py-2 rounded-sm ">
                             <span className="text-sm">Watched</span>
@@ -76,8 +77,8 @@ export default async function Profile() {
                 </div>
             </section>
 
-            <section className="bg-[#18181B]">
-                <div className="mx-auto max-w-7xl py-16">
+            <section className="">
+                <div className="mx-auto max-w-7xl py-16 px-4 sm:px-8 xl:px-2">
                     <div className="flex flex-col gap-y-5">
 
                         <div className="flex flex-row justify-between w-full h-10">
@@ -88,11 +89,11 @@ export default async function Profile() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-5 gap-x-7 gap-y-7">
+                        <MovieGridLayout>
                             {movies.results.map((movie: Movie) => (
                                 <MovieCard key={movie.id} movie={movie} />
                             ))}
-                        </div>
+                        </MovieGridLayout>
 
                     </div>
                 </div>

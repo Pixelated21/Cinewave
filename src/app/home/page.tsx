@@ -33,13 +33,13 @@ export default async function HomePage() {
 
     return (
         <main className=" h-screen overflow-y-auto">
-            <div className="relative h-[571px]">
-                <nav className="mt-5 z-10 absolute max-w-7xl left-0 right-0 mx-auto w-full">
-                    <div className="flex justify-between items-center">
+            <div className="relative h-[671px]">
+                <nav className="mt-4 z-10 absolute max-w-7xl left-0 right-0 mx-auto w-full">
+                    <div className="flex justify-between items-center px-4 sm:px-8 xl:px-2">
                         <div className="flex gap-x-16 items-center">
-                            <div>
+                            <Link href="/">
                                 <Image className="object-contain" src={'/logo.svg'} alt="logo" width={189} height={40} />
-                            </div>
+                            </Link>
                             <div className="h-10 w-44 bg-white"></div>
                         </div>
                         <div className="flex items-center gap-x-8">
@@ -60,7 +60,7 @@ export default async function HomePage() {
 
             {/* Trending Section */}
             <section className="bg-[#18181B]">
-                <div className="mx-auto max-w-7xl py-[60px]">
+                <div className="mx-auto max-w-7xl py-[60px] px-4 sm:px-8 xl:px-2">
                     <div className="flex flex-col gap-y-5">
                         <div className="flex justify-between items-center">
                             <div className="flex items-center gap-x-5">
@@ -76,7 +76,7 @@ export default async function HomePage() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-2.5 gap-y-2.5">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2.5 gap-y-2.5">
                             {trending.results.splice(0, 3).map((item: Trending) => (
                                 <TrendingCard key={item.id} item={item} />
                             ))}

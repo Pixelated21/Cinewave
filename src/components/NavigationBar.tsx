@@ -6,12 +6,8 @@ export interface NavigationBarProps extends React.HTMLAttributes<HTMLDivElement>
 
 export const links: NavLink[] = [
     {
-        title: 'Home',
-        href: '/home',
-    },
-    {
         title: 'Movies',
-        href: '/movies'
+        href: '/home',
     },
     {
         title: 'Try Me',
@@ -19,25 +15,29 @@ export const links: NavLink[] = [
     },
     {
         title: 'Series',
-        href: '/series'
+        href: '/home',
     },
+    // {
+    //     title: 'Share Space',
+    //     href: '/home',
+    //     is_auth: true,
+    // },
     {
         title: 'Profile',
         href: '/profile',
-        is_auth: false
+        is_auth: true
     }
 ]
 
 export default function NavigationBar({ className, ...props }: NavigationBarProps) {
     return (
-        // TODO: Sync transition perfectly with the hero section
         <nav className={`${className}`}>
-            <div className="max-w-7xl mx-auto h-[72px] flex items-center w-full">
-                <div className="flex justify-between items-center h-full w-full">
+            <div className="max-w-7xl mx-auto h-[72px] z-30 flex items-center w-full">
+                <div className="flex justify-between items-center h-full w-full px-4 sm:px-8 xl:px-2">
                     <div className="flex gap-x-16 items-center">
-                        <div>
+                        <Link href="/home">
                             <Image className="object-contain" src={'/logo.svg'} alt="logo" width={189} height={40} />
-                        </div>
+                        </Link>
                         <div className="h-10 w-44 bg-white"></div>
                     </div>
                     <div className="flex items-center gap-x-8">
