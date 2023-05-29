@@ -1,4 +1,4 @@
-import Breakpoints from '@/components/utils/breakpoints'
+import Breakpoints from '@/components/utils/Breakpoints'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
