@@ -25,12 +25,12 @@ interface SearchQuery {
 }
 
 const fetchSimilarMovies = async (movie: Movie) => {
-    const res = await axios.get(`http://localhost:3000/api/similar/${movie.id}`)
+    const res = await axios.get(`https://cinewave.vercel.app/api/similar/${movie.id}`)
     return res.data
 }
 
 const fetchSearchResults = async ({ query }: { query: string }) => {
-    const response = await axios.get(`http://localhost:3000/api/search/${query}`);
+    const response = await axios.get(`https://cinewave.vercel.app/api/search/${query}`);
     console.log(response.data)
     return response.data;
 };
