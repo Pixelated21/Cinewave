@@ -2,6 +2,7 @@ import { NavLink } from "@/typescript/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import MovieSearchInput from "./ui/search";
 
 export interface NavigationBarProps extends React.HTMLAttributes<HTMLDivElement> { }
 
@@ -39,7 +40,7 @@ export default function NavigationBar({ className, ...props }: NavigationBarProp
                         <Link href="/home">
                             <Image className="object-contain" src={'/logo.svg'} alt="logo" width={189} height={40} />
                         </Link>
-                        <div className="h-10 w-44 bg-white lg:block hidden"></div>
+                        <MovieSearchInput />
                     </div>
                     <div className="flex items-center gap-x-8">
                         <ul className="md:flex items-center gap-x-8 hidden">
