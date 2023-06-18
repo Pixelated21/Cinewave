@@ -1,6 +1,6 @@
 import Modal from "@/components/modal"
 import MovieDetailsModal from "@/components/sections/detail/MovieDetailsModal"
-import { MovieCredits, MovieDetails, MovieVideos } from "@/typescript/interfaces"
+import { MovieCredits, MovieDetails, MovieVideoRequest } from "@/typescript/interfaces"
 import axios from "axios"
 
 const fetchMovieDetails = async ({ id }: { id: string | number }) => {
@@ -34,7 +34,7 @@ export default async function MovieDetails({ params }: { params: { id: string } 
     const { id } = params
     const detailsData: Promise<MovieDetails> = fetchMovieDetails({ id: id })
     const creditsData: Promise<MovieCredits> = fetchMovieCredits({ id: id })
-    const videosData: Promise<MovieVideos> = fetchMovieVideos({ id: id })
+    const videosData: Promise<MovieVideoRequest> = fetchMovieVideos({ id: id })
 
     const [details, credits, videos] = await Promise.all([detailsData, creditsData, videosData])
 

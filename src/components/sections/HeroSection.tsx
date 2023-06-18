@@ -33,6 +33,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
         return () => {
             clearInterval(intervalId);
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
