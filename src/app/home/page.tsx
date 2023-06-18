@@ -1,48 +1,59 @@
-import MovieCard from "@/components/cards/MovieCard";
 import Image from "next/image";
 import axios from "axios";
-import { Movie, Trending } from "@/typescript/interfaces";
+import { DiscoverMovieAdvancedFilters, Genre, Movie, Trending } from "@/typescript/interfaces";
 import TrendingCard from "@/components/cards/TrendingCard";
 import HeroSection from "@/components/sections/HeroSection";
 import { NavigationLink, links } from "@/components/NavigationBar";
-import MovieGridLayout from "@/components/layouts/MovieGridLayout";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { genres } from "@/data/genres";
+import GenreSection from "@/components/sections/home/GenreSection";
+import MovieSearchInput from "@/components/ui/search";
 
-const fetchDiscoverMovies = async () => {
-    const res = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
+const fetchDiscoverMovies = async ({ filter }: { filter: DiscoverMovieAdvancedFilters }) => {
+    console.log(filter)
+    const res = await axios.get(`https://api.themoviedb.org/3/discover/movie?language=en-US`, {
         params: {
             api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+            ...filter
         }
     })
     return res.data
 }
 
-const fetchTrendingMovies = async () => {
-    const res = await axios.get(`https://api.themoviedb.org/3/trending/movie/day`, {
+const fetchTrendingMovies = async (genres?: string | number[]) => {
+    const res = await axios.get(`https://api.themoviedb.org/3/trending/movie/day?language=en-US`, {
         params: {
             api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+            with_genres: genres
         }
     })
     return res.data
 }
 
-export default async function HomePage() {
+const parseGenres = (genres: Genre[]) => ([...genres].splice(0, 5))
 
-    const movies = await fetchDiscoverMovies()
-    const trending = await fetchTrendingMovies()
+export default async function HomePage(
+    { searchParams }: { searchParams: DiscoverMovieAdvancedFilters }) {
+
+    const filteredGenres = parseGenres(genres)
+    const moviesData = fetchDiscoverMovies({ filter: { ...searchParams } })
+    const trendingData = fetchTrendingMovies()
+    const [movies, trending] = await Promise.all([moviesData, trendingData])
+
+    const filteredTrending = [...trending.results].splice(0, 10).filter((movie: Movie) => movie.poster_path !== null && movie.backdrop_path !== null)
 
     return (
         <main className=" h-screen overflow-y-auto">
-            <div className="relative h-[671px]">
+            <div className="relative h-[571px] xl:h-[671px] shadow-md">
                 <nav className="mt-4 z-10 absolute max-w-7xl left-0 right-0 mx-auto w-full">
                     <div className="flex justify-between items-center px-4 sm:px-8 xl:px-2">
                         <div className="flex gap-x-16 items-center">
                             <Link href="/">
                                 <Image className="object-contain" src={'/logo.svg'} alt="logo" width={189} height={40} />
                             </Link>
-                            <Input className="w-52 text-white hidden md:block" type="search" placeholder="Have something in mind?" />
+                            <MovieSearchInput />
 
                             <div className="h-10  bg-white rounded-sm lg:block hidden"></div>
                         </div>
@@ -58,9 +69,8 @@ export default async function HomePage() {
                         </div>
                     </div>
                 </nav>
-                <HeroSection trending={trending.results} />
+                <HeroSection trending={filteredTrending} />
             </div>
-
 
             {/* Trending Section */}
             <section className="bg-[#18181B]">
@@ -82,7 +92,7 @@ export default async function HomePage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2.5 gap-y-2.5">
                             {trending.results.splice(0, 3).map((item: Trending) => (
-                                <TrendingCard key={item.id} item={item} />
+                                <TrendingCard key={item.id} movie={item} />
                             ))}
                         </div>
                     </div>
@@ -90,44 +100,7 @@ export default async function HomePage() {
             </section>
 
             {/* Genres Section */}
-            <section className="bg-[#18181B]">
-                <div className="mx-auto max-w-7xl py-[30px] px-4 sm:px-8 xl:px-2">
-                    <div className="flex flex-col gap-y-5">
-                        <ul className="flex flex-row items-center gap-x-10 overflow-hidden">
-                            <SectionHeadingLink title="Action" />
-                            <SectionHeadingLink title="Comedy" />
-                            <SectionHeadingLink title="Horror" />
-                            <SectionHeadingLink title="Romance" />
-                        </ul>
-
-                        <MovieGridLayout>
-                            {movies.results.map((movie: Movie) => (
-                                <MovieCard key={movie.id} movie={movie} />
-                            ))}
-                        </MovieGridLayout>
-
-                    </div>
-                </div>
-            </section>
+            <GenreSection movies={movies} genres={filteredGenres} />
         </main>
-    )
-}
-
-interface SectionHeadingLinkProps {
-    title: string;
-}
-
-const SectionHeadingLink = ({ title }: SectionHeadingLinkProps) => {
-    return (
-        <li className="group cursor-pointer">
-            <div className="flex flex-col">
-                <h2
-                    className="text-gray-500 group-hover:text-gray-950 duration-300 font-medium text-xl">
-                    {title}
-                </h2>
-                <span
-                    className="h-0.5 w-0 group-hover:w-full bg-blue-700 duration-300"></span>
-            </div>
-        </li>
     )
 }
