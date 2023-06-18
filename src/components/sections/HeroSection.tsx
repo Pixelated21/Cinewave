@@ -4,18 +4,36 @@ import { Trending } from "@/typescript/interfaces";
 import Image from "next/image";
 import Breaker from "../utils/Breaker";
 import { Button } from "../ui/button";
+import { useEffect, useMemo, useState } from "react";
 
 export default function HeroSection({ trending }: { trending: Trending[] }) {
 
-    const trendingMovies = trending.slice(0, 5)
+    const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
 
-    let currentMovie = trendingMovies[0]
+    const currentMovie = useMemo(() => trending[currentMovieIndex], [
+        trending,
+        currentMovieIndex,
+    ]);
 
-    currentMovie = {
-        ...currentMovie,
-        original_language: getLanguage(currentMovie?.original_language, 'english_name')
+    const showNextMovie = () => {
+        setCurrentMovieIndex((prevIndex) =>
+            (prevIndex + 1) % trending.length
+        );
     };
 
+    const showPreviousMovie = () => {
+        setCurrentMovieIndex((prevIndex) =>
+            (prevIndex - 1 + trending.length) % trending.length
+        );
+    };
+
+    useEffect(() => {
+        const intervalId = setInterval(showNextMovie, 5000);
+
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, []);
 
     return (
         <section className="absolute h-full w-full">
@@ -51,7 +69,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                         <li>
                                             <span
                                                 className="text-xs rounded-md font-semibold text-black bg-white py-[3px] px-1">
-                                                {currentMovie.original_language}
+                                                {getLanguage(currentMovie?.original_language, 'english_name')}
                                             </span>
                                         </li>
                                     </ul>
@@ -78,8 +96,18 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                             </div>
                         </div>
                         <div className="flex flex-col gap-y-1.5 justify-end">
-                            <div className="h-10 w-10 background rounded-md"></div>
-                            <div className="h-10 w-10 background rounded-md"></div>
+                            <div onClick={showPreviousMovie} className="h-10 w-10 background rounded-md flex items-center justify-center text-white cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                                </svg>
+
+                            </div>
+                            <div onClick={showNextMovie} className="h-10 w-10 background rounded-md flex items-center justify-center text-white cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                                </svg>
+
+                            </div>
                         </div>
                     </div>
                 </div>
