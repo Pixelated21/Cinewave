@@ -1,18 +1,12 @@
-import Image from "next/image";
 import axios from "axios";
 import { DiscoverMovieAdvancedFilters, Genre, Movie, Trending } from "@/typescript/interfaces";
 import TrendingCard from "@/components/cards/TrendingCard";
 import HeroSection from "@/components/sections/HeroSection";
-import { NavigationLink, links } from "@/components/NavigationBar";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import NavigationBar from "@/components/NavigationBar";
 import { genres } from "@/data/genres";
 import GenreSection from "@/components/sections/home/GenreSection";
-import MovieSearchInput from "@/components/ui/search";
 
 const fetchDiscoverMovies = async ({ filter }: { filter: DiscoverMovieAdvancedFilters }) => {
-    console.log(filter)
     const res = await axios.get(`https://api.themoviedb.org/3/discover/movie?language=en-US`, {
         params: {
             api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
@@ -47,28 +41,7 @@ export default async function HomePage(
     return (
         <main className=" h-screen overflow-y-auto">
             <div className="relative h-[571px] xl:h-[671px] shadow-md">
-                <nav className="mt-4 z-10 absolute max-w-7xl left-0 right-0 mx-auto w-full">
-                    <div className="flex justify-between items-center px-4 sm:px-8 xl:px-2">
-                        <div className="flex gap-x-16 items-center">
-                            <Link href="/">
-                                <Image className="object-contain" src={'/logo.svg'} alt="logo" width={189} height={40} />
-                            </Link>
-                            <MovieSearchInput />
-
-                            <div className="h-10  bg-white rounded-sm lg:block hidden"></div>
-                        </div>
-                        <div className="flex items-center gap-x-8">
-                            <ul className="md:flex items-center gap-x-8 hidden">
-                                {links.map((link) => (
-                                    <NavigationLink key={link.href + link.title} href={link.href} title={link.title} />
-                                ))}
-                            </ul >
-                            <Button className=" hover:bg-red-500 text-white font-semibold">
-                                Login
-                            </Button>
-                        </div>
-                    </div>
-                </nav>
+                <NavigationBar className="z-10 absolute max-w-7xl left-0 right-0 mx-auto w-full" />
                 <HeroSection trending={filteredTrending} />
             </div>
 
