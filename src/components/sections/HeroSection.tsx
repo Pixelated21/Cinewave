@@ -5,6 +5,7 @@ import Image from "next/image";
 import Breaker from "../utils/Breaker";
 import { Button } from "../ui/button";
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 
 export default function HeroSection({ trending }: { trending: Trending[] }) {
 
@@ -33,7 +34,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
         return () => {
             clearInterval(intervalId);
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -77,7 +78,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                 </div>
 
                                 <div className="max-w-[495px]">
-                                    <p className="text-xs text-white">
+                                    <p className="text-xs text-white h-20 overflow-hidden ">
                                         {currentMovie.overview}
                                     </p>
                                 </div>
@@ -86,8 +87,10 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                             <Breaker height="42px" />
 
                             <div className="flex gap-x-3 items-center">
-                                <Button>
-                                    More Details
+                                <Button asChild>
+                                    <Link href={`/detail/${currentMovie.id}`} >
+                                        More Details
+                                    </Link>
                                 </Button>
 
                                 <Button className="bg-purple-500 hover:bg-purple-700">
