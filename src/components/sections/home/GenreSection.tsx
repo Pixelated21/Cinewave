@@ -28,7 +28,7 @@ export default function GenreSection({ movies, genres }: GenreSectionProps) {
 
     function handleGenreChange(genre: Genre) {
         setSelectedGenre(genre)
-        router.push('home/?with_genres=' + genre.id,)
+        router.push(`home/?with_genres=${genre.id}`,)
 
 
     }
