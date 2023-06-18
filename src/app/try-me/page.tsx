@@ -17,10 +17,6 @@ const fetchTrendingMovies = async () => {
     return res.data
 }
 
-
-
-
-
 export default async function TryMe() {
 
     const movies = await fetchTrendingMovies()
@@ -38,17 +34,6 @@ export default async function TryMe() {
         <main className="bg-[#18181B] h-screen overflow-y-auto">
             <NavigationBar className="primary" />
             <TryMeRandomizer data={tryMeRandomizerData} />
-            <TryMeCarrousel data={tryMeCarrouselData} />
-
-            <section className="bg-[#18181B]">
-                <div className="mx-auto max-w-7xl py-[30px] px-4 sm:px-8 xl:px-2">
-                    <MovieGridLayout>
-                        {movies.results.map((movie: Movie) => (
-                            <MovieCard key={movie.id} movie={movie} />
-                        ))}
-                    </MovieGridLayout>
-                </div>
-            </section>
         </main>
     )
 }
