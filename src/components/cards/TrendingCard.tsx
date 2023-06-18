@@ -1,16 +1,16 @@
 import { Trending } from "@/typescript/interfaces";
 import Image from "next/image";
+import Link from "next/link";
 
 
-export default function TrendingCard({ item }: { item: Trending }) {
+export default function TrendingCard({ movie }: { movie: Trending }) {
     return (
         // TODO Change to w-[420px]
-        <a
-            href="#"
-            className="h-64 rounded-md flex-1 group relative w-full overflow-hidden bg-gray-800">
+        <Link
+            href={`/detail/${movie.id}`} className="h-64 rounded-md flex-1 group relative w-full overflow-hidden bg-gray-800">
 
             <Image className="absolute object-cover h-full w-full"
-                src={`https://image.tmdb.org/t/p/w500/${item.backdrop_path}`}
+                src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
                 alt="eminence" fill />
 
             <div
@@ -20,16 +20,16 @@ export default function TrendingCard({ item }: { item: Trending }) {
                 <div className="flex flex-col h-full justify-end gap-y-1">
                     <div className="flex flex-col">
                         <h1 className="text-white text-2xl font-semibold">
-                            {item.title}
+                            {movie.title}
                         </h1>
                         <span
                             className="h-0.5 w-1/6 group-hover:w-3/6 duration-500 bg-white"></span>
                     </div>
                     <div className="flex justify-between">
                         <div>
-                            <ul className="flex items-center gap-x-1">
+                            <ul className="flex movies-center gap-x-1">
                                 <li>
-                                    <h4 className="text-white text-sm font-medium">{item.release_date}</h4>
+                                    <h4 className="text-white text-sm font-medium">{movie.release_date}</h4>
                                 </li>
                                 <li>
                                     <svg
@@ -49,11 +49,11 @@ export default function TrendingCard({ item }: { item: Trending }) {
                             </ul>
                         </div>
                         <div>
-                            <h4 className="text-white text-sm font-medium capitalize">{item.media_type}</h4>
+                            <h4 className="text-white text-sm font-medium capitalize">{movie.media_type}</h4>
                         </div>
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     )
 }

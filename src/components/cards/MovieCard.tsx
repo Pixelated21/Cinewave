@@ -1,13 +1,12 @@
 import { Movie } from "@/typescript/interfaces";
+import Link from "next/link";
 import Image from "next/image";
 
 // #TODO Add more image optimizations for faster load times
 
 export default function MovieCard({ movie }: { movie: Movie }) {
     return (
-        <div
-            className={`min-h-[320px] sm:max-h-[550px] sm:max-w-[550px] md:min-h-[400px] h-full relative group flex flex-col overflow-hidden`}>
-
+        <Link href={`/detail/${movie.id}`} className={`min-h-[320px] sm:max-h-[550px] sm:max-w-[550px] md:min-h-[400px] h-full relative group flex flex-col overflow-hidden`}>
             <div className="h-full w-full flex flex-row overflow-hidden rounded-md">
 
                 <div className="pb-1.5 px-1.5 bg-black w-[25px] hidden sm:block">
@@ -19,6 +18,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                         <span className="font-medium text-xs text-purple-600">{Number(movie.vote_average).toPrecision(2)}</span>
                     </div>
                 </div>
+
 
                 <div className="relative flex-1 cursor-pointer">
                     <Image className="absolute object-cover h-full w-full"
@@ -38,6 +38,6 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                     <p className="text-xs text-white whitespace-nowrap text-ellipsis overflow-hidden">{movie.release_date}</p>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
