@@ -35,7 +35,7 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
 
                     <div className="h-[713px] w-[835px] relative z-10">
                         <Image className="absolute object-cover h-full" alt=""
-                            src={`https://image.tmdb.org/t/p/original/${movies[1].poster_path}`} width={835} height={713} />
+                            src={`https://image.tmdb.org/t/p/original/${movies[1].backdrop_path}`} width={835} height={713} />
 
                         <div className="bg-black w-full h-full absolute opacity-10"></div>
                         <div className=" w-full h-full absolute bottom-0 bg-gradient-to-t from-black to-transparent"></div>
