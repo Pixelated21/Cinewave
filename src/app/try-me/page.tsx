@@ -9,7 +9,7 @@ import { Movie } from "@/typescript/interfaces";
 import axios from "axios";
 
 const fetchTrendingMovies = async () => {
-    const res = await axios.get(`https://api.themoviedb.org/3/trending/movie/day`, {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_API_URL}/trending/movie/day`, {
         params: {
             api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
         }
@@ -34,6 +34,7 @@ export default async function TryMe() {
         <main className="bg-[#18181B] h-screen overflow-y-auto">
             <NavigationBar className="primary" />
             <TryMeRandomizer data={tryMeRandomizerData} />
+            {/* <TryMeCarrousel data={tryMeCarrouselData} /> */}
         </main>
     )
 }

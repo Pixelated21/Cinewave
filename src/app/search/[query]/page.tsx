@@ -8,7 +8,7 @@ import axios from "axios";
 
 const fetchSearchResults = async ({ query }: { query: string }) => {
     const searchTerms = query.trim();
-    const response = await axios.get(`https://cinewave.vercel.app/api/search/${searchTerms}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/search/${searchTerms}`);
     return response.data;
 };
 

@@ -7,7 +7,7 @@ export async function GET(request: Request, { params }: { params: { query: strin
     const { query } = params
 
     const fetchSimilarMovies = async (query: string) => {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${query}/similar`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_API_URL}/movie/${query}/similar`, {
             params: {
                 api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
                 language: 'en-US',

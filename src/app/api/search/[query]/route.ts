@@ -15,7 +15,7 @@ export async function GET(request: Request, { params }: { params: { query: strin
     try {
         const apiRequests = searchTerms.map(async (term) => {
             const formattedUrl = new URL(
-                `https://api.themoviedb.org/3/search/movie`
+                `${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_API_URL}/search/movie`
             );
 
             const response = await axios.get(formattedUrl.href, {

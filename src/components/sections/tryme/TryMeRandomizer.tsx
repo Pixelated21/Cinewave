@@ -25,13 +25,12 @@ interface SearchQuery {
 }
 
 const fetchSimilarMovies = async (movie: Movie) => {
-    const res = await axios.get(`https://cinewave.vercel.app/api/similar/${movie.id}`)
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/similar/${movie.id}`)
     return res.data
 }
 
 const fetchSearchResults = async ({ query }: { query: string }) => {
-    const response = await axios.get(`https://cinewave.vercel.app/api/search/${query}`);
-    console.log(response.data)
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/search/${query}`);
     return response.data;
 };
 
@@ -52,7 +51,6 @@ export default function TryMeRandomizer({ data }: TryMeRandomizerProps) {
         if (!query || query?.length < 3) return
         const searchResultsData = await fetchSearchResults({ query })
         setSearchResults(searchResultsData.data.results.filter((movie: Movie) => (movie.release_date !== null || isReleasedBeforeToday(movie.release_date)) && (movie.poster_path !== null)).splice(0, 4))
-        console.log('hit')
     }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -168,7 +166,5 @@ export default function TryMeRandomizer({ data }: TryMeRandomizerProps) {
                 </div>
             </section>
         </section>
-
-
     )
 }
