@@ -1,8 +1,7 @@
-export default function HomeLayout(props: { children: React.ReactNode, modal: React.ReactNode }) {
+export default function HomeLayout(props: { children: React.ReactNode}) {
     return (
         <div>
             {props.children}
-            {props.modal}
         </div>
     )
 }
