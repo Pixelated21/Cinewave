@@ -16,7 +16,7 @@ export default function MovieSearchInput() {
     }
     return (
         <form onSubmit={handleSearch}>
-            <Input value={search} onChange={(e) => setSearch(e.target.value)} className="w-52 text-white hidden md:block" type="search" placeholder="Have something in mind?" />
+            <Input value={search} onChange={(e) => setSearch(e.target.value)} className="w-52 text-white hidden lg:block" type="search" placeholder="Have something in mind?" />
         </form>
     )
 }
