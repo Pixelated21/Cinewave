@@ -12,8 +12,46 @@ import TrailerCard from "@/components/cards/TrailerCard";
 import { genres } from "@/data/genres";
 import { getGenres } from "@/lib/utils";
 import { Credits, Movie, MovieDetails, MovieVideoRequest } from "@/types";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+type Props = {
+    params: { id: string };
+    searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+    { params, searchParams }: Props): Promise<Metadata> {
+    const { id } = params;
+
+    const getMovieDetails: Promise<MovieDetails> = getMovieDetailsAction({
+        id: id,
+    });
+
+    const movieDetails = await getMovieDetails;
+
+    return {
+        title: `${movieDetails.title} | CineWave`,
+        description: movieDetails.overview,
+        openGraph: {
+            siteName: "CineWave",
+            type: "website",
+            locale: "en_US",
+            images: `https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`,
+            title: `${movieDetails.title} | CineWave`,
+            description: movieDetails.overview,
+            url: `https://cinewave.vercel.app/movie/${id}`,
+        },
+
+        twitter: {
+            images: `https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`,
+            title: `${movieDetails.title} | CineWave`,
+            description: movieDetails.overview,
+            card: "app",
+        },
+    };
+}
 
 export default async function MovieDetails({
     params,
@@ -136,11 +174,11 @@ export default async function MovieDetails({
                             </h1>
                             {movieDetails.original_title !==
                                 movieDetails.title && (
-                                    <div className="mt-2.5 text-xs">
-                                        <span>Original Title: </span>
-                                        <span>{movieDetails.original_title}</span>
-                                    </div>
-                                )}
+                                <div className="mt-2.5 text-xs">
+                                    <span>Original Title: </span>
+                                    <span>{movieDetails.original_title}</span>
+                                </div>
+                            )}
 
                             <div className="mt-2.5 flex flex-row gap-x-2 text-sm font-semibold">
                                 <div>Movie ({movieDetails.release_date})</div>
