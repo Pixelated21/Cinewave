@@ -56,7 +56,7 @@ export async function generateMetadata({
         twitter: {
             title: `${movieDetails.title} | CineWave`,
             description: movieDetails.overview,
-            card: "summary_large_image",
+            card: "summary",
         },
     };
 }
