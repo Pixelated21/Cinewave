@@ -47,7 +47,7 @@ export async function generateMetadata({
             siteName: "CineWave",
             type: "website",
             locale: "en_US",
-            images: `https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`,
+            images: `https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`,
             title: `${movieDetails.title} | CineWave`,
             description: movieDetails.overview,
             url: `https://cinewave.vercel.app/movie/${id}`,
