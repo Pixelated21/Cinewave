@@ -2,6 +2,7 @@ import Breakpoints from "@/components/utils/Breakpoints";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import ScrollToTop from "@/components/utils/ScrollToTop";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
                 {children}
                 {/* <Breakpoints /> */}
                 {/* <ScrollToTop /> */}
+                <Analytics/>
             </body>
         </html>
     );
