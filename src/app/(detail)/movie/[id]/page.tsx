@@ -21,10 +21,10 @@ type Props = {
     searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata(
-    { params, searchParams }: Props,
-    parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+    params,
+    searchParams,
+}: Props): Promise<Metadata> {
     const id = params.id;
 
     const getMovieDetails: Promise<MovieDetails> = getMovieDetailsAction({
@@ -34,19 +34,20 @@ export async function generateMetadata(
     const [movieDetails] = await Promise.all([getMovieDetails]);
 
     // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent!)?.openGraph?.images || [];
 
     return {
         title: `${movieDetails.title} | CineWave`,
         description: movieDetails.overview,
+        keywords: [
+            movieDetails.title,
+            ...movieDetails.genres.map((g) => g.name),
+            "movies",
+        ],
         openGraph: {
             siteName: "CineWave",
             type: "website",
             locale: "en_US",
-            images: [
-                `https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`,
-                ...previousImages,
-            ],
+            images: `https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`,
             title: `${movieDetails.title} | CineWave`,
             description: movieDetails.overview,
             url: `https://cinewave.vercel.app/movie/${id}`,
