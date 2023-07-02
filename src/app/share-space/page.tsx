@@ -1,6 +1,4 @@
 import NavigationBar from "@/components/NavigationBar";
-import MovieGridLayout from "@/components/layouts/MovieGridLayout";
-import { Button } from "@/components/ui/button";
 
 export default function ShareSpacePage() {
     return (
