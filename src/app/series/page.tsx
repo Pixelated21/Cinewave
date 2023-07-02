@@ -1,31 +1,19 @@
 import NavigationBar from "@/components/NavigationBar";
 import MovieCard from "@/components/cards/MovieCard";
-import MovieGridLayout from "@/components/layouts/MovieGridLayout";
+import MovieGridLayout from "@/components/layouts/LayoutSection";
 import { Button } from "@/components/ui/button";
-import { formatSearchQuery } from "@/lib/utils";
-import { Movie } from "@/typescript/interfaces";
-import axios from "axios";
-
-const fetchDiscoverSeries = async () => {
-    const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_API_URL}/discover/tv`,
-        {
-            params: {
-                api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
-                language: "en-US",
-            },
-        }
-    );
-    return res.data;
-};
+import { Movie } from "@/types";
+import { getDiscoverSeriesAction } from "../_actions/series";
 
 export default async function SeriesPage() {
-    const discoverSeriesData = await fetchDiscoverSeries();
+    const getDiscoverSeries = await getDiscoverSeriesAction();
+
+    const [discoverSeries] = await Promise.all([getDiscoverSeries]);
 
     const filteredDiscoverSeries = {
-        ...discoverSeriesData,
+        ...discoverSeries,
         results: [
-            ...discoverSeriesData.results.filter(
+            ...discoverSeries.results.filter(
                 (movie: Movie) => movie.poster_path
             ),
         ],
