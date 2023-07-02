@@ -21,6 +21,8 @@ export default async function SearchPage({
     const filteredSearchResults = {
         ...searchResults,
         results: [
+            // FIXME: Fix type hinting
+            // @ts-ignore
             ...searchResults.data.results.filter(
                 (movie: Movie) => movie.poster_path
             ),

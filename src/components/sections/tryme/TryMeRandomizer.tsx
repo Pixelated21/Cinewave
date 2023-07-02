@@ -51,6 +51,7 @@ export default function TryMeRandomizer({ data }: TryMeRandomizerProps) {
         const searchResultsData = await searchMoviesAction({ term: query });
         setSearchResults(
             // FIXME: Fix type hinting
+            // @ts-ignore
             searchResultsData.data.results
                 .filter(
                     (movie: Movie) =>

@@ -30,8 +30,9 @@ export default function MovieCardBlurEffect({
                                 {resource.release_date}
                             </span>
                         </span>
-                        {/* FIXME: Implement Proper Type hinting */}
                         <h1 className="truncate text-lg font-semibold">
+                            {/* FIXME: Implement Proper Type hinting */}
+                            {/* @ts-ignore */}
                             {resource.name || resource.title}
                         </h1>
                         <span className="text-sm font-light text-gray-300">
