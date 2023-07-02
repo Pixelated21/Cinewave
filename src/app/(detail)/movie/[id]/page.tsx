@@ -21,11 +21,10 @@ type Props = {
     searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata({
-    params,
-    searchParams,
-}: Props): // parent?: ResolvingMetadata
-Promise<Metadata> {
+export async function generateMetadata(
+    { params, searchParams }: Props,
+    parent?: ResolvingMetadata
+): Promise<Metadata> {
     const id = params.id;
 
     const getMovieDetails: Promise<MovieDetails> = getMovieDetailsAction({
@@ -35,7 +34,7 @@ Promise<Metadata> {
     const [movieDetails] = await Promise.all([getMovieDetails]);
 
     // optionally access and extend (rather than replace) parent metadata
-    // const previousImages = (await parent).openGraph?.images || [];
+    const previousImages = (await parent)?.openGraph?.images || [];
 
     return {
         title: `${movieDetails.title} | CineWave`,
@@ -46,6 +45,7 @@ Promise<Metadata> {
             locale: "en_US",
             images: [
                 `https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`,
+                ...previousImages,
             ],
             title: `${movieDetails.title} | CineWave`,
             description: movieDetails.overview,
@@ -53,10 +53,9 @@ Promise<Metadata> {
         },
 
         twitter: {
-            images: `https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`,
             title: `${movieDetails.title} | CineWave`,
             description: movieDetails.overview,
-            card: "app",
+            card: "summary_large_image",
         },
     };
 }
