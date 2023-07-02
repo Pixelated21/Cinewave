@@ -1,18 +1,25 @@
-import { Cast } from "@/typescript/interfaces";
+import { Cast } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function CastCard({ cast }: { cast: Cast }) {
     return (
-        <Link href={'#'} className="text-white w-[133px]">
+        <Link href={"#"} className="w-[133px] text-white">
             <div className="relative h-[200px] w-[133px]">
-                <Image alt="" src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`} fill className=" object-cover cursor-pointer rounded-sm  duration-300 absolute" />
+                <Image
+                    alt=""
+                    src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`}
+                    fill
+                    className=" absolute cursor-pointer rounded-sm  object-cover duration-300"
+                />
             </div>
 
-            <div className="flex flex-col mt-2 w-[133px]">
-                <p className="text-xs truncate">{cast.name}</p>
-                <p className="text-sm font-semibold text-ellipsis truncate">{cast.character}</p>
+            <div className="mt-2 flex w-[133px] flex-col">
+                <p className="truncate text-xs">{cast.name}</p>
+                <p className="truncate text-ellipsis text-sm font-semibold">
+                    {cast.character}
+                </p>
             </div>
         </Link>
-    )
+    );
 }
