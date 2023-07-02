@@ -1,5 +1,5 @@
 import { languages } from "@/data/languages"
-import { LanguageTransTypes } from "@/typescript/types";
+import { LanguageTransTypes } from "@/types";
 import { ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -44,4 +44,13 @@ export function isReleasedBeforeToday(dateString: string) {
   releaseDate.setHours(0, 0, 0, 0);
 
   return releaseDate > currentDate;
+}
+
+export function getGenres(genreIds: number[] | string[], genres: any[]) {
+  if (!genres) return genreIds;
+  if (genreIds?.length < 0) return [];
+  return genreIds.map((genreId) => {
+    const genre = genres.find((genre) => genre.id === genreId);
+    return genre ? genre.name : '';
+  });
 }

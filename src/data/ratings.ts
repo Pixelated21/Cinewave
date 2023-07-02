@@ -1,4 +1,4 @@
-import { Rating } from "@/typescript/interfaces";
+import { Rating } from "@/types";
 
 export const ratings: Rating[] = [
     {

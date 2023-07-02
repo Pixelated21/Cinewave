@@ -1,4 +1,4 @@
-import { Genre } from "@/typescript/interfaces";
+import { Genre } from "@/types";
 
 export const genres: Genre[] = [
     {
