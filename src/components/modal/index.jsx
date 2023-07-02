@@ -1,9 +1,6 @@
 "use client";
-import {
-    useCallback,
-    useRef,
-    useEffect,
-} from "react";
+
+import { useCallback, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Modal({ children }) {
@@ -39,12 +36,12 @@ export default function Modal({ children }) {
     return (
         <div
             ref={overlay}
-            className="fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/80"
+            className="fixed bottom-0 left-0 right-0 top-0 z-10 mx-auto bg-black/80"
             onClick={onClick}
         >
             <div
                 ref={wrapper}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[985px] sm:w-[985px] md:w-[985px] lg:w-[985px]"
+                className="absolute left-1/2 top-1/2 w-[985px] -translate-x-1/2 -translate-y-1/2 sm:w-[985px] md:w-[985px] lg:w-[985px]"
             >
                 {children}
             </div>
