@@ -31,7 +31,7 @@ export default function RootLayout({
                 {children}
                 {/* <Breakpoints /> */}
                 {/* <ScrollToTop /> */}
-                <Analytics/>
+                {/* <Analytics/> */}
             </body>
         </html>
     );
