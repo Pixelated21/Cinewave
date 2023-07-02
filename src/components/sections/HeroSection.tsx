@@ -60,11 +60,6 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                         </li>
                                         <li>
                                             <span className="text-xs text-white">
-                                                23m
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span className="text-xs text-white">
                                                 {currentMovie.release_date}
                                             </span>
                                         </li>
