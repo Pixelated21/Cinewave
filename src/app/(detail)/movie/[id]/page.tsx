@@ -23,7 +23,7 @@ type Props = {
 
 export async function generateMetadata(
     { params, searchParams }: Props,
-    parent?: ResolvingMetadata
+    parent: ResolvingMetadata
 ): Promise<Metadata> {
     const id = params.id;
 
@@ -34,7 +34,7 @@ export async function generateMetadata(
     const [movieDetails] = await Promise.all([getMovieDetails]);
 
     // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent)?.openGraph?.images || [];
+    const previousImages = (await parent!)?.openGraph?.images || [];
 
     return {
         title: `${movieDetails.title} | CineWave`,
