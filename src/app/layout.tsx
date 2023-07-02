@@ -8,6 +8,14 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
     title: "CineWave",
     description: "Keep track of your favorite movies and TV shows.",
+    twitter: {
+        images: "https://www.pngkit.com/png/detail/13-135262_movie-moviemaker-film-cut-svg-png-icon-free.png",
+    },
+    openGraph: {
+        images: "https://www.pngkit.com/png/detail/13-135262_movie-moviemaker-film-cut-svg-png-icon-free.png",
+        title: "CineWave",
+        description: "Keep track of your favorite movies and TV shows.",
+    }
 };
 
 export default function RootLayout({
