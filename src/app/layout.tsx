@@ -28,8 +28,8 @@ export default function RootLayout({
         <html lang="en">
             <body className={inter.className}>
                 {children}
-                <Breakpoints />
-                <ScrollToTop />
+                {/* <Breakpoints /> */}
+                {/* <ScrollToTop /> */}
             </body>
         </html>
     );
