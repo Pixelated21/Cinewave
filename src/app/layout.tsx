@@ -15,7 +15,8 @@ export const metadata = {
         images: "https://www.pngkit.com/png/detail/13-135262_movie-moviemaker-film-cut-svg-png-icon-free.png",
         title: "CineWave",
         description: "Keep track of your favorite movies and TV shows.",
-    }
+        url: "https://cinewave.vercel.app/",
+    },
 };
 
 export default function RootLayout({
