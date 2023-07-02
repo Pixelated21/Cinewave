@@ -21,20 +21,21 @@ type Props = {
     searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateMetadata(
-    { params, searchParams }: Props,
-    parent?: ResolvingMetadata
-): Promise<Metadata> {
-    const { id } = params;
+export async function generateMetadata({
+    params,
+    searchParams,
+}: Props): // parent?: ResolvingMetadata
+Promise<Metadata> {
+    const id = params.id;
 
     const getMovieDetails: Promise<MovieDetails> = getMovieDetailsAction({
         id: id,
     });
 
-    const movieDetails = await getMovieDetails;
+    const [movieDetails] = await Promise.all([getMovieDetails]);
 
     // optionally access and extend (rather than replace) parent metadata
-    const previousImages = (await parent).openGraph?.images || [];
+    // const previousImages = (await parent).openGraph?.images || [];
 
     return {
         title: `${movieDetails.title} | CineWave`,
@@ -45,7 +46,6 @@ export async function generateMetadata(
             locale: "en_US",
             images: [
                 `https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`,
-                ...previousImages,
             ],
             title: `${movieDetails.title} | CineWave`,
             description: movieDetails.overview,
