@@ -8,7 +8,8 @@ export default function TrailerCard({ video }: { video: MovieVideo }) {
         >
             <Image
                 className="absolute object-cover"
-                alt={video.name}
+                alt={`Trailer for: ${video.name} | CineWave `}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 src={`https://i.ytimg.com/vi/${video.key}/hqdefault.jpg?sqp=-oaymwEjCOADEI4CSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLB2EoORWOGsz-YJAN_0sFx42DbuwA`}
                 fill
             />

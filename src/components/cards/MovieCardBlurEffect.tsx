@@ -17,8 +17,9 @@ export default function MovieCardBlurEffect({
         >
             <div className="relative flex h-full w-full flex-col justify-end">
                 <Image
-                    alt={`Poster for: ${resource.title}`}
+                    alt={`Poster for: ${resource.title} | CineWave`}
                     className="absolute object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     fill
                     src={`https://image.tmdb.org/t/p/w500/${resource.poster_path}`}
                 />

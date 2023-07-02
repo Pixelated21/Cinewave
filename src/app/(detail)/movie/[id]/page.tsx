@@ -16,15 +16,11 @@ import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-type Props = {
-    params: { id: string };
-    searchParams: { [key: string]: string | string[] | undefined };
-};
-
 export async function generateMetadata({
     params,
-    searchParams,
-}: Props): Promise<Metadata> {
+}: {
+    params: { id: string };
+}): Promise<Metadata> {
     const id = params.id;
 
     const getMovieDetails: Promise<MovieDetails> = getMovieDetailsAction({
@@ -32,8 +28,6 @@ export async function generateMetadata({
     });
 
     const [movieDetails] = await Promise.all([getMovieDetails]);
-
-    // optionally access and extend (rather than replace) parent metadata
 
     return {
         title: `${movieDetails.title} | CineWave`,
@@ -123,10 +117,11 @@ export default async function MovieDetails({
                     <div className="relative flex h-full items-end ">
                         <Image
                             className="absolute h-full w-full object-cover"
-                            fill
-                            src={`https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`}
+                            height={671}
+                            width={1280}
+                            src={`https://image.tmdb.org/t/p/w1280/${movieDetails.backdrop_path}`}
                             priority
-                            alt="hero"
+                            alt={`Backdrop of: ${movieDetails.title} | CineWave`}
                         />
                         <div className="absolute h-full w-full bg-black bg-opacity-50"></div>
                         <div className="absolute h-80 w-full bg-gradient-to-b from-[#0E0410]/0 to-[#0E0410]"></div>
@@ -140,10 +135,12 @@ export default async function MovieDetails({
                         <div className="relative h-[400px] w-[250px] rounded-sm xl:h-[450px] xl:w-[300px]">
                             <Image
                                 className="absolute rounded-sm object-cover"
-                                fill
+                                height={450}
+                                width={300}
+                                sizes=""
                                 src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
                                 priority
-                                alt="hero"
+                                alt={`Poster of: ${movieDetails.title} | CineWave`}
                             />
                         </div>
                         <div className="mt-7 flex flex-row items-center gap-x-7">
@@ -264,9 +261,9 @@ export default async function MovieDetails({
                                             <Image
                                                 className="absolute rounded-full object-cover"
                                                 fill
-                                                src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
-                                                priority
-                                                alt="hero"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                src={`https://image.tmdb.org/t/p/w92/${cast.profile_path}`}
+                                                alt={`Profile Photo of: ${cast.name} | CineWave`}
                                             />
                                         </div>
                                         <div className="flex flex-col text-white">
@@ -294,9 +291,10 @@ export default async function MovieDetails({
                                     <div className=" flex w-[211px] flex-col gap-y-4">
                                         <div className="relative  h-80 overflow-hidden rounded-sm">
                                             <Image
-                                                alt="layout"
+                                                alt={`Collection Poster of: ${movieDetails.belongs_to_collection.name} | CineWave`}
                                                 className="absolute object-cover"
                                                 fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                 src={`https://image.tmdb.org/t/p/w500/${movieDetails.belongs_to_collection.poster_path}`}
                                             />
                                         </div>

@@ -10,10 +10,11 @@ export default function SmallMovieCard({ movie }: { movie: Movie }) {
                 <div className="flex flex-row items-center gap-x-3 ">
                     <div className="relative h-[70px] w-[45px] overflow-hidden rounded-sm">
                         <Image
-                            alt="layout"
+                            alt={`Poster for: ${movie.title} | CineWave`}
                             className="absolute object-cover"
                             fill
-                            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
                         />
                     </div>
                     <div>

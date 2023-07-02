@@ -32,7 +32,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                         className="absolute h-full w-full object-cover"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                        alt={movie.title}
+                        alt={`Poster for: ${movie.title} | CineWave`}
                         fill
                     />
                     <div className="absolute h-full w-full bg-black bg-opacity-0 duration-300 group-hover:bg-opacity-50"></div>
