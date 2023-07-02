@@ -4,16 +4,13 @@ import { Trending } from "@/types";
 import Image from "next/image";
 import Breaker from "../utils/Breaker";
 import { Button } from "../ui/button";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function HeroSection({ trending }: { trending: Trending[] }) {
     const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
 
-    const currentMovie = useMemo(
-        () => trending[currentMovieIndex],
-        [trending, currentMovieIndex]
-    );
+    const currentMovie = trending[currentMovieIndex];
 
     const showNextMovie = () => {
         setCurrentMovieIndex((prevIndex) => (prevIndex + 1) % trending.length);
