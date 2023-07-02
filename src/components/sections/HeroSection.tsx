@@ -97,7 +97,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                     </Link>
                                 </Button>
 
-                                <Button className="bg-purple-500 hover:bg-purple-700">
+                                <Button className="bg-purple-800 hover:bg-purple-700">
                                     Add To Watchlist
                                 </Button>
                             </div>
