@@ -1,6 +1,11 @@
 export type LanguageTransTypes = "iso_639_1" | "english_name" | "name";
 
-export type ResourceTypes = "movie" | "series";
+export enum ResourceTypesEnum {
+    MOVIE = "movie",
+    SERIES = "series",
+    COLLECTION = "collection",
+    PEOPLE = "people",
+}
 
 export interface Movie {
     adult: boolean;
