@@ -108,6 +108,7 @@ export async function getMovieDetailsAction({ id }: { id: string | number }) {
         {
             params: {
                 api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+                language: "en-US",
             },
         });
     return res.data;
@@ -118,6 +119,7 @@ export async function getMovieCreditsAction({ id }: { id: string | number }) {
         {
             params: {
                 api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+                language: "en-US",
             },
         });
     return res.data;
@@ -128,6 +130,7 @@ export async function getMovieVideosAction({ id }: { id: string | number }) {
         {
             params: {
                 api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+                language: "en-US",
             },
         });
     return res.data;
@@ -138,6 +141,7 @@ export async function getMovieRecommendationsAction({ id }: { id: string | numbe
         {
             params: {
                 api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+                language: "en-US",
             },
         });
     return res.data;
@@ -149,6 +153,7 @@ export async function getComingSoonMoviesAction() {
         {
             params: {
                 api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+                language: "en-US",
             },
         }
     );
