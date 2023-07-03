@@ -1,4 +1,4 @@
-import { DiscoverMovieAdvancedFilters, Movie } from "@/types";
+import { DiscoverMovieAdvancedFilters, Movie, ResourceTypesEnum } from "@/types";
 import HeroSection from "@/components/sections/HeroSection";
 import NavigationBar from "@/components/NavigationBar";
 import ResourceListingSection from "@/components/sections/home/ResourceListingSection";
@@ -47,28 +47,28 @@ export default async function HomePage({
 
             {/* Trending */}
             <ResourceListingSection
-                type="movie"
+                type={ResourceTypesEnum.MOVIE}
                 resource={trendingMovies}
                 title={"Trending"}
             />
 
             {/* Latest Movies */}
             <ResourceListingSection
-                type="movie"
+                type={ResourceTypesEnum.MOVIE}
                 resource={latestMovies}
                 title={"Latest Movies"}
             />
 
             {/* Latest TV Show */}
             <ResourceListingSection
-                type="series"
+                type={ResourceTypesEnum.SERIES}
                 resource={latestSeries}
                 title={"Latest TV Shows"}
             />
 
             {/* Coming Soon */}
             <ResourceListingSection
-                type="movie"
+                type={ResourceTypesEnum.MOVIE}
                 resource={comingSoon}
                 title={"Coming Soon"}
             />
