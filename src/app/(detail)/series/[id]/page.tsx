@@ -1,77 +1,81 @@
 import {
-    getMovieCreditsAction,
-    getMovieDetailsAction,
-    getMovieRecommendationsAction,
-    getMovieVideosAction,
-    getTrendingMoviesAction,
-} from "@/app/_actions/movie";
+    getSeriesCreditsAction,
+    getSeriesDetailsAction,
+    getSeriesRecommendationsAction,
+    getSeriesVideosAction,
+    getTrendingSeriesAction,
+} from "@/app/_actions/series";
 import NavigationBar from "@/components/NavigationBar";
-import MovieCardBlurEffect from "@/components/cards/MovieCardBlurEffect";
-import SmallMovieCard from "@/components/cards/SmallMovieCard";
+import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
+import SmallMovieCard from "@/components/cards/series/SmallSeriesCard";
 import TrailerCard from "@/components/cards/TrailerCard";
 import { genres } from "@/data/genres";
 import { getGenres } from "@/lib/utils";
 import {
     Credits,
     Movie,
-    MovieDetails,
     MovieVideoRequest,
+    Series,
     SeriesDetails,
 } from "@/types";
 import Image from "next/image";
+import SmallSeriesCard from "@/components/cards/series/SmallSeriesCard";
+import SeriesCardBlurEffect from "@/components/cards/series/SeriesCardBlurEffect";
 
-export default async function MovieDetails({
+export default async function seriesDetails({
     params,
 }: {
     params: { id: string };
 }) {
     const { id } = params;
-    const getMovieDetails: Promise<SeriesDetails> = getMovieDetailsAction({
+    const getSeriesDetails: Promise<SeriesDetails> = getSeriesDetailsAction({
         id: id,
     });
-    const getMovieCredits: Promise<Credits> = getMovieCreditsAction({ id: id });
-    const getMovieVideos: Promise<MovieVideoRequest> = getMovieVideosAction({
+    const getSeriesCredits: Promise<Credits> = getSeriesCreditsAction({
         id: id,
     });
-    const getTrendingMovies = getTrendingMoviesAction();
-    const getMovieRecommendations = getMovieRecommendationsAction({ id: id });
+    const getSeriesVideos: Promise<MovieVideoRequest> = getSeriesVideosAction({
+        id: id,
+    });
+    const getTrendingSeries = getTrendingSeriesAction();
+    const getSeriesRecommendations = getSeriesRecommendationsAction({ id: id });
 
     const [
-        movieDetails,
-        movieCredits,
-        movieVideos,
-        trendingMovies,
-        movieRecommendations,
+        seriesDetails,
+        seriesCredits,
+        seriesVideos,
+        trendingSeries,
+        seriesRecommendations,
     ] = await Promise.all([
-        getMovieDetails,
-        getMovieCredits,
-        getMovieVideos,
-        getTrendingMovies,
-        getMovieRecommendations,
+        getSeriesDetails,
+        getSeriesCredits,
+        getSeriesVideos,
+        getTrendingSeries,
+        getSeriesRecommendations,
     ]);
 
     const filteredVideos = {
-        ...movieVideos,
-        results: movieVideos.results.filter(
+        ...seriesVideos,
+        results: seriesVideos.results.filter(
             (video) =>
                 video.type?.toLowerCase() === "trailer" &&
                 video.official === true
         ),
     };
 
-    const filteredTrending = trendingMovies.results
+    const filteredTrending = trendingSeries.results
         .splice(0, 10)
         .filter(
-            (movie: Movie) =>
-                movie.poster_path !== null && movie.backdrop_path !== null
+            (series: Series) =>
+                series.poster_path !== null && series.backdrop_path !== null
         );
 
     // FIXME: Fix Type Hinting
-    const filteredRecommendations = movieRecommendations.results
-        .filter((movie: Movie) => movie.backdrop_path !== null)
-        .map(({ genre_ids, ...movie }: { genre_ids: any }) => {
+    const filteredRecommendations = seriesRecommendations.results
+        .filter((series: Series) => series.backdrop_path !== null)
+        .map(({ genre_ids, ...series }: { genre_ids: any }) => {
             const genre = getGenres(genre_ids!, genres);
-            return { ...movie, genre_ids: genre };
+            return { ...series, genre_ids: genre };
         });
 
     return (
@@ -84,7 +88,7 @@ export default async function MovieDetails({
                         <Image
                             className="absolute h-full w-full object-cover"
                             fill
-                            src={`https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`}
+                            src={`https://image.tmdb.org/t/p/original/${seriesDetails.backdrop_path}`}
                             priority
                             alt="hero"
                         />
@@ -101,7 +105,7 @@ export default async function MovieDetails({
                             <Image
                                 className="absolute rounded-sm object-cover"
                                 fill
-                                src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+                                src={`https://image.tmdb.org/t/p/w500/${seriesDetails.poster_path}`}
                                 priority
                                 alt="hero"
                             />
@@ -110,14 +114,14 @@ export default async function MovieDetails({
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">
                                 <span className="text-3xl font-bold text-white">
                                     {Number(
-                                        movieDetails.vote_average
+                                        seriesDetails.vote_average
                                     ).toPrecision(2)}
                                 </span>
                             </div>
                             <div className="flex flex-col gap-y-2.5">
                                 <div className=" flex flex-row items-end gap-x-1">
                                     <span className="text-sm font-semibold text-white">
-                                        {movieDetails.vote_count}
+                                        {seriesDetails.vote_count}
                                     </span>
                                     <span className="text-xs text-gray-200">
                                         Ratings
@@ -138,19 +142,19 @@ export default async function MovieDetails({
                     <div className=" flex-1 px-10 text-white">
                         <div className="mt-8 flex flex-col">
                             <h1 className="text-4xl font-bold xl:text-5xl">
-                                {movieDetails.name}
+                                {seriesDetails.name}
                             </h1>
-                            {movieDetails.original_name !==
-                                movieDetails.name && (
+                            {seriesDetails.original_name !==
+                                seriesDetails.name && (
                                 <div className="mt-2.5 text-xs">
                                     <span>Original Title: </span>
-                                    <span>{movieDetails.original_name}</span>
+                                    <span>{seriesDetails.original_name}</span>
                                 </div>
                             )}
                             <div className="mt-2.5 flex flex-row gap-x-2 text-sm font-semibold">
                                 <div>
-                                    Movie ({movieDetails.first_air_date} -{" "}
-                                    {movieDetails.last_air_date})
+                                    Series ({seriesDetails.first_air_date} -{" "}
+                                    {seriesDetails.last_air_date})
                                 </div>
                             </div>
                         </div>
@@ -162,7 +166,7 @@ export default async function MovieDetails({
 
                         <div className="mt-9 max-w-[608px]">
                             <p className="font-medium">
-                                {movieDetails.overview}
+                                {seriesDetails.overview}
                             </p>
                         </div>
 
@@ -175,7 +179,7 @@ export default async function MovieDetails({
                                         Genres
                                     </span>
                                     <span>
-                                        {movieDetails.genres
+                                        {seriesDetails.genres
                                             .map((genre) => genre.name)
                                             .join(", ")}
                                     </span>
@@ -185,7 +189,7 @@ export default async function MovieDetails({
                                         Production Companies
                                     </span>
                                     <span>
-                                        {movieDetails.production_companies
+                                        {seriesDetails.production_companies
                                             .map((companies) => companies.name)
                                             .join(", ")}
                                     </span>
@@ -195,7 +199,7 @@ export default async function MovieDetails({
                                         Production Countries
                                     </span>
                                     <span>
-                                        {movieDetails.production_countries
+                                        {seriesDetails.production_countries
                                             .map((countries) => countries.name)
                                             .join(", ")}
                                     </span>
@@ -210,30 +214,32 @@ export default async function MovieDetails({
                                 Cast & Crew
                             </h1>
                             <div className="mt-8 flex flex-col gap-y-5">
-                                {movieCredits.cast?.splice(0, 4).map((cast) => (
-                                    <div
-                                        key={cast.id}
-                                        className="flex items-center gap-x-4"
-                                    >
-                                        <div className="relative h-14 w-14 rounded-full">
-                                            <Image
-                                                className="absolute rounded-full object-cover"
-                                                fill
-                                                src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
-                                                priority
-                                                alt="hero"
-                                            />
+                                {seriesCredits.cast
+                                    ?.splice(0, 4)
+                                    .map((cast) => (
+                                        <div
+                                            key={cast.id}
+                                            className="flex items-center gap-x-4"
+                                        >
+                                            <div className="relative h-14 w-14 rounded-full">
+                                                <Image
+                                                    className="absolute rounded-full object-cover"
+                                                    fill
+                                                    src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
+                                                    priority
+                                                    alt="hero"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col text-white">
+                                                <span className="text-sm font-bold">
+                                                    {cast.name}
+                                                </span>
+                                                <span className="text-xs font-normal">
+                                                    {cast.character}
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="flex flex-col text-white">
-                                            <span className="text-sm font-bold">
-                                                {cast.name}
-                                            </span>
-                                            <span className="text-xs font-normal">
-                                                {cast.character}
-                                            </span>
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))}
                             </div>
                             <div className="mt-5 flex flex-row items-center gap-x-2">
                                 <span className="text-sm font-semibold text-white">
@@ -276,11 +282,10 @@ export default async function MovieDetails({
                             <div className="mt-5 h-full">
                                 <div className="grid grid-cols-3 gap-5">
                                     {filteredRecommendations.map(
-                                        (movie: Movie) => (
-                                            <MovieCardBlurEffect
-                                                key={movie.id}
-                                                resource={movie}
-                                                type="series"
+                                        (series: Series) => (
+                                            <SeriesCardBlurEffect
+                                                key={series.id}
+                                                resource={series}
                                             />
                                         )
                                     )}
@@ -296,9 +301,11 @@ export default async function MovieDetails({
                             </h1>
                             <div className="mt-5 w-[300px] bg-gray-900 p-5 ">
                                 <div className="divide- flex flex-col gap-y-4">
-                                    {filteredTrending.map((movie: Movie) => (
-                                        <div className="" key={movie.id}>
-                                            <SmallMovieCard movie={movie} />
+                                    {filteredTrending.map((series: Series) => (
+                                        <div className="" key={series.id}>
+                                            <SmallSeriesCard
+                                                resource={series}
+                                            />
                                         </div>
                                     ))}
                                 </div>

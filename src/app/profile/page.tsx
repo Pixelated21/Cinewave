@@ -1,10 +1,9 @@
 import NavigationBar from "@/components/NavigationBar";
-import MovieCard from "@/components/cards/MovieCard";
+import MovieCard from "@/components/cards/movie/MovieCard";
 import MovieGridLayout from "@/components/layouts/LayoutSection";
 import { Movie } from "@/types";
 import Image from "next/image";
 import { getTrendingMoviesAction } from "../_actions/movie";
-
 
 export default async function Profile() {
     const getTrendingMovies = getTrendingMoviesAction();

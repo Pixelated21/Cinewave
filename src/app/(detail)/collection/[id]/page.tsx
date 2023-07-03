@@ -1,8 +1,8 @@
 import { getCollectionDetailsAction } from "@/app/_actions/collection";
 import { getTrendingMoviesAction } from "@/app/_actions/movie";
 import NavigationBar from "@/components/NavigationBar";
-import MovieCardBlurEffect from "@/components/cards/MovieCardBlurEffect";
-import SmallMovieCard from "@/components/cards/SmallMovieCard";
+import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
+import SmallMovieCard from "@/components/cards/movie/SmallMovieCard";
 import { Collection, Movie, Part } from "@/types";
 import Image from "next/image";
 
@@ -97,7 +97,6 @@ export default async function CollectionPage({
                                             <MovieCardBlurEffect
                                                 key={movie.id}
                                                 resource={movie}
-                                                type="movie"
                                             />
                                         )
                                     )}
@@ -113,11 +112,13 @@ export default async function CollectionPage({
                             </h1>
                             <div className="mt-5 w-[300px] bg-gray-900 p-5 ">
                                 <div className="divide- flex flex-col gap-y-4">
-                                    {filteredTrendingMovie.map((movie: Movie) => (
-                                        <div className="" key={movie.id}>
-                                            <SmallMovieCard movie={movie} />
-                                        </div>
-                                    ))}
+                                    {filteredTrendingMovie.map(
+                                        (movie: Movie) => (
+                                            <div className="" key={movie.id}>
+                                                <SmallMovieCard movie={movie} />
+                                            </div>
+                                        )
+                                    )}
                                 </div>
                             </div>
                         </div>

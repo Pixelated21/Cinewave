@@ -6,8 +6,8 @@ import {
     getTrendingMoviesAction,
 } from "@/app/_actions/movie";
 import NavigationBar from "@/components/NavigationBar";
-import MovieCardBlurEffect from "@/components/cards/MovieCardBlurEffect";
-import SmallMovieCard from "@/components/cards/SmallMovieCard";
+import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
+import SmallMovieCard from "@/components/cards/movie/SmallMovieCard";
 import TrailerCard from "@/components/cards/TrailerCard";
 import { genres } from "@/data/genres";
 import { getGenres } from "@/lib/utils";
@@ -352,7 +352,6 @@ export default async function MovieDetails({
                                             <MovieCardBlurEffect
                                                 key={movie.id}
                                                 resource={movie}
-                                                type="movie"
                                             />
                                         )
                                     )}

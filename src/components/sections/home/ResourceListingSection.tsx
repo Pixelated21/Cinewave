@@ -2,7 +2,7 @@
 
 import LayoutSection from "@/components/layouts/LayoutSection";
 import { Movie } from "@/types";
-import MovieCardBlurEffect from "@/components/cards/MovieCardBlurEffect";
+import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
 import { ResourceTypes } from "@/types";
 import { getGenres } from "@/lib/utils";
 import { genres } from "@/data/genres";

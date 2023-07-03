@@ -1,6 +1,6 @@
 import { searchMoviesAction } from "@/app/_actions/movie";
 import NavigationBar from "@/components/NavigationBar";
-import MovieCard from "@/components/cards/MovieCard";
+import MovieCard from "@/components/cards/movie/MovieCard";
 import MovieGridLayout from "@/components/layouts/LayoutSection";
 import { Button } from "@/components/ui/button";
 import { formatSearchQuery } from "@/lib/utils";

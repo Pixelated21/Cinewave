@@ -4,7 +4,7 @@ import {
     getSimilarMovieAction,
     searchMoviesAction,
 } from "@/app/_actions/movie";
-import MovieCard from "@/components/cards/MovieCard";
+import MovieCard from "@/components/cards/movie/MovieCard";
 import MovieGridLayout from "@/components/layouts/LayoutSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
