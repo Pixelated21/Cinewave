@@ -41,8 +41,8 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                     priority
                     alt="hero"
                 />
-                <div className="absolute h-full w-full bg-black bg-opacity-50"></div>
-                <div className="absolute h-80 w-full bg-gradient-to-b from-[#0E0410]/0 to-[#0E0410]/90"></div>
+                <div className="absolute h-full w-full bg-black bg-opacity-50"/>
+                <div className="absolute h-80 w-full bg-gradient-to-b from-[#0E0410]/0 to-[#0E0410]/90"/>
 
                 <div className="absolute left-0 right-0 mx-auto mb-14 h-1/2 max-w-7xl">
                     <div className="flex h-full justify-between px-4 sm:px-8 xl:px-2">
@@ -51,32 +51,25 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                 <h1 className="max-w-[600px] text-5xl font-semibold text-white">
                                     {currentMovie.title}
                                 </h1>
-                                <div>
-                                    <ul className="flex items-center gap-x-3">
-                                        <li>
-                                            <span className="text-xs capitalize text-white">
-                                                {currentMovie.media_type}
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span className="text-xs text-white">
-                                                {currentMovie.release_date}
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span className="rounded-md bg-green-400 px-1 py-[3px] text-xs font-semibold text-black">
-                                                HD
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span className="rounded-md bg-white px-1 py-[3px] text-xs font-semibold text-black">
-                                                {getLanguage(
-                                                    currentMovie?.original_language,
-                                                    "english_name"
-                                                )}
-                                            </span>
-                                        </li>
-                                    </ul>
+                                <div className="flex items-center gap-x-3">
+                                    <span className="text-xs capitalize text-white">
+                                        {currentMovie.media_type}
+                                    </span>
+
+                                    <span className="text-xs text-white">
+                                        {currentMovie.release_date}
+                                    </span>
+
+                                    <span className="rounded-md bg-green-400 px-1 py-[3px] text-xs font-semibold text-black">
+                                        HD
+                                    </span>
+
+                                    <span className="rounded-md bg-white px-1 py-[3px] text-xs font-semibold text-black">
+                                        {getLanguage(
+                                            currentMovie?.original_language,
+                                            "english_name"
+                                        )}
+                                    </span>
                                 </div>
 
                                 <div className="max-w-[495px]">
