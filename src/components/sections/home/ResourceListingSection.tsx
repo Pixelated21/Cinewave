@@ -1,23 +1,24 @@
 "use client";
 
 import LayoutSection from "@/components/layouts/LayoutSection";
-import { Movie } from "@/types";
+import { Movie, Series } from "@/types";
 import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
-import { ResourceTypes } from "@/types";
+import { ResourceTypesEnum } from "@/types";
 import { getGenres } from "@/lib/utils";
 import { genres } from "@/data/genres";
+import SeriesCardBlurEffect from "@/components/cards/series/SeriesCardBlurEffect";
 
-interface MovieSectionProps {
+interface ResourceListingSectionProps {
     resource: { results: Movie[] };
     title: string;
-    type: ResourceTypes;
+    type: ResourceTypesEnum;
 }
 
 export default function ResourceListingSection({
     resource,
     title,
     type,
-}: MovieSectionProps) {
+}: ResourceListingSectionProps) {
     const filteredResource = resource.results.map(({ genre_ids, ...movie }) => {
         const genre = getGenres(genre_ids!, genres);
         return { ...movie, genre_ids: genre };
@@ -37,9 +38,26 @@ export default function ResourceListingSection({
                     </div>
 
                     <LayoutSection>
+                        {type === ResourceTypesEnum.MOVIE
+                            ? filteredResource.map((resource: Movie) => (
+                                <MovieCardBlurEffect
+                                    key={resource.id}
+                                    resource={resource}
+                                />
+                            ))
+                            : type === ResourceTypesEnum.SERIES
+                                ? filteredResource.map((resource) => (
+                                    <SeriesCardBlurEffect
+                                        key={resource.id}
+                                        //   FIXME: Implement Proper Type hinting
+                                        //   @ts-ignore
+                                        resource={resource}
+                                    />
+                                ))
+                                : null}
+
                         {filteredResource.map((resource: Movie) => (
                             <MovieCardBlurEffect
-                                type={type}
                                 key={resource.id}
                                 resource={resource}
                             />
