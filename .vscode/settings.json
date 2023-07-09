@@ -1,4 +1,11 @@
 {
-    "cSpell.words": ["apos", "clsx", "Randomizer", "tryme"],
+    "cSpell.words": [
+        "apos",
+        "clsx",
+        "LARAVEL",
+        "Randomizer",
+        "Swiper",
+        "tryme"
+    ],
     "typescript.tsdk": "node_modules\\typescript\\lib"
 }
