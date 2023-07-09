@@ -133,7 +133,7 @@ export type MovieVideo = {
 export type Series = {
     backdrop_path?: string
     first_air_date: string
-    genre_ids: number[]
+    genre_ids: Genre[]
     id: number
     name: string
     origin_country: string[]
