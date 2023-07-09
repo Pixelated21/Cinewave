@@ -18,6 +18,9 @@ export const metadata = {
         description: "Keep track of your favorite movies and TV shows.",
         url: "https://cinewave.vercel.app/",
     },
+    verification: {
+        google: "nh6dvmdIjWdwctJuSeXvVPzlC9gsqDjyokmXEKU5nUQ"
+    }
 };
 
 export default function RootLayout({
