@@ -2,11 +2,11 @@ import { ResourceTypesEnum, Series } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-type MovieCardBlurEffectProps = {
+type SeriesCardBlurEffectProps = {
     resource: Series;
 };
 
-export default function SeriesCardBlurEffect(props: MovieCardBlurEffectProps) {
+export default function SeriesCardBlurEffect(props: SeriesCardBlurEffectProps) {
     const { resource } = props;
     const genres = resource?.genre_ids?.map((genre) => genre).join(", ");
 
