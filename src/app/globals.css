@@ -11,27 +11,27 @@
         @apply bg-[#0E0410];
     }
 
-    #movieModal {
-        --sb-track-color: #18181B;
-        --sb-thumb-color: #633b9a;
-        --sb-size: 9px;
+    #main {
+        --sb-track-color: #0E0410;
+        --sb-thumb-color: #3b144c;
+        --sb-size: 10px;
 
         scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
     }
 
-    #movieModal::-webkit-scrollbar {
+    #main::-webkit-scrollbar {
         width: var(--sb-size);
     }
 
-    #movieModal::-webkit-scrollbar-track {
+    #main::-webkit-scrollbar-track {
         background: var(--sb-track-color);
-        border-radius: 10px;
+        /* border-radius: 10px; */
     }
 
-    #movieModal::-webkit-scrollbar-thumb {
+    #main::-webkit-scrollbar-thumb {
         background: var(--sb-thumb-color);
-        border-radius: 10px;
-        border: 2px solid #232e33;
+        /* border-radius: 10px; */
+        border: 2px solid #0E0410;
     }
 
     :root {

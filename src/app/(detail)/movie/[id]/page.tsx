@@ -111,7 +111,7 @@ export default async function MovieDetails({
         });
 
     return (
-        <main className="h-screen overflow-y-auto bg-[#0E0410]">
+        <main id="main" className="h-screen overflow-y-auto bg-[#0E0410]">
             <section className="relative h-[571px] shadow-md xl:h-[671px]">
                 <NavigationBar className="absolute z-10 w-full" />
 
