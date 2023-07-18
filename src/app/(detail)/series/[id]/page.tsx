@@ -21,6 +21,7 @@ import {
 import Image from "next/image";
 import SmallSeriesCard from "@/components/cards/series/SmallSeriesCard";
 import SeriesCardBlurEffect from "@/components/cards/series/SeriesCardBlurEffect";
+import Badge from "@/components/badges/Badge";
 
 export default async function seriesDetails({
     params,
@@ -110,7 +111,7 @@ export default async function seriesDetails({
                                 alt="hero"
                             />
                         </div>
-                        <div className="mt-7 flex flex-row items-center gap-x-7">
+                        {/* <div className="mt-7 flex flex-row items-center gap-x-7">
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">
                                 <span className="text-3xl font-bold text-white">
                                     {Number(
@@ -136,7 +137,7 @@ export default async function seriesDetails({
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className=" flex-1 px-10 text-white">
@@ -159,10 +160,10 @@ export default async function seriesDetails({
                             </div>
                         </div>
 
-                        <div className="mt-6 flex flex-row gap-x-5">
+                        {/* <div className="mt-6 flex flex-row gap-x-5">
                             <div className="h-10 w-10 rounded-full bg-gray-500"></div>
                             <div className="h-10 w-10 rounded-full bg-gray-500"></div>
-                        </div>
+                        </div> */}
 
                         <div className="mt-9 max-w-[608px]">
                             <p className="font-medium">
@@ -174,36 +175,77 @@ export default async function seriesDetails({
                             <h1 className="text-xl font-bold">Details</h1>
 
                             <div className="mt-8 flex flex-col">
-                                <div className="flex items-center gap-x-5 py-2">
-                                    <span className="w-44 text-base">
-                                        Genres
-                                    </span>
-                                    <span>
-                                        {seriesDetails.genres
-                                            .map((genre) => genre.name)
-                                            .join(", ")}
-                                    </span>
-                                </div>
-                                <div className="flex items-center gap-x-5 py-2">
-                                    <span className="w-44 text-base">
-                                        Production Companies
-                                    </span>
-                                    <span>
-                                        {seriesDetails.production_companies
-                                            .map((companies) => companies.name)
-                                            .join(", ")}
-                                    </span>
-                                </div>
-                                <div className="flex items-center gap-x-5 py-2">
-                                    <span className="w-44 text-base">
-                                        Production Countries
-                                    </span>
-                                    <span>
-                                        {seriesDetails.production_countries
-                                            .map((countries) => countries.name)
-                                            .join(", ")}
-                                    </span>
-                                </div>
+                                {seriesDetails.genres.length > 0 && (
+                                    <div className="flex items-center gap-x-5 py-2">
+                                        <span className="w-48 text-base">
+                                            Genres
+                                        </span>
+                                        <div className="flex flex-1 flex-wrap gap-1">
+                                            {seriesDetails.genres.map(
+                                                (genre) => {
+                                                    {
+                                                        return (
+                                                            <Badge
+                                                                key={genre.id}
+                                                                text={
+                                                                    genre.name
+                                                                }
+                                                            />
+                                                        );
+                                                    }
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {seriesDetails.production_companies.length >
+                                    0 && (
+                                    <div className="flex items-center gap-x-5 py-2">
+                                        <span className="w-48 text-base">
+                                            Production Companies
+                                        </span>
+                                        <div className="flex flex-1 flex-wrap gap-1">
+                                            {seriesDetails.production_companies.map(
+                                                (companies) => {
+                                                    return (
+                                                        <Badge
+                                                            key={companies.id}
+                                                            text={
+                                                                companies.name
+                                                            }
+                                                        />
+                                                    );
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {seriesDetails.production_countries.length >
+                                    0 && (
+                                    <div className="flex items-center gap-x-5 py-2">
+                                        <span className="w-48 text-base">
+                                            Production Countries
+                                        </span>
+                                        <div className="flex flex-1 flex-wrap gap-1">
+                                            {seriesDetails.production_countries.map(
+                                                (countries) => {
+                                                    return (
+                                                        <Badge
+                                                            key={
+                                                                countries.iso_3166_1
+                                                            }
+                                                            text={
+                                                                countries.name
+                                                            }
+                                                        />
+                                                    );
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -221,11 +263,15 @@ export default async function seriesDetails({
                                             key={cast.id}
                                             className="flex items-center gap-x-4"
                                         >
-                                            <div className="relative h-14 w-14 rounded-full">
+                                            <div className="relative h-14 w-14 overflow-hidden rounded-full">
                                                 <Image
-                                                    className="absolute rounded-full object-cover"
+                                                    className="absolute rounded-full bg-white object-cover"
                                                     fill
-                                                    src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
+                                                    src={`${
+                                                        cast.profile_path
+                                                            ? `https://image.tmdb.org/t/p/w92/${cast.profile_path}`
+                                                            : "/assets/profile_default.png"
+                                                    }`}
                                                     priority
                                                     alt="hero"
                                                 />
@@ -241,12 +287,12 @@ export default async function seriesDetails({
                                         </div>
                                     ))}
                             </div>
-                            <div className="mt-5 flex flex-row items-center gap-x-2">
+                            {/* <div className="mt-5 flex flex-row items-center gap-x-2">
                                 <span className="text-sm font-semibold text-white">
                                     Show more
                                 </span>
                                 <div className="h-5 w-5 rounded-full bg-white"></div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -275,43 +321,52 @@ export default async function seriesDetails({
                             </div>
                         )}
 
-                        <div className="flex flex-col">
-                            <h1 className=" text-3xl font-semibold text-white">
-                                More Like This
-                            </h1>
-                            <div className="mt-5 h-full">
-                                <div className="grid grid-cols-3 gap-5">
-                                    {filteredRecommendations.map(
-                                        (series: Series) => (
-                                            <SeriesCardBlurEffect
-                                                key={series.id}
-                                                resource={series}
-                                            />
-                                        )
-                                    )}
+                        {filteredRecommendations.length > 0 && (
+                            <div className="flex flex-col">
+                                <h1 className=" text-3xl font-semibold text-white">
+                                    More Like This
+                                </h1>
+                                <div className="mt-5 h-full">
+                                    <div className="grid grid-cols-3 gap-5">
+                                        {filteredRecommendations.map(
+                                            (series: Series) => (
+                                                <SeriesCardBlurEffect
+                                                    key={series.id}
+                                                    resource={series}
+                                                />
+                                            )
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
                     </div>
 
-                    <div className="flex flex-col gap-y-8">
-                        <div className="flex flex-col">
-                            <h1 className=" text-3xl font-semibold text-white">
-                                Popular
-                            </h1>
-                            <div className="mt-5 w-[300px] bg-gray-900 p-5 ">
-                                <div className="divide- flex flex-col gap-y-4">
-                                    {filteredTrending.map((series: Series) => (
-                                        <div className="" key={series.id}>
-                                            <SmallSeriesCard
-                                                resource={series}
-                                            />
-                                        </div>
-                                    ))}
+                    {filteredTrending.length > 0 && (
+                        <div className="flex flex-col gap-y-8">
+                            <div className="flex flex-col">
+                                <h1 className=" text-3xl font-semibold text-white">
+                                    Popular
+                                </h1>
+                                <div className="mt-5 w-[300px] bg-gray-900 p-5 ">
+                                    <div className="divide- flex flex-col gap-y-4">
+                                        {filteredTrending.map(
+                                            (series: Series) => (
+                                                <div
+                                                    className=""
+                                                    key={series.id}
+                                                >
+                                                    <SmallSeriesCard
+                                                        resource={series}
+                                                    />
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </section>
         </main>

@@ -1,3 +1,6 @@
+"use client";
+
+import { toggleFavoriteMovieAction } from "@/app/_actions/movie";
 import { Movie, ResourceTypesEnum } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +19,18 @@ export default function MovieCardBlurEffect(props: MovieCardBlurEffectProps) {
             className="relative h-[450px] overflow-hidden rounded-sm bg-black"
         >
             <div className="relative flex h-full w-full flex-col justify-end">
+                {/* <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleFavoriteMovieAction({ id: resource.id });
+                        console.log("Clicked on the button");
+                    }}
+                    className="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white"
+                >
+                    <div className="h-6 w-6 rounded-full bg-gray-500 duration-300 hover:h-8 hover:w-8"></div>
+                </button> */}
+
                 <Image
                     alt={`Poster for: ${resource.title} | CineWave`}
                     className="absolute object-cover"
@@ -23,7 +38,8 @@ export default function MovieCardBlurEffect(props: MovieCardBlurEffectProps) {
                     fill
                     src={`https://image.tmdb.org/t/p/w500/${resource.poster_path}`}
                 />
-                <div className="relative h-[150px] w-full bg-gradient-to-t from-black to-black/0 px-3 py-4 text-white backdrop-blur-lg">
+
+                <div className="relative h-[150px] w-full bg-gradient-to-t  from-black to-black/0 px-3 py-4 text-white backdrop-blur-lg">
                     <div className="flex h-full flex-col justify-evenly gap-y-2">
                         <div className="flex flex-row gap-x-2 text-sm font-light">
                             <span className="capitalize">USA</span>

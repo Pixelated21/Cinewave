@@ -12,8 +12,11 @@ import "swiper/css";
 export default function HeroSection({ trending }: { trending: Trending[] }) {
     return (
         <Swiper
-            grabCursor={true}
             modules={[EffectCreative, Autoplay, Navigation, History]}
+            loop={true}
+            effect="creative"
+            className="relative h-full w-full"
+            slidesPerView={1}
             autoplay={{
                 delay: 5000,
                 pauseOnMouseEnter: true,
@@ -28,16 +31,6 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                     translate: ["100%", 0, 0],
                 },
             }}
-            navigation={{
-                nextEl: "next-element",
-                prevEl: "prev-element",
-                enabled: true,
-
-            }}
-            loop={true}
-            effect="creative"
-            className="relative h-full w-full"
-            slidesPerView={1}
         >
             <Image
                 alt="banner"
@@ -105,7 +98,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                                 </Link>
                                             </Button>
 
-                                            <Button className="bg-purple-800 hover:bg-purple-700">
+                                            <Button disabled className="bg-purple-800 hover:bg-purple-700">
                                                 Add To Watchlist
                                             </Button>
                                         </div>

@@ -159,3 +159,10 @@ export async function getComingSoonMoviesAction() {
     );
     return res.data;
 };
+
+export async function toggleFavoriteMovieAction({ id }: { id: number }) {
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_LARAVEL_API_URL}/movies/favorites`, {
+        'movie_id': id,
+    });
+    return res.data;
+}

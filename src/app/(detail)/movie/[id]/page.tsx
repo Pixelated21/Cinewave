@@ -15,6 +15,8 @@ import { Credits, Movie, MovieDetails, MovieVideoRequest } from "@/types";
 import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Badge from "@/components/badges/Badge";
+import TrailerSection from "@/components/sections/detail/TrailerSection";
 
 export async function generateMetadata({
     params,
@@ -143,7 +145,7 @@ export default async function MovieDetails({
                                 alt={`Poster of: ${movieDetails.title} | CineWave`}
                             />
                         </div>
-                        <div className="mt-7 flex flex-row items-center gap-x-7">
+                        {/* <div className="mt-7 flex flex-row items-center gap-x-7">
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">
                                 <span className="text-3xl font-bold text-white">
                                     {Number(
@@ -152,7 +154,7 @@ export default async function MovieDetails({
                                 </span>
                             </div>
                             <div className="flex flex-col gap-y-2.5">
-                                <div className=" flex flex-row items-end gap-x-1">
+                                <div className=" flex flex-row items-center  gap-x-1">
                                     <span className="text-sm font-semibold text-white">
                                         {movieDetails.vote_count}
                                     </span>
@@ -160,7 +162,7 @@ export default async function MovieDetails({
                                         Ratings
                                     </span>
                                 </div>
-                                <div className=" flex flex-row items-end gap-x-1">
+                                <div className=" flex flex-row items-center gap-x-1">
                                     <span className="text-sm font-semibold text-white">
                                         {84}
                                     </span>
@@ -169,7 +171,7 @@ export default async function MovieDetails({
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className=" flex-1 px-10 text-white">
@@ -190,9 +192,9 @@ export default async function MovieDetails({
                             </div>
                         </div>
 
-                        <div className="mt-6 flex flex-row gap-x-5">
-                            <div className="h-10 w-10 rounded-full bg-gray-500"></div>
-                            <div className="h-10 w-10 rounded-full bg-gray-500"></div>
+                        <div className="mt-2 flex flex-row gap-x-5">
+                            {/* <div className="h-10 w-10 rounded-full bg-gray-500"></div>
+                            <div className="h-10 w-10 rounded-full bg-gray-500"></div> */}
                         </div>
 
                         <div className="mt-9 max-w-[608px]">
@@ -204,43 +206,81 @@ export default async function MovieDetails({
                         <div className="mt-9">
                             <h1 className="text-xl font-bold">Details</h1>
 
-                            <div className="mt-8 flex flex-col">
-                                <div className="flex items-center gap-x-5 py-2">
-                                    <span className="w-44 text-base">
-                                        Genres
-                                    </span>
-                                    <span>
-                                        {movieDetails.genres
-                                            .map((genre) => genre.name)
-                                            .join(", ")}
-                                    </span>
-                                </div>
-                                <div className="flex items-center gap-x-5 py-2">
-                                    <span className="w-44 text-base">
-                                        Production Companies
-                                    </span>
-                                    <span>
-                                        {movieDetails.production_companies
-                                            .map((companies) => companies.name)
-                                            .join(", ")}
-                                    </span>
-                                </div>
-                                <div className="flex items-center gap-x-5 py-2">
-                                    <span className="w-44 text-base">
-                                        Production Countries
-                                    </span>
-                                    <span>
-                                        {movieDetails.production_countries
-                                            .map((countries) => countries.name)
-                                            .join(", ")}
-                                    </span>
-                                </div>
-                                <div className="flex items-center gap-x-5 py-2">
-                                    <span className="w-44 text-base">
-                                        Runtime
-                                    </span>
-                                    <span>{movieDetails.runtime} m</span>
-                                </div>
+                            <div className="mt-8 flex flex-col divide-y-2 divide-gray-700/20">
+                                {movieDetails.genres.length > 0 && (
+                                    <div className="flex items-center gap-x-5 py-2">
+                                        <div className="w-48 text-base">
+                                            Genres
+                                        </div>
+                                        <div className="flex flex-wrap gap-x-1">
+                                            {movieDetails.genres.map(
+                                                (genre) => {
+                                                    return (
+                                                        <Badge
+                                                            key={genre.id}
+                                                            text={genre.name}
+                                                        />
+                                                    );
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {movieDetails.production_companies.length >
+                                    0 && (
+                                    <div className="flex items-center gap-x-5 py-2">
+                                        <div className="w-48 text-base">
+                                            Production Companies
+                                        </div>
+                                        <div className="flex flex-1 flex-wrap gap-1">
+                                            {movieDetails.production_companies.map(
+                                                (company) => {
+                                                    return (
+                                                        <Badge
+                                                            key={company.id}
+                                                            text={company.name}
+                                                        />
+                                                    );
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {movieDetails.production_countries.length >
+                                    0 && (
+                                    <div className="flex items-center gap-x-5 py-2 ">
+                                        <div className="w-48 text-base">
+                                            Production Countries
+                                        </div>
+                                        <div className="flex flex-wrap gap-1">
+                                            {movieDetails.production_countries.map(
+                                                (country) => {
+                                                    return (
+                                                        <Badge
+                                                            key={
+                                                                country.iso_3166_1
+                                                            }
+                                                            text={country.name}
+                                                        />
+                                                    );
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {movieDetails.runtime > 0 && (
+                                    <div className="flex items-center gap-x-5 py-2">
+                                        <div className="w-48 text-base">
+                                            Runtime
+                                        </div>
+                                        <Badge
+                                            text={`${movieDetails.runtime} m`}
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -252,17 +292,22 @@ export default async function MovieDetails({
                             </h1>
                             <div className="mt-8 flex flex-col gap-y-5">
                                 {movieCredits.cast?.splice(0, 4).map((cast) => (
-                                    <Link
-                                        href={`/person/${cast.id}`}
+                                    <div
+                                        // href={`/person/${cast.id}`}
+                                        // href={'#'}
                                         key={cast.id}
                                         className="flex items-center gap-x-4"
                                     >
-                                        <div className="relative h-14 w-14 rounded-full">
+                                        <div className="relative h-14 w-14 overflow-hidden rounded-full">
                                             <Image
-                                                className="absolute rounded-full object-cover"
+                                                className="absolute rounded-full bg-white object-cover"
                                                 fill
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                src={`https://image.tmdb.org/t/p/w92/${cast.profile_path}`}
+                                                src={`${
+                                                    cast.profile_path
+                                                        ? `https://image.tmdb.org/t/p/w92/${cast.profile_path}`
+                                                        : "/assets/profile_default.png"
+                                                }`}
                                                 alt={`Profile Photo of: ${cast.name} | CineWave`}
                                             />
                                         </div>
@@ -274,7 +319,7 @@ export default async function MovieDetails({
                                                 {cast.character}
                                             </span>
                                         </div>
-                                    </Link>
+                                    </div>
                                 ))}
                             </div>
                             {/* <div className="mt-5 flex flex-row items-center gap-x-2">
@@ -298,8 +343,8 @@ export default async function MovieDetails({
                                                 src={`https://image.tmdb.org/t/p/w500/${movieDetails.belongs_to_collection.poster_path}`}
                                             />
                                         </div>
-                                        <Link
-                                            href={`/collection/${movieDetails.belongs_to_collection.id}`}
+                                        <div
+                                            // href={`/collection/${movieDetails.belongs_to_collection.id}`}
                                             className="text-white duration-300 hover:text-purple-400"
                                         >
                                             <p className="text-center text-base font-semibold ">
@@ -309,7 +354,7 @@ export default async function MovieDetails({
                                                         .name
                                                 }
                                             </p>
-                                        </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -321,18 +366,22 @@ export default async function MovieDetails({
             <section className="container mb-20">
                 <div className="flex flex-row gap-x-10">
                     <div className="flex flex-1 flex-col gap-y-10">
-                        {filteredVideos.results.length > 0 && (
+                        {/* {filteredVideos.results.length > 0 && (
+                            <TrailerSection trailers={filteredVideos.results} />
+                        )} */}
+
+                        {filteredRecommendations.length > 0 && (
                             <div className="flex flex-col">
                                 <h1 className=" text-3xl font-semibold text-white">
-                                    Trailers
+                                    More Like This
                                 </h1>
                                 <div className="mt-5 h-full">
                                     <div className="grid grid-cols-3 gap-5">
-                                        {filteredVideos.results.map(
-                                            (trailer) => (
-                                                <TrailerCard
-                                                    key={trailer.id}
-                                                    video={trailer}
+                                        {filteredRecommendations.map(
+                                            (movie: Movie) => (
+                                                <MovieCardBlurEffect
+                                                    key={movie.id}
+                                                    resource={movie}
                                                 />
                                             )
                                         )}
@@ -340,24 +389,6 @@ export default async function MovieDetails({
                                 </div>
                             </div>
                         )}
-
-                        <div className="flex flex-col">
-                            <h1 className=" text-3xl font-semibold text-white">
-                                More Like This
-                            </h1>
-                            <div className="mt-5 h-full">
-                                <div className="grid grid-cols-3 gap-5">
-                                    {filteredRecommendations.map(
-                                        (movie: Movie) => (
-                                            <MovieCardBlurEffect
-                                                key={movie.id}
-                                                resource={movie}
-                                            />
-                                        )
-                                    )}
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div className="flex flex-col gap-y-8">
