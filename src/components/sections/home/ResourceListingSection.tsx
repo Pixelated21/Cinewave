@@ -55,13 +55,6 @@ export default function ResourceListingSection({
                                     />
                                 ))
                                 : null}
-
-                        {filteredResource.map((resource: Movie) => (
-                            <MovieCardBlurEffect
-                                key={resource.id}
-                                resource={resource}
-                            />
-                        ))}
                     </LayoutSection>
                 </div>
             </div>
