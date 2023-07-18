@@ -40,7 +40,7 @@ export default async function HomePage({
 
     return (
         <main id="main" className=" h-screen overflow-y-auto">
-            <div className="relative h-[450px] shadow-md xl:h-[600px]">
+            <div className="relative h-[570px] shadow-md xl:h-[600px]">
             {/* <div className="relative h-[571px] shadow-md xl:h-[671px]"> */}
                 <NavigationBar className="absolute left-0 right-0 z-10 mx-auto w-full max-w-7xl" />
                 <HeroSection trending={filteredTrendingMovies} />

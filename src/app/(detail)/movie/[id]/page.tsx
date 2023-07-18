@@ -376,7 +376,7 @@ export default async function MovieDetails({
                                     More Like This
                                 </h1>
                                 <div className="mt-5 h-full">
-                                    <div className="grid grid-cols-3 gap-5">
+                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
                                         {filteredRecommendations.map(
                                             (movie: Movie) => (
                                                 <MovieCardBlurEffect
@@ -391,7 +391,7 @@ export default async function MovieDetails({
                         )}
                     </div>
 
-                    <div className="flex flex-col gap-y-8">
+                    <div className=" hidden lg:flex flex-col gap-y-8 ">
                         <div className="flex flex-col">
                             <h1 className=" text-3xl font-semibold text-white">
                                 Popular
