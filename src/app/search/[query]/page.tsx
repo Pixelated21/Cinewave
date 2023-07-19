@@ -1,8 +1,8 @@
-import { searchMoviesAction } from "@/app/_actions/movie";
+import { multiSearchAction } from "@/app/_actions/search";
 import NavigationBar from "@/components/NavigationBar";
-import MovieCard from "@/components/cards/movie/MovieCard";
+import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
+import SeriesCardBlurEffect from "@/components/cards/series/SeriesCardBlurEffect";
 import MovieGridLayout from "@/components/layouts/LayoutSection";
-import { Button } from "@/components/ui/button";
 import { formatSearchQuery } from "@/lib/utils";
 import { Movie } from "@/types";
 
@@ -14,7 +14,7 @@ export default async function SearchPage({
     const { query } = params;
     const sanitizedQuery = formatSearchQuery(query, false);
 
-    const getSearchResults = searchMoviesAction({ term: sanitizedQuery });
+    const getSearchResults = multiSearchAction({ term: sanitizedQuery });
 
     const [searchResults] = await Promise.all([getSearchResults]);
 
@@ -24,7 +24,8 @@ export default async function SearchPage({
             // FIXME: Fix type hinting
             // @ts-ignore
             ...searchResults.data.results.filter(
-                (movie: Movie) => movie.poster_path
+                // @ts-ignore
+                (resource) => resource.poster_path
             ),
         ],
     };
@@ -53,7 +54,21 @@ export default async function SearchPage({
                 <div className="mx-auto max-w-7xl px-4 py-[30px] sm:px-8 xl:px-2">
                     <MovieGridLayout>
                         {filteredSearchResults.results.map((movie: Movie) => (
-                            <MovieCard key={movie.id} movie={movie} />
+                            <>
+                                {/* @ts-ignore */}
+                                {movie.media_type === "movie" ? (
+                                    <MovieCardBlurEffect
+                                        key={movie.id}
+                                        resource={movie}
+                                    />
+                                ) : (
+                                    <SeriesCardBlurEffect
+                                        key={movie.id}
+                                        // @ts-ignore
+                                        resource={movie}
+                                    />
+                                )}
+                            </>
                         ))}
                     </MovieGridLayout>
                 </div>
