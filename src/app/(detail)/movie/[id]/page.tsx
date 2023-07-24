@@ -8,15 +8,12 @@ import {
 import NavigationBar from "@/components/NavigationBar";
 import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
 import SmallMovieCard from "@/components/cards/movie/SmallMovieCard";
-import TrailerCard from "@/components/cards/TrailerCard";
 import { genres } from "@/data/genres";
 import { getGenres } from "@/lib/utils";
 import { Credits, Movie, MovieDetails, MovieVideoRequest } from "@/types";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import Badge from "@/components/badges/Badge";
-import TrailerSection from "@/components/sections/detail/TrailerSection";
 
 export async function generateMetadata({
     params,
@@ -181,11 +178,11 @@ export default async function MovieDetails({
                             </h1>
                             {movieDetails.original_title !==
                                 movieDetails.title && (
-                                <div className="mt-2.5 text-xs">
-                                    <span>Original Title: </span>
-                                    <span>{movieDetails.original_title}</span>
-                                </div>
-                            )}
+                                    <div className="mt-2.5 text-xs">
+                                        <span>Original Title: </span>
+                                        <span>{movieDetails.original_title}</span>
+                                    </div>
+                                )}
 
                             <div className="mt-2.5 flex flex-row gap-x-2 text-sm font-semibold">
                                 <div>Movie ({movieDetails.release_date})</div>
@@ -212,7 +209,7 @@ export default async function MovieDetails({
                                         <div className="w-48 text-base">
                                             Genres
                                         </div>
-                                        <div className="flex flex-wrap gap-x-1">
+                                        <div className="flex flex-wrap gap-1">
                                             {movieDetails.genres.map(
                                                 (genre) => {
                                                     return (
@@ -229,47 +226,47 @@ export default async function MovieDetails({
 
                                 {movieDetails.production_companies.length >
                                     0 && (
-                                    <div className="flex items-center gap-x-5 py-2">
-                                        <div className="w-48 text-base">
-                                            Production Companies
+                                        <div className="flex items-center gap-x-5 py-2">
+                                            <div className="w-48 text-base">
+                                                Production Companies
+                                            </div>
+                                            <div className="flex flex-1 flex-wrap gap-1">
+                                                {movieDetails.production_companies.map(
+                                                    (company) => {
+                                                        return (
+                                                            <Badge
+                                                                key={company.id}
+                                                                text={company.name}
+                                                            />
+                                                        );
+                                                    }
+                                                )}
+                                            </div>
                                         </div>
-                                        <div className="flex flex-1 flex-wrap gap-1">
-                                            {movieDetails.production_companies.map(
-                                                (company) => {
-                                                    return (
-                                                        <Badge
-                                                            key={company.id}
-                                                            text={company.name}
-                                                        />
-                                                    );
-                                                }
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
+                                    )}
 
                                 {movieDetails.production_countries.length >
                                     0 && (
-                                    <div className="flex items-center gap-x-5 py-2 ">
-                                        <div className="w-48 text-base">
-                                            Production Countries
+                                        <div className="flex items-center gap-x-5 py-2 ">
+                                            <div className="w-48 text-base">
+                                                Production Countries
+                                            </div>
+                                            <div className="flex flex-wrap gap-1">
+                                                {movieDetails.production_countries.map(
+                                                    (country) => {
+                                                        return (
+                                                            <Badge
+                                                                key={
+                                                                    country.iso_3166_1
+                                                                }
+                                                                text={country.name}
+                                                            />
+                                                        );
+                                                    }
+                                                )}
+                                            </div>
                                         </div>
-                                        <div className="flex flex-wrap gap-1">
-                                            {movieDetails.production_countries.map(
-                                                (country) => {
-                                                    return (
-                                                        <Badge
-                                                            key={
-                                                                country.iso_3166_1
-                                                            }
-                                                            text={country.name}
-                                                        />
-                                                    );
-                                                }
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
+                                    )}
 
                                 {movieDetails.runtime > 0 && (
                                     <div className="flex items-center gap-x-5 py-2">
@@ -303,11 +300,10 @@ export default async function MovieDetails({
                                                 className="absolute rounded-full bg-white object-cover"
                                                 fill
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                src={`${
-                                                    cast.profile_path
+                                                src={`${cast.profile_path
                                                         ? `https://image.tmdb.org/t/p/w92/${cast.profile_path}`
                                                         : "/assets/profile_default.png"
-                                                }`}
+                                                    }`}
                                                 alt={`Profile Photo of: ${cast.name} | CineWave`}
                                             />
                                         </div>
