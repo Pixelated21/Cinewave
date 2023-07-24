@@ -22,6 +22,46 @@ import Image from "next/image";
 import SmallSeriesCard from "@/components/cards/series/SmallSeriesCard";
 import SeriesCardBlurEffect from "@/components/cards/series/SeriesCardBlurEffect";
 import Badge from "@/components/badges/Badge";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+    params,
+}: {
+    params: { id: string };
+}): Promise<Metadata> {
+    const id = params.id;
+
+    const getSeriesDetails: Promise<SeriesDetails> = getSeriesDetailsAction({
+        id: id,
+    });
+
+    const [seriesDetails] = await Promise.all([getSeriesDetails]);
+
+    return {
+        title: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
+        description: seriesDetails.overview,
+        keywords: [
+            seriesDetails.name ?? seriesDetails.original_name,
+            ...seriesDetails.genres.map((g) => g.name),
+            "movies",
+        ],
+        openGraph: {
+            siteName: "CineWave",
+            type: "website",
+            locale: "en_US",
+            images: `https://image.tmdb.org/t/p/original/${seriesDetails.poster_path}`,
+            title: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
+            description: seriesDetails.overview,
+            url: `https://cinewave.vercel.app/series/${id}`,
+        },
+
+        twitter: {
+            title: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
+            description: seriesDetails.overview,
+            card: "player",
+        },
+    };
+}
 
 export default async function seriesDetails({
     params,
