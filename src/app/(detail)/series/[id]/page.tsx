@@ -6,8 +6,6 @@ import {
     getTrendingSeriesAction,
 } from "@/app/_actions/series";
 import NavigationBar from "@/components/NavigationBar";
-import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
-import SmallMovieCard from "@/components/cards/series/SmallSeriesCard";
 import TrailerCard from "@/components/cards/TrailerCard";
 import { genres } from "@/data/genres";
 import { getGenres } from "@/lib/utils";
@@ -187,11 +185,11 @@ export default async function seriesDetails({
                             </h1>
                             {seriesDetails.original_name !==
                                 seriesDetails.name && (
-                                <div className="mt-2.5 text-xs">
-                                    <span>Original Title: </span>
-                                    <span>{seriesDetails.original_name}</span>
-                                </div>
-                            )}
+                                    <div className="mt-2.5 text-xs">
+                                        <span>Original Title: </span>
+                                        <span>{seriesDetails.original_name}</span>
+                                    </div>
+                                )}
                             <div className="mt-2.5 flex flex-row gap-x-2 text-sm font-semibold">
                                 <div>
                                     Series ({seriesDetails.first_air_date} -{" "}
@@ -241,51 +239,51 @@ export default async function seriesDetails({
 
                                 {seriesDetails.production_companies.length >
                                     0 && (
-                                    <div className="flex items-center gap-x-5 py-2">
-                                        <span className="w-48 text-base">
-                                            Production Companies
-                                        </span>
-                                        <div className="flex flex-1 flex-wrap gap-1">
-                                            {seriesDetails.production_companies.map(
-                                                (companies) => {
-                                                    return (
-                                                        <Badge
-                                                            key={companies.id}
-                                                            text={
-                                                                companies.name
-                                                            }
-                                                        />
-                                                    );
-                                                }
-                                            )}
+                                        <div className="flex items-center gap-x-5 py-2">
+                                            <span className="w-48 text-base">
+                                                Production Companies
+                                            </span>
+                                            <div className="flex flex-1 flex-wrap gap-1">
+                                                {seriesDetails.production_companies.map(
+                                                    (companies) => {
+                                                        return (
+                                                            <Badge
+                                                                key={companies.id}
+                                                                text={
+                                                                    companies.name
+                                                                }
+                                                            />
+                                                        );
+                                                    }
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
+                                    )}
 
                                 {seriesDetails.production_countries.length >
                                     0 && (
-                                    <div className="flex items-center gap-x-5 py-2">
-                                        <span className="w-48 text-base">
-                                            Production Countries
-                                        </span>
-                                        <div className="flex flex-1 flex-wrap gap-1">
-                                            {seriesDetails.production_countries.map(
-                                                (countries) => {
-                                                    return (
-                                                        <Badge
-                                                            key={
-                                                                countries.iso_3166_1
-                                                            }
-                                                            text={
-                                                                countries.name
-                                                            }
-                                                        />
-                                                    );
-                                                }
-                                            )}
+                                        <div className="flex items-center gap-x-5 py-2">
+                                            <span className="w-48 text-base">
+                                                Production Countries
+                                            </span>
+                                            <div className="flex flex-1 flex-wrap gap-1">
+                                                {seriesDetails.production_countries.map(
+                                                    (countries) => {
+                                                        return (
+                                                            <Badge
+                                                                key={
+                                                                    countries.iso_3166_1
+                                                                }
+                                                                text={
+                                                                    countries.name
+                                                                }
+                                                            />
+                                                        );
+                                                    }
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
+                                    )}
                             </div>
                         </div>
                     </div>
@@ -307,11 +305,10 @@ export default async function seriesDetails({
                                                 <Image
                                                     className="absolute rounded-full bg-white object-cover"
                                                     fill
-                                                    src={`${
-                                                        cast.profile_path
-                                                            ? `https://image.tmdb.org/t/p/w92/${cast.profile_path}`
-                                                            : "/assets/profile_default.png"
-                                                    }`}
+                                                    src={`${cast.profile_path
+                                                        ? `https://image.tmdb.org/t/p/w92/${cast.profile_path}`
+                                                        : "/assets/profile_default.png"
+                                                        }`}
                                                     priority
                                                     alt="hero"
                                                 />
