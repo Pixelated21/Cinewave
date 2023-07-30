@@ -54,3 +54,7 @@ export function getGenres(genreIds: number[] | string[], genres: any[]) {
     return genre ? genre.name : '';
   });
 }
+
+export function daysToSeconds(days: number) {
+  return days * 24 * 60 * 60;
+}
