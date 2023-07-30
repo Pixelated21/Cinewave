@@ -26,7 +26,7 @@ export default function NavigationBar({ className }: NavigationBarProps) {
                         <MovieSearchInput />
                     </div>
                     <div className="flex items-center gap-x-8">
-                        <ul className="hidden items-center gap-x-6 md:flex">
+                        <ul className="hidden items-center gap-x-2 md:flex">
                             {navigationLinks.map((link) => (
                                 <li
                                     key={link.title}
