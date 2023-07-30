@@ -14,7 +14,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
         <Swiper
             modules={[EffectCreative, Autoplay, Navigation, History]}
             loop={true}
-            // effect="creative"
+            effect="creative"
             className="relative h-full w-full"
             slidesPerView={1}
             autoplay={{
@@ -77,28 +77,28 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                             <div className="absolute left-0 right-0 mx-auto mb-14 h-1/2 max-w-7xl">
                                 <div className="flex h-full justify-between px-4 sm:px-8 xl:px-2">
                                     <div className="flex flex-col gap-y-8 justify-end">
-                                        <div className="flex flex-col gap-y-3 max-w-[495px]">
-                                            <h1 className="text-sm font-black text-white">
+                                        <div className="flex flex-col gap-y-3 max-w-lg">
+                                            <h1 className="text-xs 2xl:text-sm font-black text-white">
                                                 <p className="text-[#3f3f46]"># {movieIndex + 1} Spotlight</p>
                                             </h1>
 
-                                            <h1 className="max-w-[600px] mb-2 line-clamp-2 text-3xl font-black text-white">
+                                            <h1 className=" mb-2 line-clamp-2 text-3xl 2xl:text-5xl font-black text-white">
                                                 {movie?.title}
                                             </h1>
-                                            <div className="flex items-center gap-x-3">
-                                                <span className="text-xs  capitalize  text-white">
+                                            <div className="flex text-xs 2xl:text-sm items-center gap-x-3">
+                                                <span className=" capitalize  text-white">
                                                     {movie?.media_type}
                                                 </span>
 
-                                                <span className="text-xs  text-white">
+                                                <span className=" text-white">
                                                     {movie?.release_date}
                                                 </span>
 
-                                                <span className="rounded-md bg-green-400 px-1 py-[3px] text-xs font-semibold text-black">
+                                                <span className="rounded-md bg-green-400 px-1 py-[3px]  font-semibold text-black">
                                                     HD
                                                 </span>
 
-                                                <span className="rounded-md bg-white px-1 py-[3px] text-xs font-semibold text-black">
+                                                <span className="rounded-md bg-white px-1 py-[3px]  font-semibold text-black">
                                                     {getLanguage(
                                                         movie?.original_language,
                                                         "english_name"
@@ -106,7 +106,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                                 </span>
                                             </div>
 
-                                            <p className="line-clamp-2 text-xs text-white ">
+                                            <p className="line-clamp-2 text-xs 2xl:text-sm text-white ">
                                                 {movie?.overview}
                                             </p>
                                         </div>

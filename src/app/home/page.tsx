@@ -1,5 +1,5 @@
 import { DiscoverMovieAdvancedFilters, Movie, ResourceTypesEnum } from "@/types";
-import HeroSection from "@/components/sections/HeroSection";
+import HeroSection from "@/components/sections/home/HeroSection";
 import NavigationBar from "@/components/NavigationBar";
 import ResourceListingSection from "@/components/sections/home/ResourceListingSection";
 import {
@@ -39,10 +39,9 @@ export default async function HomePage({
         );
 
     return (
-        <main id="main" className=" h-screen overflow-y-auto">
-            <div className="relative h-[570px] shadow-md xl:h-[600px]">
-            {/* <div className="relative h-[571px] shadow-md xl:h-[671px]"> */}
-                <NavigationBar className="absolute left-0 right-0 z-10 mx-auto w-full max-w-7xl" />
+        <main id="homepage-scroll" className=" h-screen overflow-y-auto">
+            <NavigationBar className="bg-[#18181B] left-0 right-0 z-10 mx-auto w-full " />
+            <div className="relative h-[450px] xl:h-[600px]">
                 <HeroSection trending={filteredTrendingMovies} />
             </div>
 
