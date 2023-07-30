@@ -2,8 +2,8 @@
 import { getLanguage } from "@/lib/utils";
 import { Trending } from "@/types";
 import Image from "next/image";
-import Breaker from "../utils/Breaker";
-import { Button } from "../ui/button";
+import Breaker from "../../utils/Breaker";
+import { Button } from "../../ui/button";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, Autoplay, Navigation, History } from "swiper/modules";
@@ -14,7 +14,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
         <Swiper
             modules={[EffectCreative, Autoplay, Navigation, History]}
             loop={true}
-            effect="creative"
+            // effect="creative"
             className="relative h-full w-full"
             slidesPerView={1}
             autoplay={{
@@ -38,33 +38,59 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                 fill
                 src={"/assets/banner.png"}
             />
-            {trending.map((movie) => (
+            {trending.map((movie, movieIndex) => (
                 <SwiperSlide className="relative" key={movie?.id}>
                     <section className="absolute h-full w-full">
                         <div className="relative flex h-full items-end">
-                            <Image
-                                className="absolute h-full w-full object-cover"
-                                fill
-                                src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-                                priority
-                                alt="hero"
-                            />
-                            <div className="absolute h-full w-full bg-black bg-opacity-50" />
-                            <div className="absolute h-80 w-full bg-gradient-to-b from-[#0E0410]/0 to-[#0E0410]/90" />
+                            <div className="h-full w-full absolute flex overflow-hidden">
+
+                                <div className="w-[380px] xl:w-[542px] bg-[#18181B]"></div>
+
+                                <div className=" flex-1 relative overflow-hidden">
+                                    <Image
+                                        className="absolute h-full w-full object-cover brightness-[0.9]"
+                                        fill
+                                        src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
+                                        priority
+                                        alt={`${movie?.title} | Cinewave`}
+                                    />
+
+                                    {/* Left Frame Borders */}
+                                    <div className="absolute -left-4 h-full w-[240px] blur-sm bg-gradient-to-r from-[#18181B]  to-transparent" />
+                                    <div className="absolute -left-4 h-full w-[240px] blur-sm bg-gradient-to-r from-[#18181B]  to-transparent" />
+
+                                    {/* Right Frame Borders */}
+                                    <div className="absolute -right-2 h-full w-60 blur-sm bg-gradient-to-l from-[#18181B] to-transparent" />
+                                    <div className="absolute -right-2 h-full w-60 blur-sm bg-gradient-to-l from-[#18181B] to-transparent" />
+
+
+                                    {/* Top Frame Borders */}
+                                    {/* <div className="absolute top-0 h-3 w-full bg-gradient-to-b from-[#18181B] via-[#18181B] to-transparent" /> */}
+                                    <div className="absolute top-0 h-1/3 w-full bg-gradient-to-b from-[#18181B] to-transparent" />
+
+                                    {/* Bottom Frame Borders */}
+                                    <div className="absolute mx-auto -left-5 blur-sm -bottom-2 h-3 w-[104%] bg-gradient-to-t from-[#18181B] via-[#18181B] to-transparent" />
+                                    <div className="absolute mx-auto -left-5 -bottom-2 h-2/3 w-[104%] bg-gradient-to-t from-[#18181B] to-transparent" />
+                                </div>
+                            </div>
 
                             <div className="absolute left-0 right-0 mx-auto mb-14 h-1/2 max-w-7xl">
                                 <div className="flex h-full justify-between px-4 sm:px-8 xl:px-2">
-                                    <div className="flex flex-col justify-end">
-                                        <div className="flex flex-col gap-y-3">
-                                            <h1 className="max-w-[600px] text-5xl font-semibold text-white">
+                                    <div className="flex flex-col gap-y-8 justify-end">
+                                        <div className="flex flex-col gap-y-3 max-w-[495px]">
+                                            <h1 className="text-sm font-black text-white">
+                                                <p className="text-[#3f3f46]"># {movieIndex + 1} Spotlight</p>
+                                            </h1>
+
+                                            <h1 className="max-w-[600px] mb-2 line-clamp-2 text-3xl font-black text-white">
                                                 {movie?.title}
                                             </h1>
                                             <div className="flex items-center gap-x-3">
-                                                <span className="text-xs capitalize text-white">
+                                                <span className="text-xs  capitalize  text-white">
                                                     {movie?.media_type}
                                                 </span>
 
-                                                <span className="text-xs text-white">
+                                                <span className="text-xs  text-white">
                                                     {movie?.release_date}
                                                 </span>
 
@@ -80,17 +106,13 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                                 </span>
                                             </div>
 
-                                            <div className="max-w-[495px]">
-                                                <p className="h-16 overflow-hidden text-xs text-white ">
-                                                    {movie?.overview}
-                                                </p>
-                                            </div>
+                                            <p className="line-clamp-2 text-xs text-white ">
+                                                {movie?.overview}
+                                            </p>
                                         </div>
 
-                                        <Breaker height="32px" />
-
                                         <div className="flex items-center gap-x-3">
-                                            <Button asChild>
+                                            <Button className="bg-gray-800 hover:bg-gray-700" asChild>
                                                 <Link
                                                     href={`/${movie.media_type}/${movie.id}`}
                                                 >
@@ -98,9 +120,9 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                                 </Link>
                                             </Button>
 
-                                            <Button disabled className="bg-purple-800 hover:bg-purple-700">
+                                            {/* <Button disabled className="bg-red-900 hover:bg-purple-700">
                                                 Add To Watchlist
-                                            </Button>
+                                            </Button> */}
                                         </div>
                                     </div>
                                 </div>
