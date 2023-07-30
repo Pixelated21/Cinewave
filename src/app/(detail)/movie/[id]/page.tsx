@@ -113,12 +113,13 @@ export default async function MovieDetails({
                 <NavigationBar className="absolute z-10 w-full" />
 
                 <div className="absolute h-full w-full">
+
                     <div className="relative flex h-full items-end ">
                         <Image
                             className="absolute h-full w-full object-cover"
                             height={671}
                             width={1280}
-                            src={`https://image.tmdb.org/t/p/w1280/${movieDetails.backdrop_path}`}
+                            src={`https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`}
                             priority
                             alt={`Backdrop of: ${movieDetails.title} | CineWave`}
                         />
@@ -301,8 +302,8 @@ export default async function MovieDetails({
                                                 fill
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                 src={`${cast.profile_path
-                                                        ? `https://image.tmdb.org/t/p/w92/${cast.profile_path}`
-                                                        : "/assets/profile_default.png"
+                                                    ? `https://image.tmdb.org/t/p/w92/${cast.profile_path}`
+                                                    : "/assets/profile_default.png"
                                                     }`}
                                                 alt={`Profile Photo of: ${cast.name} | CineWave`}
                                             />
