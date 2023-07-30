@@ -1,4 +1,4 @@
-import { formatSearchQuery } from "@/lib/utils";
+import { daysToSeconds, formatSearchQuery } from "@/lib/utils";
 import axios from "axios";
 
 export async function multiSearchAction({ term }: { term: string }) {
@@ -11,16 +11,15 @@ export async function multiSearchAction({ term }: { term: string }) {
 
     try {
         const apiRequests = searchTerms.map(async (term) => {
-
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_API_URL}/search/multi`, {
-                params: {
-                    api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
-                    query: term,
-                    language: "en-US",
-                },
+            const params = new URLSearchParams({
+                api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+                query: term,
+                language: "en-US",
             });
 
-            return res.data
+            const res = await fetch(`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_API_URL}/search/multi?${params.toString()}`, { next: { revalidate: daysToSeconds(1) } });
+            const data = await res.json();
+            return data
         });
 
         const results = await Promise.all(apiRequests)
