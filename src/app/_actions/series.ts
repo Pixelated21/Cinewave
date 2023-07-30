@@ -1,5 +1,4 @@
 import { DiscoverMovieAdvancedFilters } from "@/types";
-import axios from "axios";
 
 export async function getLatestSeriesAction({ filter }: { filter: DiscoverMovieAdvancedFilters }) {
     const params = new URLSearchParams({

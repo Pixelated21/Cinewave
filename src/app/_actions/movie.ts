@@ -1,6 +1,5 @@
 import { daysToSeconds, formatSearchQuery } from "@/lib/utils";
 import { DiscoverMovieAdvancedFilters } from "@/types";
-import axios from "axios";
 
 // FIXME: If action fails then the page will not render
 // TODO: Add error handling
