@@ -19,11 +19,11 @@ export default async function SearchPage({
     const [searchResults] = await Promise.all([getSearchResults]);
 
     const filteredSearchResults = {
-        ...searchResults,
+        ...searchResults.results,
         results: [
             // FIXME: Fix type hinting
             // @ts-ignore
-            ...searchResults.data.results.filter(
+            ...searchResults?.results?.filter(
                 // @ts-ignore
                 (resource) => resource.poster_path
             ),
