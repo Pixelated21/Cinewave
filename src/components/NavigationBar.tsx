@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import MovieSearchInput from "./ui/search";
-import { navigationLinks } from "@/app/config/site";
+import { navigationLinks } from "@/app/_config/site";
 
 export interface NavigationBarProps
     extends React.HTMLAttributes<HTMLDivElement> { }
@@ -28,11 +28,13 @@ export default function NavigationBar({ className }: NavigationBarProps) {
                     <div className="flex items-center gap-x-8">
                         <ul className="hidden items-center gap-x-6 md:flex">
                             {navigationLinks.map((link) => (
-                                <NavigationLink
+                                <li
                                     key={link.title}
-                                    title={link.title}
-                                    href={link.href}
-                                />
+                                >
+                                    <NavigationLink
+                                        linkData={link}
+                                    />
+                                </li>
                             ))}
                         </ul>
                         {/* <Button
@@ -48,10 +50,9 @@ export default function NavigationBar({ className }: NavigationBarProps) {
     );
 }
 
-export const NavigationLink = (link: NavLink) => {
-    return (
-        <li className="text-sm text-white">
-            <Link href={link.href}>{link.title}</Link>
-        </li>
-    );
+export const NavigationLink = ({ linkData }: { linkData: NavLink }) => {
+    if (linkData.isDisabled) {
+        return <Button variant={"link"} asChild><span className="text-sm text-white/60 px-0 py-0 hover:no-underline cursor-pointer">{linkData.title}</span></Button>
+    }
+    return <Link className="text-sm text-white" href={linkData.href}>{linkData.title}</Link>
 };
