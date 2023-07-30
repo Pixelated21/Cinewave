@@ -269,6 +269,7 @@ export type Language = {
 }
 
 export type NavLink = {
+    isDisabled?: boolean;
     title: string,
     href: string,
     is_auth?: boolean
