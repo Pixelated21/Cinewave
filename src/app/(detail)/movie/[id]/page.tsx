@@ -110,7 +110,7 @@ export default async function MovieDetails({
     return (
         <main id="main" className="h-screen overflow-y-auto bg-[#0E0410]">
             <section className="relative h-[571px] shadow-md xl:h-[671px]">
-                <NavigationBar className="absolute z-10 w-full" />
+                <NavigationBar className="absolute z-10 w-full hover:backdrop-blur-md backdrop-blur-none duration-500 delay-1000 hover:delay-300" />
 
                 <div className="absolute h-full w-full">
 
