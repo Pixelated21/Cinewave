@@ -129,9 +129,9 @@ export default async function MovieDetails({
                 </div>
             </section>
 
-            <section className="container relative z-10 -mt-60 mb-20 px-10">
-                <div className="flex h-full flex-row">
-                    <div className="flex flex-col">
+            <section className="container relative z-10 -mt-72 mb-20 px-0 sm:px-10">
+                <div className="flex h-full justify-center sm:justify-start flex-col lg:flex-row">
+                    <div className="flex flex-col  items-center lg:items-start">
                         <div className="relative h-[400px] w-[250px] rounded-sm xl:h-[450px] xl:w-[300px]">
                             <Image
                                 className="absolute rounded-sm object-cover"
@@ -172,20 +172,20 @@ export default async function MovieDetails({
                         </div> */}
                     </div>
 
-                    <div className=" flex-1 px-10 text-white">
+                    <div className=" flex-1 px-10 text-white ">
                         <div className="mt-8 flex flex-col">
-                            <h1 className="text-4xl font-bold xl:text-5xl">
+                            <h1 className="text-2xl text-center lg:text-left sm:text-4xl font-bold xl:text-5xl">
                                 {movieDetails.title}
                             </h1>
                             {movieDetails.original_title !==
                                 movieDetails.title && (
-                                    <div className="mt-2.5 text-xs">
+                                    <div className="mt-2.5 text-xs text-center lg:text-left">
                                         <span>Original Title: </span>
                                         <span>{movieDetails.original_title}</span>
                                     </div>
                                 )}
 
-                            <div className="mt-2.5 flex flex-row gap-x-2 text-sm font-semibold">
+                            <div className="mt-2.5 flex flex-row gap-x-2 text-sm justify-center lg:justify-start font-semibold">
                                 <div>Movie ({movieDetails.release_date})</div>
                             </div>
                         </div>
@@ -195,16 +195,16 @@ export default async function MovieDetails({
                             <div className="h-10 w-10 rounded-full bg-gray-500"></div> */}
                         </div>
 
-                        <div className="mt-9 max-w-[608px]">
-                            <p className="font-medium">
+                        <div className="mt-9 lg:max-w-[608px]">
+                            <p className="md:font-medium text-sm md:text-base text-center lg:text-left  font-normal">
                                 {movieDetails.overview}
                             </p>
                         </div>
 
-                        <div className="mt-9">
+                        <div className="mt-9 ">
                             <h1 className="text-xl font-bold">Details</h1>
 
-                            <div className="mt-8 flex flex-col divide-y-2 divide-gray-700/20">
+                            <div className="mt-8 flex flex-col divide-y-2 divide-gray-700/20 ">
                                 {movieDetails.genres.length > 0 && (
                                     <div className="flex items-center gap-x-5 py-2">
                                         <div className="w-48 text-base">
@@ -283,8 +283,8 @@ export default async function MovieDetails({
                         </div>
                     </div>
 
-                    <div className="flex w-[300px] flex-col gap-y-8">
-                        <div className="mt-8 hidden  lg:block">
+                    <div className="hidden w-[300px] xl:flex flex-col  gap-y-8">
+                        <div className="mt-8  lg:block">
                             <h1 className="text-lg font-bold text-white">
                                 Cast & Crew
                             </h1>
