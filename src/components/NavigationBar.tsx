@@ -12,7 +12,7 @@ export default function NavigationBar({ className }: NavigationBarProps) {
     return (
         <nav className={`${className}`}>
             <div className="container z-30 flex h-[72px] w-full items-center">
-                <div className="flex h-full w-full items-center justify-between px-4 sm:px-8 xl:px-2">
+                <div className="flex h-full w-full items-center justify-between px-0 sm:px-2 xl:px-2">
                     <div className="flex items-center gap-x-16">
                         <Link href="/home">
                             <Image

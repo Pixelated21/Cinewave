@@ -108,15 +108,15 @@ export default async function MovieDetails({
         });
 
     return (
-        <main id="main" className="h-screen overflow-y-auto bg-[#0E0410]">
+        <main className="h-screen overflow-y-auto bg-[#0E0410]">
             <section className="relative h-[571px] shadow-md xl:h-[671px]">
-                <NavigationBar className="absolute z-10 w-full hover:backdrop-blur-md backdrop-blur-none duration-500 delay-1000 hover:delay-300" />
+                <NavigationBar className="absolute z-10 w-full bg-gray-700 md:bg-transparent md:hover:backdrop-blur-md md:backdrop-blur-none md:duration-500 md:delay-1000 md:hover:delay-300" />
 
                 <div className="absolute h-full w-full">
 
-                    <div className="relative flex h-full items-end ">
+                    <div className="relative flex h-full items-end blur-xl lg:blur-none duration-300">
                         <Image
-                            className="absolute h-full w-full object-cover"
+                            className="absolute h-full w-full object-cover "
                             height={671}
                             width={1280}
                             src={`https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`}
@@ -129,10 +129,10 @@ export default async function MovieDetails({
                 </div>
             </section>
 
-            <section className="container relative z-10 -mt-72 mb-20 px-0 sm:px-10">
-                <div className="flex h-full justify-center sm:justify-start flex-col lg:flex-row">
-                    <div className="flex flex-col  items-center lg:items-start">
-                        <div className="relative h-[400px] w-[250px] rounded-sm xl:h-[450px] xl:w-[300px]">
+            <section className="container relative z-10 -mt-[440px] md:-mt-60 mb-20 px-0 sm:px-10">
+                <div className="flex h-full justify-center sm:justify-start flex-col md:flex-row">
+                    <div className="flex flex-col items-center lg:items-start">
+                        <div className="relative h-[250px] w-[150px] md:h-[350px] md:w-[200px] rounded-sm xl:h-[400px] xl:w-[250px] 2xl:h-[400px] 2xl:w-[300px] duration-300">
                             <Image
                                 className="absolute rounded-sm object-cover"
                                 height={450}
@@ -142,6 +142,7 @@ export default async function MovieDetails({
                                 priority
                                 alt={`Poster of: ${movieDetails.title} | CineWave`}
                             />
+                            <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 bg-orange-600 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
                         </div>
                         {/* <div className="mt-7 flex flex-row items-center gap-x-7">
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">
@@ -172,20 +173,20 @@ export default async function MovieDetails({
                         </div> */}
                     </div>
 
-                    <div className=" flex-1 px-10 text-white ">
-                        <div className="mt-8 flex flex-col">
-                            <h1 className="text-2xl text-center lg:text-left sm:text-4xl font-bold xl:text-5xl">
+                    <div className=" flex-1 px-5 md:px-10 text-white ">
+                        <div className="mt-0  md:mt-8 flex flex-col">
+                            <h1 className="text-2xl text-center md:text-left sm:text-4xl font-bold xl:text-5xl">
                                 {movieDetails.title}
                             </h1>
                             {movieDetails.original_title !==
                                 movieDetails.title && (
-                                    <div className="mt-2.5 text-xs text-center lg:text-left">
+                                    <div className="mt-2.5 text-xs text-center md:text-left">
                                         <span>Original Title: </span>
                                         <span>{movieDetails.original_title}</span>
                                     </div>
                                 )}
 
-                            <div className="mt-2.5 flex flex-row gap-x-2 text-sm justify-center lg:justify-start font-semibold">
+                            <div className="mt-2.5 flex flex-row gap-x-2 text-sm justify-center md:justify-start font-semibold">
                                 <div>Movie ({movieDetails.release_date})</div>
                             </div>
                         </div>
@@ -196,12 +197,12 @@ export default async function MovieDetails({
                         </div>
 
                         <div className="mt-9 lg:max-w-[608px]">
-                            <p className="md:font-medium text-sm md:text-base text-center lg:text-left  font-normal">
+                            <p className="md:font-medium text-sm md:text-base text-gray-300 text-left  font-normal">
                                 {movieDetails.overview}
                             </p>
                         </div>
 
-                        <div className="mt-9 ">
+                        <div className="mt-9 hidden lg:block">
                             <h1 className="text-xl font-bold">Details</h1>
 
                             <div className="mt-8 flex flex-col divide-y-2 divide-gray-700/20 ">
