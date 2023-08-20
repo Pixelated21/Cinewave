@@ -7,6 +7,8 @@ import { ResourceTypesEnum } from "@/types";
 import { getGenres } from "@/lib/utils";
 import { genres } from "@/data/genres";
 import SeriesCardBlurEffect from "@/components/cards/series/SeriesCardBlurEffect";
+import MovieCard from "@/components/cards/movie/MovieCard";
+import SeriesCard from "@/components/cards/series/SeriesCard";
 
 interface ResourceListingSectionProps {
     resource: { results: Movie[] };
@@ -40,14 +42,15 @@ export default function ResourceListingSection({
                     <LayoutSection>
                         {type === ResourceTypesEnum.MOVIE
                             ? filteredResource.map((resource: Movie) => (
-                                <MovieCardBlurEffect
-                                    key={resource.id}
-                                    resource={resource}
-                                />
+                                // <MovieCardBlurEffect
+                                //     key={resource.id}
+                                //     resource={resource}
+                                // />
+                                <MovieCard resource={resource} key={resource.id} />
                             ))
                             : type === ResourceTypesEnum.SERIES
                                 ? filteredResource.map((resource) => (
-                                    <SeriesCardBlurEffect
+                                    <SeriesCard
                                         key={resource.id}
                                         //   FIXME: Implement Proper Type hinting
                                         //   @ts-ignore
