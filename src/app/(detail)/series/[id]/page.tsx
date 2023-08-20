@@ -6,7 +6,6 @@ import {
     getTrendingSeriesAction,
 } from "@/app/_actions/series";
 import NavigationBar from "@/components/NavigationBar";
-import TrailerCard from "@/components/cards/TrailerCard";
 import { genres } from "@/data/genres";
 import { getGenres } from "@/lib/utils";
 import {
@@ -17,8 +16,6 @@ import {
     SeriesDetails,
 } from "@/types";
 import Image from "next/image";
-import SmallSeriesCard from "@/components/cards/series/SmallSeriesCard";
-import SeriesCardBlurEffect from "@/components/cards/series/SeriesCardBlurEffect";
 import Badge from "@/components/badges/Badge";
 import { Metadata } from "next";
 import SeriesCard from "@/components/cards/series/SeriesCard";
