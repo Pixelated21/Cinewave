@@ -42,6 +42,7 @@ export async function generateMetadata({
         ],
         openGraph: {
             siteName: "CineWave",
+            // @ts-ignore
             type: "website",
             locale: "en_US",
             images: `${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${seriesDetails.poster_path}`,
@@ -53,6 +54,7 @@ export async function generateMetadata({
         twitter: {
             name: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
             description: seriesDetails.overview,
+                        // @ts-ignore
             card: "player",
         },
     };

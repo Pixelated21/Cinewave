@@ -2,8 +2,9 @@ import NavigationBar from "@/components/NavigationBar";
 import MovieCard from "@/components/cards/movie/MovieCard";
 import MovieGridLayout from "@/components/layouts/LayoutSection";
 import { Button } from "@/components/ui/button";
-import { Movie } from "@/types";
+import { Movie, Series } from "@/types";
 import { getDiscoverSeriesAction } from "../_actions/series";
+import SeriesCard from "@/components/cards/series/SeriesCard";
 
 export default async function SeriesPage() {
     const getDiscoverSeries = await getDiscoverSeriesAction();
@@ -14,7 +15,7 @@ export default async function SeriesPage() {
         ...discoverSeries,
         results: [
             ...discoverSeries.results.filter(
-                (movie: Movie) => movie.poster_path
+                (series: Series) => series.poster_path
             ),
         ],
     };
@@ -42,8 +43,8 @@ export default async function SeriesPage() {
 
                 <div className="mx-auto max-w-7xl px-4 py-[30px] sm:px-8 xl:px-2">
                     <MovieGridLayout>
-                        {filteredDiscoverSeries.results.map((movie: Movie) => (
-                            <MovieCard key={movie.id} movie={movie} />
+                        {filteredDiscoverSeries.results.map((series: Series) => (
+                            <SeriesCard key={series.id} resource={series} />
                         ))}
                     </MovieGridLayout>
                 </div>

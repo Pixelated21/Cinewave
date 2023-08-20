@@ -43,7 +43,7 @@ export default async function MoviePage() {
                 <div className="mx-auto max-w-7xl px-4 py-[30px] sm:px-8 xl:px-2">
                     <MovieGridLayout>
                         {filteredDiscoverMovie.results.map((movie: Movie) => (
-                            <MovieCard key={movie.id} movie={movie} />
+                            <MovieCard key={movie.id} resource={movie} />
                         ))}
                     </MovieGridLayout>
                 </div>
