@@ -11,57 +11,33 @@
 		@apply bg-[#0E0410];
 	}
 
-	/* Main Scroll Bar */
-	#main {
-		--sb-track-color: #19071d;
-		--sb-thumb-color: #3b144c;
-		--sb-size: 20px;
-
-		scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-	}
-
-	#main::-webkit-scrollbar {
-		width: var(--sb-size);
-	}
-
-	#main::-webkit-scrollbar-track {
-		background: var(--sb-track-color);
-		/* border-radius: 10px; */
-	}
-
-	#main::-webkit-scrollbar-thumb {
-		background: var(--sb-thumb-color);
-		/* border-radius: 10px; */
-		border: 2px solid #0e0410;
-	}
-
 	/* Homepage scrollbar */
 
-	#homepage-scroll {
-		--sb-track-color: #18181B;
+	#main-scrollbar {
+		--sb-track-color: #0e0e0f;
 		--sb-thumb-color: #43434c;
-		--sb-size: 20px;
+		--sb-size: 16px;
 
 		scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
 	}
 
-	#homepage-scroll::-webkit-scrollbar {
+	#main-scrollbar::-webkit-scrollbar {
 		width: var(--sb-size);
 	}
 
-	#homepage-scroll::-webkit-scrollbar-track {
+	#main-scrollbar::-webkit-scrollbar-track {
 		background: var(--sb-track-color);
 		/* border-radius: 10px; */
 	}
 
-	#homepage-scroll::-webkit-scrollbar-thumb {
+	#main-scrollbar::-webkit-scrollbar-thumb {
 		background: var(--sb-thumb-color);
-		border: 2px solid #18181B;
+		/* border: 2px solid #18181B; */
 	}
 
-    #homepage-scroll::-webkit-scrollbar-thumb:hover {
-        background: #797989;
-    }
+	#main-scrollbar::-webkit-scrollbar-thumb:hover {
+		background: #797989;
+	}
 
 	:root {
 		--background: 0 0% 100%;
