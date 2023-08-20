@@ -41,7 +41,7 @@ export default function MovieDetailsModal({
                         ) : (
                             <Image
                                 className="h-full w-full rounded-sm object-cover"
-                                src={`https://image.tmdb.org/t/p/original/${details.backdrop_path}`}
+                                src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${details.backdrop_path}`}
                                 alt={details.title}
                                 fill
                             />

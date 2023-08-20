@@ -198,7 +198,7 @@ export default function TryMeRandomizer({ data }: TryMeRandomizerProps) {
                                         <Image
                                             className="absolute h-full w-full object-cover"
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${movie.poster_path}`}
                                             alt={movie.title}
                                             fill
                                         />

@@ -18,7 +18,7 @@ export default async function PeoplePage({
                 <Image
                     className="absolute rounded-full object-cover"
                     fill
-                    src={`https://image.tmdb.org/t/p/original/${personDetails.profile_path}`}
+                    src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${personDetails.profile_path}`}
                     priority
                     alt="hero"
                 />

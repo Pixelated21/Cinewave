@@ -8,7 +8,7 @@ export default function CastCard({ cast }: { cast: Cast }) {
             <div className="relative h-[200px] w-[133px]">
                 <Image
                     alt=""
-                    src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`}
+                    src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w185/${cast.profile_path}`}
                     fill
                     className=" absolute cursor-pointer rounded-sm  object-cover duration-300"
                 />

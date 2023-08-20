@@ -21,7 +21,7 @@ export default function SeriesCardBlurEffect(props: SeriesCardBlurEffectProps) {
                     className="absolute object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     fill
-                    src={`https://image.tmdb.org/t/p/w500/${resource.poster_path}`}
+                    src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${resource.poster_path}`}
                 />
                 <div className="relative h-[150px] w-full bg-gradient-to-t from-black to-black/0 px-3 py-4 text-white backdrop-blur-lg">
                     <div className="flex h-full flex-col justify-evenly gap-y-2">

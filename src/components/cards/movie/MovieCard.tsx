@@ -1,56 +1,40 @@
+import { getYear } from "@/lib/utils";
 import { Movie } from "@/types";
-import Link from "next/link";
+import { Bookmark } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-// #TODO Add more image optimizations for faster load times
-
-export default function MovieCard({ movie }: { movie: Movie }) {
+export default function MovieCard({ resource }: { resource: Movie }) {
     return (
-        <Link
-            href={`/movie/${movie.id}`}
-            className={`group relative flex h-full min-h-[320px] flex-col overflow-hidden sm:max-h-[550px] sm:max-w-[550px] md:min-h-[400px]`}
+        <div className="relative h-[310px] md:h-[410px] overflow-hidden rounded-sm"
         >
-            <div className="flex h-full w-full flex-row overflow-hidden rounded-md">
-                <div className="hidden w-[25px] bg-black px-1.5 pb-1.5 sm:block">
-                    <div className="flex h-full w-full flex-col items-center justify-end gap-y-2">
-                        <h1
-                            style={{
-                                writingMode: "vertical-rl",
-                            }}
-                            className="rotate-180 whitespace-nowrap text-xs text-white"
-                        >
-                            {movie.title}
-                        </h1>
-                        <span className="text-xs font-medium text-purple-600">
-                            {Number(movie.vote_average).toPrecision(2)}
-                        </span>
+            <Link
+                href={`/movie/${resource.id}`}
+                className=""
+            >
+                <div className="relative group h-[240px] md:h-[335px] flex w-full flex-col justify-end">
+
+                    <Image
+                        alt={`Poster for: ${resource.title} | CineWave`}
+                        className="absolute group-hover:blur-[4px] duration-200 object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        fill
+                        src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${resource.poster_path}`}
+                    />
+                    <div className="absolute flex items-center justify-center md:h-14 md:w-14 h-10 w-10 group-hover:opacity-70 opacity-0 duration-200 bg-white rounded-full right-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <Bookmark className="h-7 w-7 text-black" />
                     </div>
                 </div>
 
-                <div className="relative flex-1 cursor-pointer">
-                    <Image
-                        className="absolute h-full w-full object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                        alt={`Poster for: ${movie.title} | CineWave`}
-                        fill
-                    />
-                    <div className="absolute h-full w-full bg-black bg-opacity-0 duration-300 group-hover:bg-opacity-50"></div>
+            </Link>
+            <div className="h-10 w-full mt-3">
+                <Link href={`/movie/${resource.id}`} className="truncate text-sm font-semibold text-white" >{resource.title}</Link>
+                <div className="text-white text-xs flex flex-row gap-x-2 mt-1.5 items-center">
+                    <span>{getYear(resource.release_date)}</span>
+                    <div className="h-1 w-1 bg-white rounded-full"></div>
+                    <span>Movie</span>
                 </div>
             </div>
-
-            <div className=" flex flex-col gap-y-1 pt-2 sm:hidden">
-                <div>
-                    <p className="whitespace-nowrap text-sm font-semibold text-white">
-                        {movie.original_title}
-                    </p>
-                </div>
-                <div>
-                    <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-white">
-                        {movie.release_date}
-                    </p>
-                </div>
-            </div>
-        </Link>
-    );
+        </div >
+    )
 }

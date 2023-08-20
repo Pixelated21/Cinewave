@@ -41,20 +41,20 @@ export async function generateMetadata({
         keywords: [
             seriesDetails.name ?? seriesDetails.original_name,
             ...seriesDetails.genres.map((g) => g.name),
-            "movies",
+            "series",
         ],
         openGraph: {
             siteName: "CineWave",
             type: "website",
             locale: "en_US",
-            images: `https://image.tmdb.org/t/p/original/${seriesDetails.poster_path}`,
-            title: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
+            images: `${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${seriesDetails.poster_path}`,
+            name: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
             description: seriesDetails.overview,
             url: `https://cinewave.vercel.app/series/${id}`,
         },
 
         twitter: {
-            title: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
+            name: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
             description: seriesDetails.overview,
             card: "player",
         },
@@ -118,36 +118,43 @@ export default async function seriesDetails({
         });
 
     return (
-        <main id="main" className="h-screen overflow-y-auto bg-[#0E0410]">
+        <main id="main-scrollbar" className="h-screen overflow-y-auto bg-[#18181B]">
             <section className="relative h-[571px] shadow-md xl:h-[671px]">
-                <NavigationBar className="absolute z-10 w-full" />
+                <NavigationBar className="absolute z-10 w-full bg-gray-800 md:bg-transparent md:hover:backdrop-blur-md md:backdrop-blur-none md:duration-500 md:delay-1000 md:hover:delay-300" />
 
                 <div className="absolute h-full w-full">
-                    <div className="relative flex h-full items-end">
+
+                    <div className="relative flex h-full items-end blur-xl md:blur-none duration-300">
                         <Image
-                            className="absolute h-full w-full object-cover"
-                            fill
-                            src={`https://image.tmdb.org/t/p/original/${seriesDetails.backdrop_path}`}
+                            className="absolute h-full w-full object-cover "
+                            height={671}
+                            width={1280}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${seriesDetails.backdrop_path}`}
                             priority
-                            alt="hero"
+                            alt={`Backdrop of: ${seriesDetails.name} | CineWave`}
                         />
                         <div className="absolute h-full w-full bg-black bg-opacity-50"></div>
-                        <div className="absolute h-80 w-full bg-gradient-to-b from-[#0E0410]/0 to-[#0E0410]"></div>
+                        <div className="absolute h-80 w-full bg-gradient-to-b -bottom-2 from-[#18181B]/0 to-[#18181B]"></div>
                     </div>
                 </div>
             </section>
 
-            <section className="container relative z-10 -mt-60 mb-20 px-10">
-                <div className="flex h-full flex-row">
-                    <div className="flex flex-col">
-                        <div className="relative h-[400px] w-[250px] rounded-sm xl:h-[450px] xl:w-[300px]">
+            <section className="container relative z-10 -mt-[440px] md:-mt-60 mb-20 px-0 sm:px-10">
+                <div className="flex h-full justify-center sm:justify-start flex-col md:flex-row">
+                    <div className="flex flex-col items-center lg:items-start">
+                        <div className="relative h-[250px] w-[150px] md:h-[350px] md:w-[200px] rounded-sm xl:h-[400px] xl:w-[250px] 2xl:h-[400px] 2xl:w-[300px] duration-300">
                             <Image
                                 className="absolute rounded-sm object-cover"
-                                fill
+                                height={450}
+                                width={300}
+                                sizes=""
                                 src={`https://image.tmdb.org/t/p/w500/${seriesDetails.poster_path}`}
                                 priority
-                                alt="hero"
+                                alt={`Poster of: ${seriesDetails.name} | CineWave`}
                             />
+                            {seriesDetails.adult && (
+                                <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 bg-orange-600 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
+                            )}
                         </div>
                         {/* <div className="mt-7 flex flex-row items-center gap-x-7">
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">

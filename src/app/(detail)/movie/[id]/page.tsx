@@ -108,23 +108,23 @@ export default async function MovieDetails({
         });
 
     return (
-        <main className="h-screen overflow-y-auto bg-[#0E0410]">
+        <main id="main-scrollbar" className="h-screen overflow-y-auto bg-[#18181B]">
             <section className="relative h-[571px] shadow-md xl:h-[671px]">
-                <NavigationBar className="absolute z-10 w-full bg-gray-700 md:bg-transparent md:hover:backdrop-blur-md md:backdrop-blur-none md:duration-500 md:delay-1000 md:hover:delay-300" />
+                <NavigationBar className="absolute z-10 w-full bg-gray-800 md:bg-transparent md:hover:backdrop-blur-md md:backdrop-blur-none md:duration-500 md:delay-1000 md:hover:delay-300" />
 
                 <div className="absolute h-full w-full">
 
-                    <div className="relative flex h-full items-end blur-xl lg:blur-none duration-300">
+                    <div className="relative flex h-full items-end blur-xl md:blur-none duration-300">
                         <Image
                             className="absolute h-full w-full object-cover "
                             height={671}
                             width={1280}
-                            src={`https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movieDetails.backdrop_path}`}
                             priority
                             alt={`Backdrop of: ${movieDetails.title} | CineWave`}
                         />
                         <div className="absolute h-full w-full bg-black bg-opacity-50"></div>
-                        <div className="absolute h-80 w-full bg-gradient-to-b from-[#0E0410]/0 to-[#0E0410]"></div>
+                        <div className="absolute h-80 w-full bg-gradient-to-b -bottom-2 from-[#18181B]/0 to-[#18181B]"></div>
                     </div>
                 </div>
             </section>

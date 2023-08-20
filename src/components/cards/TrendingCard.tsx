@@ -11,7 +11,7 @@ export default function TrendingCard({ movie }: { movie: Trending }) {
         >
             <Image
                 className="absolute h-full w-full object-cover"
-                src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
+                src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${movie.backdrop_path}`}
                 alt="eminence"
                 fill
             />

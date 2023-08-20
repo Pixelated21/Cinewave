@@ -38,7 +38,7 @@ export default async function CollectionPage({
                         <Image
                             className="absolute h-full w-full object-cover"
                             fill
-                            src={`https://image.tmdb.org/t/p/original/${collectionDetails.backdrop_path}`}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${collectionDetails.backdrop_path}`}
                             priority
                             alt="hero"
                         />
@@ -55,7 +55,7 @@ export default async function CollectionPage({
                             <Image
                                 className="absolute rounded-sm object-cover"
                                 fill
-                                src={`https://image.tmdb.org/t/p/w500/${collectionDetails.poster_path}`}
+                                src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${collectionDetails.poster_path}`}
                                 priority
                                 alt="hero"
                             />

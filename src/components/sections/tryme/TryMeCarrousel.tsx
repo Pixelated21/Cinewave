@@ -20,7 +20,7 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
                         <Image
                             className="absolute h-full object-cover"
                             alt=""
-                            src={`https://image.tmdb.org/t/p/original/${movies[0].poster_path}`}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movies[0].poster_path}`}
                             width={835}
                             height={713}
                         />
@@ -48,7 +48,7 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
                         <Image
                             className="absolute h-full object-cover"
                             alt=""
-                            src={`https://image.tmdb.org/t/p/original/${movies[1].backdrop_path}`}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movies[1].backdrop_path}`}
                             width={835}
                             height={713}
                         />
@@ -88,7 +88,7 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
                         <Image
                             className="absolute h-full object-cover"
                             alt=""
-                            src={`https://image.tmdb.org/t/p/original/${movies[2].poster_path}`}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movies[2].poster_path}`}
                             width={835}
                             height={713}
                         />
