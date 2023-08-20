@@ -1,48 +1,52 @@
-import { DiscoverMovieAdvancedFilters, Movie, ResourceTypesEnum } from "@/types";
+import { DiscoverMovieAdvancedFilters, Movie, ResourceTypesEnum, Series } from "@/types";
 import HeroSection from "@/components/sections/home/HeroSection";
 import NavigationBar from "@/components/NavigationBar";
 import ResourceListingSection from "@/components/sections/home/ResourceListingSection";
 import {
     getComingSoonMoviesAction,
     getLatestMoviesAction,
+    getPopularMoviesAction,
     getTrendingMoviesAction,
 } from "../_actions/movie";
-import { getLatestSeriesAction } from "../_actions/series";
+import { getLatestSeriesAction, getPopularSeriesAction } from "../_actions/series";
 
-export default async function HomePage({
-    searchParams,
-}: {
-    searchParams: DiscoverMovieAdvancedFilters;
-}) {
+export default async function HomePage() {
     const getTrendingMovies = getTrendingMoviesAction();
-    const getLatestMovies = getLatestMoviesAction({
-        filter: { ...searchParams },
-    });
-    const getLatestSeries = getLatestSeriesAction({
-        filter: { ...searchParams },
-    });
+    const getLatestMovies = getLatestMoviesAction({});
+    const getLatestSeries = getPopularSeriesAction({with_origin_country: "US"});
     const getComingSoonMovies = getComingSoonMoviesAction();
+    const getPopularMovies = getPopularMoviesAction();
 
-    const [trendingMovies, latestMovies, latestSeries, comingSoon] =
+    const [trendingMovies, latestMovies, latestSeries, comingSoon, popularMovies] =
         await Promise.all([
             getTrendingMovies,
             getLatestMovies,
             getLatestSeries,
             getComingSoonMovies,
+            getPopularMovies
         ]);
+
+    latestSeries.results.filter((series: Series) => series.poster_path !== null && series.backdrop_path !== null);
 
     const filteredTrendingMovies = [...trendingMovies.results]
         .splice(0, 10)
         .filter(
-            (movie: Movie) =>
+            (movie) =>
+                movie.poster_path !== null && movie.backdrop_path !== null
+        );
+
+    const filteredPopularMovies = [...popularMovies.results]
+        .splice(0, 10)
+        .filter(
+            (movie) =>
                 movie.poster_path !== null && movie.backdrop_path !== null
         );
 
     return (
-        <main id="homepage-scroll" className=" h-screen overflow-y-auto">
+        <main id="main-scrollbar" className=" h-screen overflow-y-auto">
             <NavigationBar className="bg-[#18181B] left-0 right-0 z-10 mx-auto w-full " />
-            <div className="relative h-[450px] xl:h-[600px]">
-                <HeroSection trending={filteredTrendingMovies} />
+            <div className="relative h-[300px] md:h-[450px] xl:h-[600px]">
+                <HeroSection trending={filteredPopularMovies} />
             </div>
 
             {/* Trending */}

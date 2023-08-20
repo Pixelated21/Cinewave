@@ -21,6 +21,8 @@ import SmallSeriesCard from "@/components/cards/series/SmallSeriesCard";
 import SeriesCardBlurEffect from "@/components/cards/series/SeriesCardBlurEffect";
 import Badge from "@/components/badges/Badge";
 import { Metadata } from "next";
+import SeriesCard from "@/components/cards/series/SeriesCard";
+import SmallMovieCard from "@/components/cards/movie/SmallMovieCard";
 
 export async function generateMetadata({
     params,
@@ -148,7 +150,7 @@ export default async function seriesDetails({
                                 height={450}
                                 width={300}
                                 sizes=""
-                                src={`https://image.tmdb.org/t/p/w500/${seriesDetails.poster_path}`}
+                                src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${seriesDetails.poster_path}`}
                                 priority
                                 alt={`Poster of: ${seriesDetails.name} | CineWave`}
                             />
@@ -165,7 +167,7 @@ export default async function seriesDetails({
                                 </span>
                             </div>
                             <div className="flex flex-col gap-y-2.5">
-                                <div className=" flex flex-row items-end gap-x-1">
+                                <div className=" flex flex-row items-center  gap-x-1">
                                     <span className="text-sm font-semibold text-white">
                                         {seriesDetails.vote_count}
                                     </span>
@@ -173,7 +175,7 @@ export default async function seriesDetails({
                                         Ratings
                                     </span>
                                 </div>
-                                <div className=" flex flex-row items-end gap-x-1">
+                                <div className=" flex flex-row items-center gap-x-1">
                                     <span className="text-sm font-semibold text-white">
                                         {84}
                                     </span>
@@ -185,59 +187,53 @@ export default async function seriesDetails({
                         </div> */}
                     </div>
 
-                    <div className=" flex-1 px-10 text-white">
-                        <div className="mt-8 flex flex-col">
-                            <h1 className="text-4xl font-bold xl:text-5xl">
+                    <div className=" flex-1 px-5 md:px-10 text-white ">
+                        <div className="mt-0  md:mt-8 flex flex-col">
+                            <h1 className="text-2xl text-center md:text-left sm:text-4xl font-bold xl:text-5xl">
                                 {seriesDetails.name}
                             </h1>
                             {seriesDetails.original_name !==
                                 seriesDetails.name && (
-                                    <div className="mt-2.5 text-xs">
-                                        <span>Original Title: </span>
+                                    <div className="mt-2.5 text-xs text-center md:text-left">
+                                        <span>Original name: </span>
                                         <span>{seriesDetails.original_name}</span>
                                     </div>
                                 )}
-                            <div className="mt-2.5 flex flex-row gap-x-2 text-sm font-semibold">
-                                <div>
-                                    Series ({seriesDetails.first_air_date} -{" "}
-                                    {seriesDetails.last_air_date})
-                                </div>
+
+                            <div className="mt-2.5 flex flex-row gap-x-2 text-sm justify-center md:justify-start font-semibold">
+                                <div>Series ({seriesDetails.first_air_date})</div>
                             </div>
                         </div>
 
-                        {/* <div className="mt-6 flex flex-row gap-x-5">
-                            <div className="h-10 w-10 rounded-full bg-gray-500"></div>
-                            <div className="h-10 w-10 rounded-full bg-gray-500"></div>
-                        </div> */}
+                        <div className="mt-2 flex flex-row gap-x-5">
+                            {/* <div className="h-10 w-10 rounded-full bg-gray-500"></div>
+                            <div className="h-10 w-10 rounded-full bg-gray-500"></div> */}
+                        </div>
 
-                        <div className="mt-9 max-w-[608px]">
-                            <p className="font-medium">
+                        <div className="mt-9 lg:max-w-[608px]">
+                            <p className="md:font-medium text-sm md:text-base text-gray-300 text-left  font-normal">
                                 {seriesDetails.overview}
                             </p>
                         </div>
 
-                        <div className="mt-9">
+                        <div className="mt-9 hidden lg:block">
                             <h1 className="text-xl font-bold">Details</h1>
 
-                            <div className="mt-8 flex flex-col">
+                            <div className="mt-8 flex flex-col divide-y-2 divide-gray-700/20 ">
                                 {seriesDetails.genres.length > 0 && (
                                     <div className="flex items-center gap-x-5 py-2">
-                                        <span className="w-48 text-base">
+                                        <div className="w-48 text-base">
                                             Genres
-                                        </span>
-                                        <div className="flex flex-1 flex-wrap gap-1">
+                                        </div>
+                                        <div className="flex flex-wrap gap-1">
                                             {seriesDetails.genres.map(
                                                 (genre) => {
-                                                    {
-                                                        return (
-                                                            <Badge
-                                                                key={genre.id}
-                                                                text={
-                                                                    genre.name
-                                                                }
-                                                            />
-                                                        );
-                                                    }
+                                                    return (
+                                                        <Badge
+                                                            key={genre.id}
+                                                            text={genre.name}
+                                                        />
+                                                    );
                                                 }
                                             )}
                                         </div>
@@ -247,18 +243,16 @@ export default async function seriesDetails({
                                 {seriesDetails.production_companies.length >
                                     0 && (
                                         <div className="flex items-center gap-x-5 py-2">
-                                            <span className="w-48 text-base">
+                                            <div className="w-48 text-base">
                                                 Production Companies
-                                            </span>
+                                            </div>
                                             <div className="flex flex-1 flex-wrap gap-1">
                                                 {seriesDetails.production_companies.map(
-                                                    (companies) => {
+                                                    (company) => {
                                                         return (
                                                             <Badge
-                                                                key={companies.id}
-                                                                text={
-                                                                    companies.name
-                                                                }
+                                                                key={company.id}
+                                                                text={company.name}
                                                             />
                                                         );
                                                     }
@@ -269,21 +263,19 @@ export default async function seriesDetails({
 
                                 {seriesDetails.production_countries.length >
                                     0 && (
-                                        <div className="flex items-center gap-x-5 py-2">
-                                            <span className="w-48 text-base">
+                                        <div className="flex items-center gap-x-5 py-2 ">
+                                            <div className="w-48 text-base">
                                                 Production Countries
-                                            </span>
-                                            <div className="flex flex-1 flex-wrap gap-1">
+                                            </div>
+                                            <div className="flex flex-wrap gap-1">
                                                 {seriesDetails.production_countries.map(
-                                                    (countries) => {
+                                                    (country) => {
                                                         return (
                                                             <Badge
                                                                 key={
-                                                                    countries.iso_3166_1
+                                                                    country.iso_3166_1
                                                                 }
-                                                                text={
-                                                                    countries.name
-                                                                }
+                                                                text={country.name}
                                                             />
                                                         );
                                                     }
@@ -295,41 +287,41 @@ export default async function seriesDetails({
                         </div>
                     </div>
 
-                    <div className="flex w-[300px] flex-col gap-y-8">
-                        <div className="mt-8 hidden  lg:block">
+                    <div className="hidden w-[300px] xl:flex flex-col  gap-y-8">
+                        <div className="mt-8  lg:block">
                             <h1 className="text-lg font-bold text-white">
                                 Cast & Crew
                             </h1>
                             <div className="mt-8 flex flex-col gap-y-5">
-                                {seriesCredits.cast
-                                    ?.splice(0, 4)
-                                    .map((cast) => (
-                                        <div
-                                            key={cast.id}
-                                            className="flex items-center gap-x-4"
-                                        >
-                                            <div className="relative h-14 w-14 overflow-hidden rounded-full">
-                                                <Image
-                                                    className="absolute rounded-full bg-white object-cover"
-                                                    fill
-                                                    src={`${cast.profile_path
-                                                        ? `https://image.tmdb.org/t/p/w92/${cast.profile_path}`
-                                                        : "/assets/profile_default.png"
-                                                        }`}
-                                                    priority
-                                                    alt="hero"
-                                                />
-                                            </div>
-                                            <div className="flex flex-col text-white">
-                                                <span className="text-sm font-bold">
-                                                    {cast.name}
-                                                </span>
-                                                <span className="text-xs font-normal">
-                                                    {cast.character}
-                                                </span>
-                                            </div>
+                                {seriesCredits.cast?.splice(0, 4).map((cast) => (
+                                    <div
+                                        // href={`/person/${cast.id}`}
+                                        // href={'#'}
+                                        key={cast.id}
+                                        className="flex items-center gap-x-4"
+                                    >
+                                        <div className="relative h-14 w-14 overflow-hidden rounded-full">
+                                            <Image
+                                                className="absolute rounded-full bg-white object-cover"
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                src={`${cast.profile_path
+                                                    ? `https://image.tmdb.org/t/p/w92/${cast.profile_path}`
+                                                    : "/assets/profile_default.png"
+                                                    }`}
+                                                alt={`Profile Photo of: ${cast.name} | CineWave`}
+                                            />
                                         </div>
-                                    ))}
+                                        <div className="flex flex-col text-white">
+                                            <span className="text-sm font-bold">
+                                                {cast.name}
+                                            </span>
+                                            <span className="text-xs font-normal">
+                                                {cast.character}
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                             {/* <div className="mt-5 flex flex-row items-center gap-x-2">
                                 <span className="text-sm font-semibold text-white">
@@ -345,38 +337,22 @@ export default async function seriesDetails({
             <section className="container mb-20">
                 <div className="flex flex-row gap-x-10">
                     <div className="flex flex-1 flex-col gap-y-10">
-                        {filteredVideos.results.length < 0 && (
-                            <div className="flex flex-col">
-                                <h1 className=" text-3xl font-semibold text-white">
-                                    Trailers
-                                </h1>
-                                <div className="mt-5 h-full">
-                                    <div className="grid grid-cols-3 gap-5">
-                                        {filteredVideos.results.map(
-                                            (trailer) => (
-                                                <TrailerCard
-                                                    key={trailer.id}
-                                                    video={trailer}
-                                                />
-                                            )
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                        {/* {filteredVideos.results.length > 0 && (
+                            <TrailerSection trailers={filteredVideos.results} />
+                        )} */}
 
                         {filteredRecommendations.length > 0 && (
                             <div className="flex flex-col">
-                                <h1 className=" text-3xl font-semibold text-white">
+                                <h1 className=" text-2xl lg:text-3xl font-semibold text-white">
                                     More Like This
                                 </h1>
                                 <div className="mt-5 h-full">
-                                    <div className="grid grid-cols-3 gap-5">
+                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
                                         {filteredRecommendations.map(
-                                            (series: Series) => (
-                                                <SeriesCardBlurEffect
-                                                    key={series.id}
-                                                    resource={series}
+                                            (movie: Series) => (
+                                                <SeriesCard
+                                                    key={movie.id}
+                                                    resource={movie}
                                                 />
                                             )
                                         )}
@@ -386,31 +362,22 @@ export default async function seriesDetails({
                         )}
                     </div>
 
-                    {filteredTrending.length > 0 && (
-                        <div className="flex flex-col gap-y-8">
-                            <div className="flex flex-col">
-                                <h1 className=" text-3xl font-semibold text-white">
-                                    Popular
-                                </h1>
-                                <div className="mt-5 w-[300px] bg-gray-900 p-5 ">
-                                    <div className="divide- flex flex-col gap-y-4">
-                                        {filteredTrending.map(
-                                            (series: Series) => (
-                                                <div
-                                                    className=""
-                                                    key={series.id}
-                                                >
-                                                    <SmallSeriesCard
-                                                        resource={series}
-                                                    />
-                                                </div>
-                                            )
-                                        )}
-                                    </div>
+                    <div className=" hidden lg:flex flex-col gap-y-8 ">
+                        <div className="flex flex-col">
+                            <h1 className=" text-2xl lg:text-3xl font-semibold text-white">
+                                Popular
+                            </h1>
+                            <div className="mt-5 w-[300px] bg-gray-900 p-5 ">
+                                <div className="divide- flex flex-col gap-y-4">
+                                    {filteredTrending.map((movie: Movie) => (
+                                        <div className="" key={movie.id}>
+                                            <SmallMovieCard movie={movie} />
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
-                    )}
+                    </div>
                 </div>
             </section>
         </main>

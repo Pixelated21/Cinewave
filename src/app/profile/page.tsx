@@ -86,13 +86,13 @@ export default async function Profile() {
                             <input className="h-10 w-96 rounded-sm border-2 bg-transparent px-2 text-white" />
 
                             <div className="flex items-center gap-x-3">
-                                <button className="grid h-10 w-10 place-items-center rounded-sm bg-white"></button>
+                                <div className="grid h-10 w-10 place-items-center rounded-sm bg-white"></div>
                             </div>
                         </div>
 
                         <MovieGridLayout>
                             {trendingMovies.results.map((movie: Movie) => (
-                                <MovieCard key={movie.id} movie={movie} />
+                                <MovieCard key={movie.id} resource={movie} />
                             ))}
                         </MovieGridLayout>
                     </div>

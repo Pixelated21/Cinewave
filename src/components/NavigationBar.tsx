@@ -11,16 +11,15 @@ export interface NavigationBarProps
 export default function NavigationBar({ className }: NavigationBarProps) {
     return (
         <nav className={`${className}`}>
-            <div className="container z-30 flex h-[72px] w-full items-center">
+            <div className="container z-30 flex md:h-[72px] h-[55px] w-full items-center">
                 <div className="flex h-full w-full items-center justify-between px-0 sm:px-2 xl:px-2">
                     <div className="flex items-center gap-x-16">
-                        <Link href="/home">
+                        <Link className="relative md:w-[189px] md:h-[40px] w-[120px] h-[60px]" href="/home">
                             <Image
-                                className="object-contain"
+                                className="object-contain absolute "
                                 src={"/logo.svg"}
                                 alt="logo"
-                                width={189}
-                                height={40}
+                                fill
                             />
                         </Link>
                         <MovieSearchInput />
@@ -31,9 +30,10 @@ export default function NavigationBar({ className }: NavigationBarProps) {
                                 <li
                                     key={link.title}
                                 >
-                                    <NavigationLink
-                                        linkData={link}
-                                    />
+                                    {link.is_visible && (
+                                        <NavigationLink
+                                            linkData={link}
+                                        />)}
                                 </li>
                             ))}
                         </ul>

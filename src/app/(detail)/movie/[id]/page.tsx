@@ -14,6 +14,7 @@ import { Credits, Movie, MovieDetails, MovieVideoRequest } from "@/types";
 import { Metadata } from "next";
 import Image from "next/image";
 import Badge from "@/components/badges/Badge";
+import MovieCard from "@/components/cards/movie/MovieCard";
 
 export async function generateMetadata({
     params,
@@ -22,9 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const id = params.id;
 
-    const getMovieDetails: Promise<MovieDetails> = getMovieDetailsAction({
-        id: id,
-    });
+    const getMovieDetails: Promise<MovieDetails> = getMovieDetailsAction(id);
 
     const [movieDetails] = await Promise.all([getMovieDetails]);
 
@@ -60,14 +59,10 @@ export default async function MovieDetails({
     params: { id: string };
 }) {
     const { id } = params;
-    const getMovieDetails: Promise<MovieDetails> = getMovieDetailsAction({
-        id: id,
-    });
-    const getMovieCredits: Promise<Credits> = getMovieCreditsAction({ id: id });
-    const getMovieVideos: Promise<MovieVideoRequest> = getMovieVideosAction({
-        id: id,
-    });
-    const getMovieRecommendations = getMovieRecommendationsAction({ id: id });
+    const getMovieDetails: Promise<MovieDetails> = getMovieDetailsAction(id);
+    const getMovieCredits: Promise<Credits> = getMovieCreditsAction(id);
+    const getMovieVideos: Promise<MovieVideoRequest> = getMovieVideosAction(id);
+    const getMovieRecommendations = getMovieRecommendationsAction(id);
     const getTrendingMovies = getTrendingMoviesAction();
 
     const [
@@ -142,7 +137,9 @@ export default async function MovieDetails({
                                 priority
                                 alt={`Poster of: ${movieDetails.title} | CineWave`}
                             />
-                            <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 bg-orange-600 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
+                            {movieDetails.adult && (
+                                <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 bg-orange-600 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
+                            )}
                         </div>
                         {/* <div className="mt-7 flex flex-row items-center gap-x-7">
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">
@@ -370,14 +367,14 @@ export default async function MovieDetails({
 
                         {filteredRecommendations.length > 0 && (
                             <div className="flex flex-col">
-                                <h1 className=" text-3xl font-semibold text-white">
+                                <h1 className=" text-2xl lg:text-3xl font-semibold text-white">
                                     More Like This
                                 </h1>
                                 <div className="mt-5 h-full">
-                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
+                                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
                                         {filteredRecommendations.map(
                                             (movie: Movie) => (
-                                                <MovieCardBlurEffect
+                                                <MovieCard
                                                     key={movie.id}
                                                     resource={movie}
                                                 />
@@ -391,7 +388,7 @@ export default async function MovieDetails({
 
                     <div className=" hidden lg:flex flex-col gap-y-8 ">
                         <div className="flex flex-col">
-                            <h1 className=" text-3xl font-semibold text-white">
+                            <h1 className=" text-2xl lg:text-3xl font-semibold text-white">
                                 Popular
                             </h1>
                             <div className="mt-5 w-[300px] bg-gray-900 p-5 ">
