@@ -58,3 +58,8 @@ export function getGenres(genreIds: number[] | string[], genres: any[]) {
 export function daysToSeconds(days: number) {
   return days * 24 * 60 * 60;
 }
+
+export function getYear(dateString: string) {
+  const date = new Date(dateString);
+  return date.getFullYear();
+}
