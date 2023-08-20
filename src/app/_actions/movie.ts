@@ -47,7 +47,7 @@ export async function searchMoviesAction({ term }: { term: string }) {
     }
 };
 
-export async function getSimilarMovieAction({ id }: { id: string | number }) {
+export async function getSimilarMovieAction( id: string | number ) {
     const params = new URLSearchParams({
         api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
         language: "en-US",
@@ -80,7 +80,18 @@ export async function getTrendingMoviesAction(genres?: string | number[]) {
     return data
 };
 
-export async function getLatestMoviesAction({ filter }: { filter: DiscoverMovieAdvancedFilters }) {
+export async function getPopularMoviesAction(genres?: string | number[]) {
+    const params = new URLSearchParams({
+        api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+        language: "en-US",
+    });
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_API_URL}/movie/popular?${params.toString()}`, { next: { revalidate: daysToSeconds(1) } });
+    const data = await res.json();
+    return data
+};
+
+export async function getLatestMoviesAction(filter?: DiscoverMovieAdvancedFilters) {
     const params = new URLSearchParams({
         api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
         language: "en-US",
@@ -92,7 +103,7 @@ export async function getLatestMoviesAction({ filter }: { filter: DiscoverMovieA
     return data
 };
 
-export async function getMovieDetailsAction({ id }: { id: string | number }) {
+export async function getMovieDetailsAction( id: string | number ) {
     const params = new URLSearchParams({
         api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
         language: "en-US",
@@ -103,7 +114,7 @@ export async function getMovieDetailsAction({ id }: { id: string | number }) {
     return data
 };
 
-export async function getMovieCreditsAction({ id }: { id: string | number }) {
+export async function getMovieCreditsAction( id: string | number) {
     const params = new URLSearchParams({
         api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
         language: "en-US",
@@ -114,7 +125,7 @@ export async function getMovieCreditsAction({ id }: { id: string | number }) {
     return data;
 };
 
-export async function getMovieVideosAction({ id }: { id: string | number }) {
+export async function getMovieVideosAction(id: string | number ) {
     const params = new URLSearchParams({
         api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
         language: "en-US",
@@ -125,7 +136,7 @@ export async function getMovieVideosAction({ id }: { id: string | number }) {
     return data;
 };
 
-export async function getMovieRecommendationsAction({ id }: { id: string | number }) {
+export async function getMovieRecommendationsAction( id: string | number) {
     const params = new URLSearchParams({
         api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
         language: "en-US",
@@ -147,7 +158,7 @@ export async function getComingSoonMoviesAction() {
     return data;
 };
 
-export async function toggleFavoriteMovieAction({ id }: { id: number }) {
+export async function toggleFavoriteMovieAction( id: number ) {
     const options = {
         method: 'POST',
         headers: {

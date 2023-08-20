@@ -31,9 +31,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const id = params.id;
 
-    const getSeriesDetails: Promise<SeriesDetails> = getSeriesDetailsAction({
-        id: id,
-    });
+    const getSeriesDetails: Promise<SeriesDetails> = getSeriesDetailsAction(id);
 
     const [seriesDetails] = await Promise.all([getSeriesDetails]);
 
@@ -69,17 +67,11 @@ export default async function seriesDetails({
     params: { id: string };
 }) {
     const { id } = params;
-    const getSeriesDetails: Promise<SeriesDetails> = getSeriesDetailsAction({
-        id: id,
-    });
-    const getSeriesCredits: Promise<Credits> = getSeriesCreditsAction({
-        id: id,
-    });
-    const getSeriesVideos: Promise<MovieVideoRequest> = getSeriesVideosAction({
-        id: id,
-    });
+    const getSeriesDetails: Promise<SeriesDetails> = getSeriesDetailsAction(id);
+    const getSeriesCredits: Promise<Credits> = getSeriesCreditsAction(id);
+    const getSeriesVideos: Promise<MovieVideoRequest> = getSeriesVideosAction(id);
     const getTrendingSeries = getTrendingSeriesAction();
-    const getSeriesRecommendations = getSeriesRecommendationsAction({ id: id });
+    const getSeriesRecommendations = getSeriesRecommendationsAction(id);
 
     const [
         seriesDetails,

@@ -66,9 +66,7 @@ export default function TryMeRandomizer({ data }: TryMeRandomizerProps) {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!selectedMovie) return;
-        const searchResults = await getSimilarMovieAction({
-            id: selectedMovie.id,
-        });
+        const searchResults = await getSimilarMovieAction(selectedMovie.id);
         setSimilarMovies(searchResults.results);
     };
 
@@ -228,7 +226,7 @@ export default function TryMeRandomizer({ data }: TryMeRandomizerProps) {
                 <div className="mx-auto max-w-7xl px-4 pb-[30px] sm:px-8 xl:px-2">
                     <MovieGridLayout>
                         {similarMovies.map((movie: Movie) => (
-                            <MovieCard key={movie.id} movie={movie} />
+                            <MovieCard key={movie.id} resource={movie} />
                         ))}
                     </MovieGridLayout>
                 </div>
