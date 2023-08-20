@@ -42,7 +42,7 @@ export async function generateMetadata({
             images: `https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`,
             title: `${movieDetails.title} | CineWave`,
             description: movieDetails.overview,
-            url: `https://cinewave.vercel.app/movie/${id}`,
+            url: `https://cinewave.proximitydev.space/movie/${id}`,
         },
 
         twitter: {
@@ -133,7 +133,7 @@ export default async function MovieDetails({
                                 height={450}
                                 width={300}
                                 sizes=""
-                                src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+                                src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${movieDetails.poster_path}`}
                                 priority
                                 alt={`Poster of: ${movieDetails.title} | CineWave`}
                             />

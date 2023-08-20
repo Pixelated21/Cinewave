@@ -10,13 +10,13 @@ export const metadata = {
     title: "CineWave",
     description: "Keep track of your favorite movies and TV shows.",
     twitter: {
-        images: "https://www.pngkit.com/png/detail/13-135262_movie-moviemaker-film-cut-svg-png-icon-free.png",
+        images: "https://cinewave.proximitydev.space/assets/banner.png",
     },
     openGraph: {
-        images: "https://www.pngkit.com/png/detail/13-135262_movie-moviemaker-film-cut-svg-png-icon-free.png",
+        images: "https://cinewave.proximitydev.space/assets/banner.png",
         title: "CineWave",
         description: "Keep track of your favorite movies and TV shows.",
-        url: "https://cinewave.vercel.app/",
+        url: "https://cinewave.proximitydev.space",
     },
     verification: {
         google: "nh6dvmdIjWdwctJuSeXvVPzlC9gsqDjyokmXEKU5nUQ"

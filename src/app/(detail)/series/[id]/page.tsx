@@ -48,13 +48,13 @@ export async function generateMetadata({
             images: `${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${seriesDetails.poster_path}`,
             name: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
             description: seriesDetails.overview,
-            url: `https://cinewave.vercel.app/series/${id}`,
+            url: `https://cinewave.proximitydev.space/series/${id}`,
         },
 
         twitter: {
             name: `${seriesDetails.name ?? seriesDetails.original_name} | CineWave`,
             description: seriesDetails.overview,
-                        // @ts-ignore
+            // @ts-ignore
             card: "player",
         },
     };
