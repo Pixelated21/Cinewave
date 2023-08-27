@@ -1,6 +1,6 @@
 import { getYear } from "@/lib/utils";
 import { Movie } from "@/types";
-import { Bookmark } from "lucide-react";
+import { Bookmark, Heart, MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,9 +21,21 @@ export default function MovieCard({ resource }: { resource: Movie }) {
                         fill
                         src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${resource.poster_path}`}
                     />
-                    <div className="absolute flex items-center justify-center md:h-14 md:w-14 h-10 w-10 group-hover:opacity-70 opacity-0 duration-200 bg-white rounded-full right-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        <Bookmark className="h-7 w-7 text-black" />
+                    {/* Actions */}
+                    <div className="absolute flex justify-center items-center right-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <div className="flex flex-col items-center gap-y-2">
+                            {/* <div className="flex items-center justify-center md:h-14 md:w-14 h-10 w-10 group-hover:opacity-70 opacity-0 duration-200 bg-white rounded-full">
+                                <Heart className="h-7 w-7 text-black" />
+                            </div> */}
+                            <div className="flex items-center justify-center md:h-14 md:w-14 h-10 w-10 group-hover:opacity-70 opacity-0 duration-200 bg-white rounded-full">
+                                <MoreHorizontal className="h-7 w-7 text-black" />
+                            </div>
+                            {/* <div className="flex items-center justify-center md:h-14 md:w-14 h-10 w-10 group-hover:opacity-70 opacity-0 duration-200 bg-white rounded-full">
+                                <Bookmark className="h-7 w-7 text-black" />
+                            </div> */}
+                        </div>
                     </div>
+
                 </div>
 
             </Link>
