@@ -1,0 +1,13 @@
+version: "3"
+services:
+    app: # Service named "cinewave"
+        container_name: cinewave # Name of the Docker container
+        build:
+            context: . # Build context is the current directory
+            dockerfile: Dockerfile # Use the specified Dockerfile
+        volumes:
+            - .:/app
+        ports:
+            - "3000:3000" # Map host port 3000 to container port 3000
+        env_file:
+            - .env.local # Use the specified .env.local file

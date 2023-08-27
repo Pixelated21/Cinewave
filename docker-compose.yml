@@ -1,0 +1,28 @@
+version: "3"
+services:
+    app: # Service named "cinewave"
+        container_name: cinewave_development # Name of the Docker container
+        build:
+            context: . # Build context is the current directory
+            dockerfile: Dockerfile # Use the specified Dockerfile
+        volumes:
+            - type: bind
+              source: .
+              target: /app
+        working_dir: /app
+        ports:
+            - "3000:3000" # Map host port 3000 to container port 30002
+        env_file:
+            - .env.local # Use the specified .env.local file
+    db:
+        image: postgres:latest
+        restart: always
+        ports:
+            - 54321:5432
+        volumes:
+            - db_data:/var/lib/pgsql
+        environment:
+            POSTGRES_PASSWORD: "whatever21"
+            POSTGRES_DB: "cinewave"
+volumes:
+    db_data:
