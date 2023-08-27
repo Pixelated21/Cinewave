@@ -25,7 +25,7 @@ export default function NavigationBar({ className }: NavigationBarProps) {
                         <MovieSearchInput />
                     </div>
                     <div className="flex items-center gap-x-8">
-                        <ul className="hidden items-center gap-x-2 md:flex">
+                        <ul className="hidden items-center gap-x-8 md:flex">
                             {navigationLinks.map((link) => (
                                 <li
                                     key={link.title}
@@ -52,7 +52,7 @@ export default function NavigationBar({ className }: NavigationBarProps) {
 
 export const NavigationLink = ({ linkData }: { linkData: NavLink }) => {
     if (linkData.isDisabled) {
-        return <Button variant={"link"} asChild><span className="text-sm text-white/60 px-0 py-0 hover:no-underline cursor-pointer">{linkData.title}</span></Button>
+        return <span className="text-sm text-white/60 px-0 py-0 hover:no-underline cursor-not-allowed">{linkData.title}</span>
     }
-    return <Link className="text-sm text-white" href={linkData.href}>{linkData.title}</Link>
+    return <Link className="text-sm text-white hover:text-gray-300 duration-200" href={linkData.href}>{linkData.title}</Link>
 };
