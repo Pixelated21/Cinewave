@@ -3,16 +3,18 @@ import MovieCard from "@/components/cards/movie/MovieCard";
 import MovieGridLayout from "@/components/layouts/LayoutSection";
 import { Movie } from "@/types";
 import Image from "next/image";
-import { getTrendingMoviesAction } from "../_actions/movie";
+import { getTrendingMoviesAction, getUserWatchListAction } from "../_actions/movie";
+import WatchListCard from "@/components/cards/WatchListCard";
 
 export default async function Profile() {
     const getTrendingMovies = getTrendingMoviesAction();
+    const getBookmarkedMovies = getUserWatchListAction('1');
 
-    const [trendingMovies] = await Promise.all([getTrendingMovies]);
+    const [trendingMovies, bookmarkedMovies] = await Promise.all([getTrendingMovies, getBookmarkedMovies]);
 
     return (
-        <main className="h-screen overflow-y-scroll bg-[#18181B]">
-            <NavigationBar className="primary" />
+        <main id="main-scrollbar" className="h-screen overflow-y-scroll bg-[#18181B]">
+            <NavigationBar className="bg-[#0e0e0f]" />
 
             <section className="">
                 <div className="mx-auto h-72 max-w-7xl px-4 py-14 sm:px-8 xl:px-2">
@@ -22,7 +24,8 @@ export default async function Profile() {
                                 {/* TODO: Replace animation with motion spring */}
                                 <Image
                                     alt=""
-                                    src={"/temp/rimuru.jpg"}
+                                    src={"/temp/cute-animation.gif"}
+                                    // src={"/temp/rimuru.jpg"}
                                     fill
                                     className="absolute h-40 w-40 cursor-pointer rounded-full border-2 border-[#FFC107] bg-white duration-300 group-hover:border-8"
                                 />
@@ -66,35 +69,21 @@ export default async function Profile() {
                 </div>
             </section>
 
-            <section className="">
-                <div className="mx-auto max-w-7xl px-4 sm:px-8 xl:px-2">
-                    <div className="grid grid-cols-2 gap-x-5">
-                        <button className="flex items-center justify-center  rounded-sm border-2 border-gray-500 bg-gray-600 py-2 font-semibold text-gray-200 ">
-                            <span className="text-sm">Watched</span>
-                        </button>
-                        <button className="flex items-center justify-center  rounded-sm border-2 border-gray-500 bg-gray-900 py-2 font-semibold text-gray-200">
-                            <span className="text-sm">Favorites</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
+            <div className="mx-auto max-w-7xl px-4 sm:px-8  pt-5 xl:px-2 justify-center flex items-center">
+                <hr className="border-gray-700/50 w-full" />
+            </div>
+
 
             <section className="">
                 <div className="mx-auto max-w-7xl px-4 py-16 sm:px-8 xl:px-2">
                     <div className="flex flex-col gap-y-5">
-                        <div className="flex h-10 w-full flex-row justify-between">
-                            <input className="h-10 w-96 rounded-sm border-2 bg-transparent px-2 text-white" />
-
-                            <div className="flex items-center gap-x-3">
-                                <div className="grid h-10 w-10 place-items-center rounded-sm bg-white"></div>
-                            </div>
-                        </div>
 
                         <MovieGridLayout>
-                            {trendingMovies.results.map((movie: Movie) => (
-                                <MovieCard key={movie.id} resource={movie} />
+                            {bookmarkedMovies.map((resource: any) => (
+                                <WatchListCard key={resource.id} resource={resource} />
                             ))}
                         </MovieGridLayout>
+
                     </div>
                 </div>
             </section>

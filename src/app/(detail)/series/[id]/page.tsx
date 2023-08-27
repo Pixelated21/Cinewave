@@ -7,10 +7,9 @@ import {
 } from "@/app/_actions/series";
 import NavigationBar from "@/components/NavigationBar";
 import { genres } from "@/data/genres";
-import { getGenres } from "@/lib/utils";
+import { getGenres, getYear } from "@/lib/utils";
 import {
     Credits,
-    Movie,
     MovieVideoRequest,
     Series,
     SeriesDetails,
@@ -19,7 +18,9 @@ import Image from "next/image";
 import Badge from "@/components/badges/Badge";
 import { Metadata } from "next";
 import SeriesCard from "@/components/cards/series/SeriesCard";
-import SmallMovieCard from "@/components/cards/movie/SmallMovieCard";
+import SmallSeriesCard from "@/components/cards/series/SmallSeriesCard";
+import { getUserWatchListAction } from "@/app/_actions/movie";
+import AddToWatchListButton from "@/components/resource-add-to-watchlist-button";
 
 export async function generateMetadata({
     params,
@@ -71,6 +72,7 @@ export default async function seriesDetails({
     const getSeriesVideos: Promise<MovieVideoRequest> = getSeriesVideosAction(id);
     const getTrendingSeries = getTrendingSeriesAction();
     const getSeriesRecommendations = getSeriesRecommendationsAction(id);
+    const getBookmarkedMovies = getUserWatchListAction('1');
 
     const [
         seriesDetails,
@@ -78,12 +80,15 @@ export default async function seriesDetails({
         seriesVideos,
         trendingSeries,
         seriesRecommendations,
+        bookmarkedMovies,
     ] = await Promise.all([
         getSeriesDetails,
         getSeriesCredits,
         getSeriesVideos,
         getTrendingSeries,
         getSeriesRecommendations,
+        getBookmarkedMovies,
+
     ]);
 
     const filteredVideos = {
@@ -113,7 +118,7 @@ export default async function seriesDetails({
     return (
         <main id="main-scrollbar" className="h-screen overflow-y-auto bg-[#18181B]">
             <section className="relative h-[571px] shadow-md xl:h-[671px]">
-                <NavigationBar className="absolute z-10 w-full bg-gray-800 md:bg-transparent md:hover:backdrop-blur-md md:backdrop-blur-none md:duration-500 md:delay-1000 md:hover:delay-300" />
+                <NavigationBar className="absolute z-10 w-full bg-[#0e0e0f] md:bg-transparent md:hover:backdrop-blur-md md:backdrop-blur-none md:duration-500 md:delay-1000 md:hover:delay-300" />
 
                 <div className="absolute h-full w-full">
 
@@ -149,6 +154,9 @@ export default async function seriesDetails({
                                 <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 bg-orange-600 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
                             )}
                         </div>
+                        {!bookmarkedMovies.find((bookmarks) => bookmarks.resource_id === seriesDetails.id.toString()) && (
+                            <AddToWatchListButton resource_id={seriesDetails.id.toString()} user_id={'1'} poster_path={seriesDetails.poster_path} title={seriesDetails.name} release_date={getYear(seriesDetails.first_air_date)} resource_type={'series'} />
+                        )}
                         {/* <div className="mt-7 flex flex-row items-center gap-x-7">
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">
                                 <span className="text-3xl font-bold text-white">
@@ -356,13 +364,13 @@ export default async function seriesDetails({
                     <div className=" hidden lg:flex flex-col gap-y-8 ">
                         <div className="flex flex-col">
                             <h1 className=" text-2xl lg:text-3xl font-semibold text-white">
-                                Popular
+                                Popular Series
                             </h1>
-                            <div className="mt-5 w-[300px] bg-gray-900 p-5 ">
+                            <div className="mt-5 w-[300px] bg-[#121214] p-5 ">
                                 <div className="divide- flex flex-col gap-y-4">
-                                    {filteredTrending.map((movie: Movie) => (
-                                        <div className="" key={movie.id}>
-                                            <SmallMovieCard movie={movie} />
+                                    {filteredTrending.map((series: Series) => (
+                                        <div className="" key={series.id}>
+                                            <SmallSeriesCard resource={series} />
                                         </div>
                                     ))}
                                 </div>

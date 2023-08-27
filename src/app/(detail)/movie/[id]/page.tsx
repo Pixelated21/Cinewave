@@ -4,17 +4,19 @@ import {
     getMovieRecommendationsAction,
     getMovieVideosAction,
     getTrendingMoviesAction,
+    getUserWatchListAction,
 } from "@/app/_actions/movie";
 import NavigationBar from "@/components/NavigationBar";
 import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
 import SmallMovieCard from "@/components/cards/movie/SmallMovieCard";
 import { genres } from "@/data/genres";
-import { getGenres } from "@/lib/utils";
+import { getGenres, getYear } from "@/lib/utils";
 import { Credits, Movie, MovieDetails, MovieVideoRequest } from "@/types";
 import { Metadata } from "next";
 import Image from "next/image";
 import Badge from "@/components/badges/Badge";
 import MovieCard from "@/components/cards/movie/MovieCard";
+import AddToWatchListButton from "@/components/resource-add-to-watchlist-button";
 
 export async function generateMetadata({
     params,
@@ -32,7 +34,7 @@ export async function generateMetadata({
         description: movieDetails.overview,
         keywords: [
             movieDetails.title,
-            ...movieDetails.genres.map((g) => g.name),
+            ...movieDetails?.genres.map((g) => g.name),
             "movies",
         ],
         openGraph: {
@@ -64,6 +66,7 @@ export default async function MovieDetails({
     const getMovieVideos: Promise<MovieVideoRequest> = getMovieVideosAction(id);
     const getMovieRecommendations = getMovieRecommendationsAction(id);
     const getTrendingMovies = getTrendingMoviesAction();
+    const getBookmarkedMovies = getUserWatchListAction('1');
 
     const [
         movieDetails,
@@ -71,12 +74,14 @@ export default async function MovieDetails({
         movieVideos,
         trendingMovies,
         movieRecommendations,
+        bookmarkedMovies,
     ] = await Promise.all([
         getMovieDetails,
         getMovieCredits,
         getMovieVideos,
         getTrendingMovies,
         getMovieRecommendations,
+        getBookmarkedMovies,
     ]);
 
     const filteredVideos = {
@@ -105,7 +110,7 @@ export default async function MovieDetails({
     return (
         <main id="main-scrollbar" className="h-screen overflow-y-auto bg-[#18181B]">
             <section className="relative h-[571px] shadow-md xl:h-[671px]">
-                <NavigationBar className="absolute z-10 w-full bg-gray-800 md:bg-transparent md:hover:backdrop-blur-md md:backdrop-blur-none md:duration-500 md:delay-1000 md:hover:delay-300" />
+                <NavigationBar className="absolute z-10 w-full bg-[#0e0e0f] md:bg-transparent md:hover:backdrop-blur-md md:backdrop-blur-none md:duration-500 md:delay-1000 md:hover:delay-300" />
 
                 <div className="absolute h-full w-full">
 
@@ -126,12 +131,11 @@ export default async function MovieDetails({
 
             <section className="container relative z-10 -mt-[440px] md:-mt-60 mb-20 px-0 sm:px-10">
                 <div className="flex h-full justify-center sm:justify-start flex-col md:flex-row">
-                    <div className="flex flex-col items-center lg:items-start">
-                        <div className="relative h-[250px] w-[150px] md:h-[350px] md:w-[200px] rounded-sm xl:h-[400px] xl:w-[250px] 2xl:h-[400px] 2xl:w-[300px] duration-300">
+                    <div className="flex flex-col justify-center items-center gap-y-2 lg:items-center">
+                        <div className="relative h-[250px] w-[150px] md:h-[300px] md:w-[200px] rounded-sm overflow-hidden xl:h-[400px] xl:w-[250px] 2xl:h-[400px] 2xl:w-[300px] duration-300">
                             <Image
-                                className="absolute rounded-sm object-cover"
-                                height={450}
-                                width={300}
+                                className="absolute object-contain"
+                                fill
                                 sizes=""
                                 src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${movieDetails.poster_path}`}
                                 priority
@@ -141,6 +145,13 @@ export default async function MovieDetails({
                                 <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 bg-orange-600 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
                             )}
                         </div>
+                        <div className="px-5 my-2 w-full">
+                            {!bookmarkedMovies.find((bookmarks) => bookmarks.resource_id === movieDetails.id.toString()) && (
+                                <AddToWatchListButton resource_id={movieDetails.id.toString()} user_id={'1'} poster_path={movieDetails.poster_path} title={movieDetails.title} release_date={getYear(movieDetails.release_date)} resource_type={'movie'} />
+                            )}
+                        </div>
+
+
                         {/* <div className="mt-7 flex flex-row items-center gap-x-7">
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">
                                 <span className="text-3xl font-bold text-white">
@@ -391,7 +402,7 @@ export default async function MovieDetails({
                             <h1 className=" text-2xl lg:text-3xl font-semibold text-white">
                                 Popular
                             </h1>
-                            <div className="mt-5 w-[300px] bg-gray-900 p-5 ">
+                            <div className="mt-5 w-[300px] bg-[#121214] p-5 shadow-sm ">
                                 <div className="divide- flex flex-col gap-y-4">
                                     {filteredTrending.map((movie: Movie) => (
                                         <div className="" key={movie.id}>

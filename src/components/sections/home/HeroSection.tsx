@@ -1,5 +1,5 @@
 "use client";
-import { getLanguage } from "@/lib/utils";
+import { getLanguage, getYear } from "@/lib/utils";
 import { Trending } from "@/types";
 import Image from "next/image";
 import Breaker from "../../utils/Breaker";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, Autoplay, Navigation, History } from "swiper/modules";
 import "swiper/css";
+import AddToWatchListButton from "@/components/resource-add-to-watchlist-button";
 
 export default function HeroSection({ trending }: { trending: Trending[] }) {
     return (
@@ -111,7 +112,12 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                             </p>
                                         </div>
 
-                                        <div className="flex items-center">
+                                        <div className="flex gap-2 items-center">
+
+                                            <div className="">
+                                                <AddToWatchListButton user_id={'1'} resource_id={movie.id.toString()} poster_path={movie.poster_path} release_date={getYear(movie.release_date)} title={movie.title} resource_type='movie' />
+                                            </div>
+
                                             <Button size={'sm'} className="bg-gray-800 hover:bg-gray-700" asChild>
                                                 <Link
                                                     href={`/movie/${movie.id}`}
@@ -119,10 +125,6 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                                     More Details
                                                 </Link>
                                             </Button>
-
-                                            {/* <Button disabled className="bg-red-900 hover:bg-purple-700">
-                                                Add To Watchlist
-                                            </Button> */}
                                         </div>
                                     </div>
                                 </div>

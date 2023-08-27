@@ -4,9 +4,11 @@
 		"Cinewave",
 		"clsx",
 		"LARAVEL",
+		"longtext",
 		"Randomizer",
 		"Swiper",
-		"tryme"
+		"tryme",
+		"watchlist"
 	],
 	"typescript.tsdk": "node_modules\\typescript\\lib"
 }
