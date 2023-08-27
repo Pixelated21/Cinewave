@@ -37,9 +37,6 @@ export default function SmallMovieCard({ movie }: { movie: Movie }) {
                                     "english_name"
                                 )}
                             </p>
-                            <p className="text-sm font-semibold text-gray-400">
-                                200m
-                            </p>
                         </div>
                     </div>
                 </div>
