@@ -20,8 +20,6 @@ export default function MovieDetailsModal({
         videos.results[0] ?? null
     );
 
-    console.log(details);
-
     return (
         <div
             id="movieModal"
