@@ -5,8 +5,10 @@ import { Movie } from "@/types";
 import Image from "next/image";
 import { getTrendingMoviesAction, getUserWatchListAction } from "../_actions/movie";
 import WatchListCard from "@/components/cards/WatchListCard";
+import { getServerSession } from "next-auth";
 
 export default async function Profile() {
+    const session = await getServerSession();
     const getTrendingMovies = getTrendingMoviesAction();
     const getBookmarkedMovies = getUserWatchListAction('1');
 
@@ -25,7 +27,6 @@ export default async function Profile() {
                                 <Image
                                     alt=""
                                     src={"/temp/cute-animation.gif"}
-                                    // src={"/temp/rimuru.jpg"}
                                     fill
                                     className="absolute h-40 w-40 cursor-pointer rounded-full border-2 border-[#FFC107] bg-white duration-300 group-hover:border-8"
                                 />
@@ -34,7 +35,7 @@ export default async function Profile() {
                             <div>
                                 <div>
                                     <h1 className="mt-5 text-4xl font-bold text-white">
-                                        Rimuru Tempest
+                                        {session?.user?.name}
                                     </h1>
                                 </div>
 
