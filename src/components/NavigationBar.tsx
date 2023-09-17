@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import MovieSearchInput from "./ui/search";
 import { navigationLinks } from "@/app/_config/site";
+import AuthButton from "./auth-button";
 
 export interface NavigationBarProps
     extends React.HTMLAttributes<HTMLDivElement> { }
@@ -37,12 +38,7 @@ export default function NavigationBar({ className }: NavigationBarProps) {
                                 </li>
                             ))}
                         </ul>
-                        {/* <Button
-                            asChild
-                            className="bg-white font-semibold  text-purple-700 hover:bg-gray-100"
-                        >
-                            <Link href="/home">Login</Link>
-                        </Button> */}
+                        <AuthButton />
                     </div>
                 </div>
             </div>
