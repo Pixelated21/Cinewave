@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster"
 import { getServerSession } from "next-auth"
 import SessionProvider from "@/providers/SessionProvider";
+import { TailwindIndicator } from "@/components/utils/tailwind-indicator";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -38,6 +39,7 @@ export default async function RootLayout({
                     {children}
                     <Toaster />
                 </SessionProvider>
+                <TailwindIndicator />
                 {/* <Analytics/> */}
             </body>
         </html>
