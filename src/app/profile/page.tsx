@@ -1,7 +1,5 @@
 import NavigationBar from "@/components/NavigationBar";
-import MovieCard from "@/components/cards/movie/MovieCard";
 import MovieGridLayout from "@/components/layouts/LayoutSection";
-import { Movie } from "@/types";
 import Image from "next/image";
 import { getTrendingMoviesAction, getUserWatchListAction } from "../_actions/movie";
 import WatchListCard from "@/components/cards/WatchListCard";
