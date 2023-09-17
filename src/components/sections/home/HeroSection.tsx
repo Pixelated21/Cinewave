@@ -2,7 +2,6 @@
 import { getLanguage, getYear } from "@/lib/utils";
 import { Trending } from "@/types";
 import Image from "next/image";
-import Breaker from "../../utils/Breaker";
 import { Button } from "../../ui/button";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
