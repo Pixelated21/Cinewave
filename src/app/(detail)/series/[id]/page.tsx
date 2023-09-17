@@ -155,7 +155,7 @@ export default async function seriesDetails({
                             )}
                         </div>
                         {!bookmarkedMovies.find((bookmarks) => bookmarks.resource_id === seriesDetails.id.toString()) && (
-                            <AddToWatchListButton resource_id={seriesDetails.id.toString()} user_id={'1'} poster_path={seriesDetails.poster_path} title={seriesDetails.name} release_date={getYear(seriesDetails.first_air_date)} resource_type={'series'} />
+                            <AddToWatchListButton resource_id={seriesDetails.id.toString()} poster_path={seriesDetails.poster_path} title={seriesDetails.name} release_date={getYear(seriesDetails.first_air_date)} resource_type={'series'} />
                         )}
                         {/* <div className="mt-7 flex flex-row items-center gap-x-7">
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">
