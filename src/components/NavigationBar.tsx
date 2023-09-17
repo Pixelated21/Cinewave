@@ -5,11 +5,13 @@ import { Button } from "./ui/button";
 import MovieSearchInput from "./ui/search";
 import { navigationLinks } from "@/app/_config/site";
 import AuthButton from "./auth-button";
+import { getServerSession } from "next-auth";
 
 export interface NavigationBarProps
     extends React.HTMLAttributes<HTMLDivElement> { }
 
-export default function NavigationBar({ className }: NavigationBarProps) {
+export default async function NavigationBar({ className }: NavigationBarProps) {
+    const session = await getServerSession()
     return (
         <nav className={`${className}`}>
             <div className="container z-30 flex md:h-[72px] h-[55px] w-full items-center">
@@ -27,16 +29,19 @@ export default function NavigationBar({ className }: NavigationBarProps) {
                     </div>
                     <div className="flex items-center gap-x-8">
                         <ul className="hidden items-center gap-x-8 md:flex">
-                            {navigationLinks.map((link) => (
-                                <li
-                                    key={link.title}
-                                >
-                                    {link.is_visible && (
+                            {navigationLinks.map((link) => {
+                                if (link.is_auth && !session) return false
+                                if (!link.is_visible) return false
+                                return (
+                                    <li
+                                        key={link.title}
+                                    >
                                         <NavigationLink
                                             linkData={link}
-                                        />)}
-                                </li>
-                            ))}
+                                        />
+                                    </li>
+                                )
+                            })}
                         </ul>
                         <AuthButton />
                     </div>
