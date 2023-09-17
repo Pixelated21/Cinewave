@@ -21,7 +21,7 @@ export default async function MoviePage() {
 
     return (
         <main className="h-screen bg-[#18181B]">
-            <NavigationBar className="primary" />
+            <NavigationBar className="bg-[#0e0e0f]" />
             <section className="overflow-hidden">
                 <div className="relative mx-auto max-w-7xl px-4 py-[64px] sm:px-8 xl:px-2">
                     <div className="flex flex-row justify-between">

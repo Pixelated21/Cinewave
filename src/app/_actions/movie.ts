@@ -240,7 +240,7 @@ export async function toggleFavoriteMovieAction(id: number) {
 }
 
 export type WatchList = {
-	user_id: string;
+	userId: string;
 	resource_id: string;
 	poster_path: string;
 	title: string;
@@ -249,9 +249,13 @@ export type WatchList = {
 };
 
 export async function addToWatchlistAction(resource: WatchList) {
-	const results = await db.insert(watchlist).values(resource);
-
-	return results;
+	try {
+		const results = await db.insert(watchlist).values(resource);
+		return results;
+	}
+	catch (error) {
+		console.log(error);
+	}
 }
 
 export async function findMovieInWatchListAction(
@@ -263,7 +267,7 @@ export async function findMovieInWatchListAction(
 		.from(watchlist)
 		.where(
 			and(
-				eq(watchlist.user_id, user_id),
+				eq(watchlist.userId, user_id),
 				eq(watchlist.resource_id, movie_id)
 			)
 		);
@@ -271,11 +275,12 @@ export async function findMovieInWatchListAction(
 	return alreadyInWatchlist;
 }
 
-export async function getUserWatchListAction(user_id: string) {
+export async function getUserWatchListAction(userId: string) {
+	if (!userId) return [];
 	const userWatchList = await db
 		.select()
 		.from(watchlist)
-		.where(eq(watchlist.user_id, user_id));
+		.where(eq(watchlist.userId, userId));
 
 	return userWatchList;
 }

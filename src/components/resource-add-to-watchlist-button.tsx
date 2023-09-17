@@ -3,19 +3,24 @@
 import { WatchList, addToWatchlistAction } from "@/app/_actions/movie";
 import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
-import { watchlist } from "@/lib/db/schema/watchlist";
+import { useSession } from "next-auth/react";
 
 
+type Props = {
+    poster_path: string;
+    title: string;
+    release_date: string | number;
+    resource_type: string;
+    resource_id: string;
+}
+export default function AddToWatchListButton(resource: Props) {
 
-export default function AddToWatchListButton(resource: WatchList) {
-
-    const handleAddToWatchlist = async (resource: WatchList) => {
+    const handleAddToWatchlist = async (resource: Props) => {
         try {
             const res = await fetch('/api/watchlist', {
                 method: 'POST',
                 body: JSON.stringify({
                     resource_id: resource.resource_id,
-                    user_id: resource.user_id,
                     poster_path: resource.poster_path,
                     title: resource.title,
                     release_date: resource.release_date,

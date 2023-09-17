@@ -2,12 +2,13 @@
 import { signIn, signOut, useSession } from "next-auth/react"
 import { Button } from "./ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "./ui/dropdown-menu"
-import {LogOut, Settings, User } from "lucide-react"
+import { LogOut, Settings, User } from "lucide-react"
 import { Users } from "lucide-react"
 import { LifeBuoy } from "lucide-react"
 import Image from 'next/image'
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import Link from "next/link"
+import { getInitials } from "@/lib/utils"
 
 export default function AuthButton() {
     const { data: session } = useSession()
@@ -16,10 +17,10 @@ export default function AuthButton() {
         return (
             <>
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Avatar className="h-10 w-10">
+                    <DropdownMenuTrigger className="hover:ring-2 ring-1 ring-white duration-300" asChild>
+                        <Avatar className="h-10 w-10 cursor-pointer">
                             <AvatarImage src={session.user?.image!} alt="@proximity" />
-                            <AvatarFallback>PR</AvatarFallback>
+                            <AvatarFallback>{getInitials((session.user?.name || session.user?.email) ?? "")}</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-52">

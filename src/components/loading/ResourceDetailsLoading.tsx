@@ -16,8 +16,8 @@ export default function ResourceDetailsLoading() {
 
             <section className="container relative z-10 -mt-[440px] md:-mt-60 mb-20 px-0 sm:px-10">
                 <div className="flex h-full justify-center sm:justify-start flex-col md:flex-row">
-                    <div className="flex flex-col items-center lg:items-start">
-                        <div className="relative h-[250px] w-[150px] md:h-[350px] md:w-[200px] rounded-sm bg-gray-700 animate-pulse xl:h-[400px] xl:w-[250px] 2xl:h-[400px] 2xl:w-[300px]"></div>
+                    <div className="flex flex-col justify-center items-center gap-y-2 lg:justify-start lg:items-start">
+                        <div className="relative h-[250px] w-[150px] md:h-[300px] md:w-[200px] rounded-sm overflow-hidden xl:h-[400px] xl:w-[250px] 2xl:h-[400px] 2xl:w-[300px] bg-gray-700 animate-pulse"></div>
                     </div>
 
                     <div className=" flex-1 px-10 ">

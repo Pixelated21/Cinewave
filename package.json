@@ -13,6 +13,7 @@
 		"migrations:drop": "drizzle-kit drop --config=drizzle.config.ts"
 	},
 	"dependencies": {
+		"@auth/drizzle-adapter": "^0.3.2",
 		"@radix-ui/react-avatar": "^1.0.3",
 		"@radix-ui/react-dropdown-menu": "^2.0.5",
 		"@radix-ui/react-progress": "^1.0.3",
@@ -27,7 +28,7 @@
 		"axios": "^1.4.0",
 		"class-variance-authority": "^0.6.1",
 		"clsx": "^1.2.1",
-		"drizzle-orm": "^0.28.5",
+		"drizzle-orm": "^0.28.6",
 		"eslint": "8.39.0",
 		"eslint-config-next": "13.4.1",
 		"lucide-react": "^0.211.0",

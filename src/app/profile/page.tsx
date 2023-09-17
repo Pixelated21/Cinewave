@@ -3,14 +3,22 @@ import MovieGridLayout from "@/components/layouts/LayoutSection";
 import Image from "next/image";
 import { getTrendingMoviesAction, getUserWatchListAction } from "../_actions/movie";
 import WatchListCard from "@/components/cards/WatchListCard";
-import { getServerSession } from "next-auth";
+import { getAuthSession } from "@/lib/auth";
+import { getCurrentUserAction, getCurrentUserWatchListAction } from "../_actions/user";
+
+const TRAIL_BOOKMARKS = 50;
+const TRAIL_FAVORITES = 50;
+const TRAIL_SHARED_LINKS = 10;
 
 export default async function Profile() {
-    const session = await getServerSession();
+    const session = await getAuthSession();
     const getTrendingMovies = getTrendingMoviesAction();
-    const getBookmarkedMovies = getUserWatchListAction('1');
+    const getBookmarkedMovies = getCurrentUserWatchListAction();
 
     const [trendingMovies, bookmarkedMovies] = await Promise.all([getTrendingMovies, getBookmarkedMovies]);
+
+    const bookmarkedMoviesProgress = (bookmarkedMovies && Math.floor((bookmarkedMovies?.length / TRAIL_BOOKMARKS) * 100)) ?? 0;
+
 
     return (
         <main id="main-scrollbar" className="h-screen overflow-y-scroll bg-[#18181B]">
@@ -24,7 +32,8 @@ export default async function Profile() {
                                 {/* TODO: Replace animation with motion spring */}
                                 <Image
                                     alt=""
-                                    src={"/temp/cute-animation.gif"}
+                                    // src={"/temp/cute-animation.gif"}
+                                    src={session?.user?.image!}
                                     fill
                                     className="absolute h-40 w-40 cursor-pointer rounded-full border-2 border-[#FFC107] bg-white duration-300 group-hover:border-8"
                                 />
@@ -47,19 +56,19 @@ export default async function Profile() {
                                         <h1 className="w-28 text-xs font-bold text-white">
                                             Watched:
                                         </h1>
-                                        <ProgressBar percentage={20} />
+                                        <ProgressBar percentage={bookmarkedMoviesProgress} current={bookmarkedMovies?.length ?? 0} max={TRAIL_BOOKMARKS} />
                                     </div>
                                     <div className="flex flex-row items-center gap-x-4 ">
                                         <h1 className="w-28 text-xs font-bold text-white">
                                             Favorites:
                                         </h1>
-                                        <ProgressBar percentage={50} />
+                                        <ProgressBar max={TRAIL_FAVORITES} />
                                     </div>
                                     <div className="flex flex-row items-center gap-x-4">
                                         <h1 className="w-28 text-xs font-bold text-white">
                                             Shared Links:
                                         </h1>
-                                        <ProgressBar percentage={100} />
+                                        <ProgressBar max={TRAIL_SHARED_LINKS} />
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +87,7 @@ export default async function Profile() {
                     <div className="flex flex-col gap-y-5">
 
                         <MovieGridLayout>
-                            {bookmarkedMovies.map((resource: any) => (
+                            {bookmarkedMovies?.map((resource: any) => (
                                 <WatchListCard key={resource.id} resource={resource} />
                             ))}
                         </MovieGridLayout>
@@ -90,20 +99,20 @@ export default async function Profile() {
     );
 }
 
-const ProgressBar = ({ percentage = 0 }: { percentage: number }) => {
+const ProgressBar = ({ percentage = 0, current = 0, max }: { percentage?: number, current?: number, max: number }) => {
     return (
         <div className="group flex cursor-pointer">
             <div className="relative h-3 w-40 overflow-hidden rounded-md border-[2px] border-gray-600 bg-gray-800 px-[2px]">
                 <span
                     style={{
-                        width: `${percentage - 2.5}%`,
+                        width: `${percentage}%`,
                     }}
                     className="primary absolute bottom-1/2 top-1/2 my-auto h-[4px] rounded-md"
                 ></span>
             </div>
             <div className="flex opacity-0 duration-300 group-hover:opacity-100">
                 <span className="ml-2 text-xs font-bold text-gray-400">
-                    (1/50)
+                    ({current}/{max})
                 </span>
                 <span className="ml-2 text-xs font-bold text-gray-200">
                     {percentage}%

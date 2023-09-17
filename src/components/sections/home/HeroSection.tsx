@@ -114,7 +114,7 @@ export default function HeroSection({ trending }: { trending: Trending[] }) {
                                         <div className="flex gap-2 items-center">
 
                                             <div className="">
-                                                <AddToWatchListButton user_id={'1'} resource_id={movie.id.toString()} poster_path={movie.poster_path} release_date={getYear(movie.release_date)} title={movie.title} resource_type='movie' />
+                                                <AddToWatchListButton resource_id={movie.id.toString()} poster_path={movie.poster_path} release_date={getYear(movie.release_date)} title={movie.title} resource_type='movie' />
                                             </div>
 
                                             <Button size={'sm'} className="bg-gray-800 hover:bg-gray-700" asChild>

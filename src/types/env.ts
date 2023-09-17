@@ -12,5 +12,7 @@ declare namespace NodeJS {
 		readonly POSTGRES_URL: string;
 		readonly GITHUB_ID: string;
 		readonly GITHUB_SECRET: string;
+		readonly GOOGLE_ID: string;
+		readonly GOOGLE_SECRET: string;
 	}
 }

@@ -7,12 +7,15 @@ import {
 	serial,
 } from "drizzle-orm/pg-core";
 import { type InferSelectModel, type InferInsertModel } from "drizzle-orm";
+import { users } from "./users";
 
 // TODO: Abstract movie into separate table and use foreign key to reference it here instead to allow for multiple users to reference the same movie without duplicating data
 
 export const watchlist = pgTable("watchlist", {
 	id: serial("id").primaryKey(),
-	user_id: varchar("user_id"),
+	userId: text("userId")
+		.notNull()
+		.references(() => users.id, { onDelete: "cascade" }),
 	resource_id: varchar("movie_id"),
 	poster_path: text("poster"),
 	title: varchar("title", { length: 256 }),
