@@ -26,11 +26,4 @@ export const navigationLinks: NavLink[] = [
 		isDisabled: true,
 		is_visible: true,
 	},
-	{
-		title: "Profile",
-		href: "/profile",
-		is_auth: true,
-		isDisabled: false,
-		is_visible: true,
-	},
 ];
