@@ -29,16 +29,6 @@ export const authOptions: NextAuthOptions = {
 			}
 			return session;
 		},
-		signIn({ user, account, profile, email, credentials }) {
-			console.log("signIn", {
-				user,
-				account,
-				profile,
-				email,
-				credentials,
-			});
-			return true;
-		},
 	},
 	adapter: DrizzleAdapter(db),
 	session: {

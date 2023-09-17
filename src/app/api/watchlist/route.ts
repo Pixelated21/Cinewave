@@ -51,10 +51,8 @@ export async function POST(req: Request) {
 			release_date,
 			resource_type,
 		});
-		console.log(res);
 		return new Response("Added to watchlist", { status: 200 });
 	} catch (error) {
-		console.log(error);
 		return new Response("Something went wrong", { status: 500 });
 	}
 }
