@@ -65,3 +65,20 @@ export function getYear(dateString: string) {
 	const date = new Date(dateString);
 	return date.getFullYear();
 }
+
+export function getInitials(name: string) {
+	// Split the name into words
+	const words = name.split(" ");
+
+	// Initialize an empty string to store the initials
+	let initials = "";
+
+	// Iterate through the words and add the first character of each word to the initials
+	for (const word of words) {
+		if (word.length > 0) {
+			initials += word[0].toUpperCase();
+		}
+	}
+
+	return initials;
+}
