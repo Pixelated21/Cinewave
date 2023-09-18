@@ -1,5 +1,5 @@
 import { languages } from "@/data/languages";
-import { LanguageTransTypes } from "@/types";
+import { LanguageTransTypes, PaginationConfig } from "@/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -82,3 +82,39 @@ export function getInitials(name: string) {
 
 	return initials;
 }
+
+export const parsePaginationPageNumber = (page: number | string): string => {
+	let handledPage = page;
+
+	if (!handledPage) {
+		handledPage = 1;
+	}
+
+	if (typeof handledPage === "string") {
+		handledPage = parseInt(handledPage);
+	}
+
+	if (isNaN(handledPage) || handledPage <= 0) {
+		handledPage = 1;
+	}
+
+	if (handledPage > 500) {
+		handledPage = 500;
+	}
+
+	return handledPage.toString();
+};
+
+export const generatePaginationConfig = ({
+	current_page,
+	total_pages,
+	total_results,
+	resource,
+}: PaginationConfig) => {
+	return {
+		current_page: Number(current_page),
+		total_pages: Number(total_pages),
+		total_results: Number(total_results),
+		resource: resource,
+	};
+};
