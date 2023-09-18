@@ -5,10 +5,14 @@ import { getTrendingMoviesAction, getUserWatchListAction } from "../_actions/mov
 import WatchListCard from "@/components/cards/WatchListCard";
 import { getAuthSession } from "@/lib/auth";
 import { getCurrentUserAction, getCurrentUserWatchListAction } from "../_actions/user";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getInitials } from "@/lib/utils";
 
 const TRAIL_BOOKMARKS = 50;
 const TRAIL_FAVORITES = 50;
 const TRAIL_SHARED_LINKS = 10;
+
+export const dynamic = 'force-dynamic'
 
 export default async function Profile() {
     const session = await getAuthSession();
@@ -28,17 +32,10 @@ export default async function Profile() {
                 <div className="mx-auto h-72 max-w-7xl px-4 py-14 sm:px-8 xl:px-2">
                     <div className="flex justify-between">
                         <div className="flex flex-row items-center gap-x-10">
-                            <div className="group relative h-40 w-40 rounded-full">
-                                {/* TODO: Replace animation with motion spring */}
-                                <Image
-                                    alt=""
-                                    // src={"/temp/cute-animation.gif"}
-                                    src={session?.user?.image!}
-                                    fill
-                                    className="absolute h-40 w-40 cursor-pointer rounded-full border-2 border-[#FFC107] bg-white duration-300 group-hover:border-8"
-                                />
-                            </div>
-
+                            <Avatar className="h-40 w-40 border-2 border-[#FFC107] bg-white duration-300 hover:border-8">
+                                <AvatarImage src={session?.user?.image!} />
+                                <AvatarFallback className="text-6xl">{getInitials(session?.user?.name!)}</AvatarFallback>
+                            </Avatar>
                             <div>
                                 <div>
                                     <h1 className="mt-5 text-4xl font-bold text-white">
