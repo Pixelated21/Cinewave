@@ -16,13 +16,13 @@ export const navigationLinks: NavLink[] = [
 	{
 		title: "Movies",
 		href: "/movie",
-		isDisabled: true,
+		isDisabled: false,
 		is_visible: true,
 	},
 	{
 		title: "Series",
 		href: "/series",
-		isDisabled: true,
+		isDisabled: false,
 		is_visible: true,
 	},
 ];

@@ -18,7 +18,7 @@ export default function AuthButton() {
             <>
                 <DropdownMenu>
                     <DropdownMenuTrigger className="hover:ring-2 ring-1 ring-white duration-300" asChild>
-                        <Avatar className="h-10 w-10 cursor-pointer">
+                        <Avatar className="h-8 w-8 md:h-10 md:w-10  cursor-pointer">
                             <AvatarImage src={session.user?.image!} alt="@proximity" />
                             <AvatarFallback>{getInitials((session.user?.name || session.user?.email) ?? "")}</AvatarFallback>
                         </Avatar>

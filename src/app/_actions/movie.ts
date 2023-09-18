@@ -2,7 +2,11 @@
 
 import { db } from "@/lib/db";
 import { watchlist } from "@/lib/db/schema/watchlist";
-import { daysToSeconds, formatSearchQuery } from "@/lib/utils";
+import {
+	daysToSeconds,
+	formatSearchQuery,
+	parsePaginationPageNumber,
+} from "@/lib/utils";
 import { DiscoverMovieAdvancedFilters } from "@/types";
 import { and, eq } from "drizzle-orm";
 
@@ -75,8 +79,9 @@ export async function getSimilarMovieAction(id: string | number) {
 	return data;
 }
 
-export async function getDiscoverMovieAction() {
+export async function getDiscoverMovieAction(page: number | string) {
 	const params = new URLSearchParams({
+		page: parsePaginationPageNumber(page),
 		api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
 		language: "en-US",
 	});
@@ -252,8 +257,7 @@ export async function addToWatchlistAction(resource: WatchList) {
 	try {
 		const results = await db.insert(watchlist).values(resource);
 		return results;
-	}
-	catch (error) {
+	} catch (error) {
 		console.log(error);
 	}
 }

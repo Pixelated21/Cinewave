@@ -51,7 +51,7 @@ export default async function Profile() {
                                     Member
                                 </h2>
 
-                                <div className="mt-5 flex flex-col gap-y-2">
+                                <div className="mt-5 hidden lg:flex flex-col gap-y-2">
                                     <div className="flex flex-row items-center gap-x-4">
                                         <h1 className="w-28 text-xs font-bold text-white">
                                             Watched:

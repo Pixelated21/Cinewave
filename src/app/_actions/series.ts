@@ -1,3 +1,4 @@
+import { parsePaginationPageNumber } from "@/lib/utils";
 import { DiscoverMovieAdvancedFilters } from "@/types";
 
 export async function getLatestSeriesAction(
@@ -53,9 +54,12 @@ export async function getTrendingSeriesAction() {
 	return data;
 }
 
-export async function getDiscoverSeriesAction() {
+export async function getDiscoverSeriesAction(
+page: number | string
+) {
 	const params = new URLSearchParams({
 		api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
+		page: parsePaginationPageNumber(page),
 		language: "en-US",
 	});
 
@@ -68,7 +72,7 @@ export async function getDiscoverSeriesAction() {
 	return data;
 }
 
-export async function getSeriesDetailsAction(id: string | number ) {
+export async function getSeriesDetailsAction(id: string | number) {
 	const params = new URLSearchParams({
 		api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
 		language: "en-US",
@@ -83,7 +87,7 @@ export async function getSeriesDetailsAction(id: string | number ) {
 	return data;
 }
 
-export async function getSeriesCreditsAction( id: string | number) {
+export async function getSeriesCreditsAction(id: string | number) {
 	const params = new URLSearchParams({
 		api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
 		language: "en-US",
@@ -98,7 +102,7 @@ export async function getSeriesCreditsAction( id: string | number) {
 	return data;
 }
 
-export async function getSeriesVideosAction(id: string | number ) {
+export async function getSeriesVideosAction(id: string | number) {
 	const params = new URLSearchParams({
 		api_key: process.env.THE_MOVIE_DATABASE_API_KEY,
 		language: "en-US",

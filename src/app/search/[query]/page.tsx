@@ -3,20 +3,28 @@ import NavigationBar from "@/components/NavigationBar";
 import MovieCardBlurEffect from "@/components/cards/movie/MovieCardBlurEffect";
 import SeriesCardBlurEffect from "@/components/cards/series/SeriesCardBlurEffect";
 import MovieGridLayout from "@/components/layouts/LayoutSection";
-import { formatSearchQuery } from "@/lib/utils";
+import PaginationControls from "@/components/pagination-controls";
+import { formatSearchQuery, generatePaginationConfig } from "@/lib/utils";
 import { Movie } from "@/types";
 
 export default async function SearchPage({
     params,
+    searchParams
 }: {
     params: { query: string };
+    searchParams: { [key: string]: string | undefined };
 }) {
     const { query } = params;
+
+    const page: number = Number(searchParams['page']) ?? '1'
+
     const sanitizedQuery = formatSearchQuery(query, false);
 
-    const getSearchResults = multiSearchAction({ term: sanitizedQuery });
+    const getSearchResults = multiSearchAction({ term: sanitizedQuery, page: page });
 
     const [searchResults] = await Promise.all([getSearchResults]);
+
+    const paginationConfig = generatePaginationConfig({ current_page: page, total_pages: searchResults.total_pages, total_results: searchResults.total_results, resource: `/search/${sanitizedQuery}` })
 
     const filteredSearchResults = {
         ...searchResults.results,
@@ -31,8 +39,8 @@ export default async function SearchPage({
     };
 
     return (
-        <main className="h-screen overflow-y-auto bg-[#18181B]">
-            <NavigationBar className="primary" />
+        <main className="overflow-y-auto bg-[#18181B]">
+            <NavigationBar className="bg-[#0e0e0f]" />
             <section className="overflow-hidden">
                 <div className="relative mx-auto max-w-7xl px-4 py-[64px] sm:px-8 xl:px-2">
                     <div className="flex flex-row justify-between">
@@ -47,9 +55,9 @@ export default async function SearchPage({
             </section>
 
             <section className="bg-[#18181B]">
-                {/* <div className="relative mx-auto mb-16 mt-6 max-w-7xl px-4 sm:px-8 xl:px-2">
-                    <div className="mx-auto h-10 w-64 rounded-md border-2 border-white bg-gray-700"></div>
-                </div> */}
+                <div className="relative mx-auto mb-8 mt-6 max-w-7xl px-4 sm:px-8 xl:px-2">
+                    <PaginationControls config={paginationConfig} />
+                </div>
 
                 <div className="mx-auto max-w-7xl px-4 py-[30px] sm:px-8 xl:px-2">
                     <MovieGridLayout>
@@ -73,9 +81,9 @@ export default async function SearchPage({
                     </MovieGridLayout>
                 </div>
 
-                {/* <div className="relative mx-auto mb-20 mt-16 max-w-7xl px-4 sm:px-8 xl:px-2">
-                    <div className="mx-auto h-10 w-64 rounded-md border-2 border-white bg-gray-700"></div>
-                </div> */}
+                <div className="relative mx-auto mb-20 mt-16 max-w-7xl px-4 sm:px-8 xl:px-2">
+                    <PaginationControls config={paginationConfig} />
+                </div>
             </section>
         </main>
     );
