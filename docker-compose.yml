@@ -15,6 +15,7 @@ services:
         env_file:
             - .env.local # Use the specified .env.local file
     db:
+        container_name: cinewave_db
         image: postgres:latest
         restart: always
         ports:
