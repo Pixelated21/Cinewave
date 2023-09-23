@@ -20,7 +20,7 @@ import { Metadata } from "next";
 import SeriesCard from "@/components/cards/series/SeriesCard";
 import SmallSeriesCard from "@/components/cards/series/SmallSeriesCard";
 import { getUserWatchListAction } from "@/app/_actions/movie";
-import AddToWatchListButton from "@/components/resource-add-to-watchlist-button";
+import AddToWatchListButton from "@/components/actions/resource-add-to-watchlist-button";
 
 export async function generateMetadata({
     params,
@@ -154,7 +154,7 @@ export default async function seriesDetails({
                                 <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 bg-orange-600 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
                             )}
                         </div>
-                        {!bookmarkedMovies.find((bookmarks) => bookmarks.resource_id === seriesDetails.id.toString()) && (
+                        {!bookmarkedMovies?.find((bookmarks) => bookmarks.resource_id === seriesDetails.id.toString()) && (
                             <AddToWatchListButton resource_id={seriesDetails.id.toString()} poster_path={seriesDetails.poster_path} title={seriesDetails.name} release_date={getYear(seriesDetails.first_air_date)} resource_type={'series'} />
                         )}
                         {/* <div className="mt-7 flex flex-row items-center gap-x-7">

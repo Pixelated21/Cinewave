@@ -16,7 +16,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Badge from "@/components/badges/Badge";
 import MovieCard from "@/components/cards/movie/MovieCard";
-import AddToWatchListButton from "@/components/resource-add-to-watchlist-button";
+import AddToWatchListButton from "@/components/actions/resource-add-to-watchlist-button";
 
 export async function generateMetadata({
     params,
@@ -147,7 +147,7 @@ export default async function MovieDetails({
                         </div>
 
                         <div className="px-5 my-2 w-4/5 md:w-full md:px-0 2xl:px-5 ">
-                            {!bookmarkedMovies.find((bookmarks) => bookmarks.resource_id === movieDetails.id.toString()) && (
+                            {!bookmarkedMovies?.find((bookmarks) => bookmarks.resource_id === movieDetails.id.toString()) && (
                                 <AddToWatchListButton resource_id={movieDetails.id.toString()} poster_path={movieDetails.poster_path} title={movieDetails.title} release_date={getYear(movieDetails.release_date)} resource_type={'movie'} />
                             )}
                         </div>
