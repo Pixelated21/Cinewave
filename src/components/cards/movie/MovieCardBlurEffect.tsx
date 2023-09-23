@@ -1,6 +1,4 @@
 "use client";
-
-import { toggleFavoriteMovieAction } from "@/app/_actions/movie";
 import { Movie, ResourceTypesEnum } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
