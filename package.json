@@ -49,6 +49,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "^17.6.3",
 		"@commitlint/config-conventional": "^17.6.3",
+		"@faker-js/faker": "^8.1.0",
 		"@types/pg": "^8.10.2",
 		"drizzle-kit": "^0.19.13",
 		"husky": "^8.0.0",
