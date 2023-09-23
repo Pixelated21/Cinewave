@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCreative, Autoplay, Navigation, History } from "swiper/modules";
 import "swiper/css";
-import AddToWatchListButton from "@/components/resource-add-to-watchlist-button";
+import AddToWatchListButton from "@/components/actions/resource-add-to-watchlist-button";
 
 export default function HeroSection({ trending }: { trending: Trending[] }) {
     return (

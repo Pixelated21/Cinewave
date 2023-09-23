@@ -118,7 +118,7 @@ export default function TryMeRandomizer({ data }: TryMeRandomizerProps) {
                                         <SelectValue placeholder="Genre" />
                                     </SelectTrigger>
                                     <SelectContent className="w-full">
-                                        {genres.map((genre) => (
+                                        {genres?.map((genre) => (
                                             <SelectItem
                                                 className="cursor-pointer"
                                                 key={genre.id}
@@ -141,7 +141,7 @@ export default function TryMeRandomizer({ data }: TryMeRandomizerProps) {
                                         <SelectValue placeholder="Rating" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {ratings.map((rating) => (
+                                        {ratings?.map((rating) => (
                                             <SelectItem
                                                 className="cursor-pointer"
                                                 key={rating.value}

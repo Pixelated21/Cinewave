@@ -3,24 +3,20 @@
 import { Movie } from "@/types";
 import Image from "next/image";
 
-interface TryMeCarrouselProps {
-    data: {
-        movies: Movie[];
-    };
-}
 
-export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
-    const { movies } = data;
 
+export default function TryMeCarrousel({ movies }: { movies: Movie[] }) {
+    console.log(movies);
+    console.log(movies)
     return (
-        <section>
-            <div className="relative h-[758px]">
-                <div className="relative mx-auto flex h-full max-w-7xl flex-row ">
+        <section className="">
+            <div className="relative container  h-[758px]">
+                <div className="relative flex h-full  flex-row ">
                     <div className="group relative z-10 h-[557px] w-[304px]">
                         <Image
                             className="absolute h-full object-cover"
                             alt=""
-                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movies[0].poster_path}`}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movies[0]?.poster_path}`}
                             width={835}
                             height={713}
                         />
@@ -32,7 +28,7 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
                                 <div className="text-xs">HD</div>
                                 <div className="text-xs">23m</div>
                                 <div className="text-xs">
-                                    {movies[4].release_date}
+                                    {movies[4]?.release_date}
                                 </div>
                                 <div className="rounded-sm bg-green-600 px-[4px] py-[3px] text-xs text-black">
                                     HD
@@ -44,11 +40,11 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
                         </div>
                     </div>
 
-                    <div className="relative z-10 h-[713px] w-[835px]">
+                    <div className="relative z-10 h-[713px] w-[835px] flex-1">
                         <Image
-                            className="absolute h-full object-cover"
+                            className="absolute h-full w-full object-cover"
                             alt=""
-                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movies[1].backdrop_path}`}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movies[1]?.backdrop_path}`}
                             width={835}
                             height={713}
                         />
@@ -59,10 +55,10 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
                         <div className="absolute bottom-16 left-7 ">
                             <div className="flex flex-col gap-y-4">
                                 <h1 className="text-4xl font-bold text-white">
-                                    {movies[1].title}
+                                    {movies[1]?.title}
                                 </h1>
                                 <p className="w-[500px] text-sm font-normal text-gray-200">
-                                    {movies[1].overview}
+                                    {movies[1]?.overview}
                                 </p>
                             </div>
                         </div>
@@ -72,7 +68,7 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
                                 <div className="text-xs">HD</div>
                                 <div className="text-xs">23m</div>
                                 <div className="text-xs">
-                                    {movies[4].release_date}
+                                    {movies[4]?.release_date}
                                 </div>
                                 <div className="rounded-sm bg-green-600 px-[4px] py-[3px] text-xs text-black">
                                     HD
@@ -88,7 +84,7 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
                         <Image
                             className="absolute h-full object-cover"
                             alt=""
-                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movies[2].poster_path}`}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${movies[2]?.poster_path}`}
                             width={835}
                             height={713}
                         />
@@ -100,7 +96,7 @@ export default function TryMeCarrousel({ data }: TryMeCarrouselProps) {
                                 <div className="text-xs">HD</div>
                                 <div className="text-xs">23m</div>
                                 <div className="text-xs">
-                                    {movies[4].release_date}
+                                    {movies[4]?.release_date}
                                 </div>
                                 <div className="rounded-sm bg-green-600 px-[4px] py-[3px] text-xs text-black">
                                     HD

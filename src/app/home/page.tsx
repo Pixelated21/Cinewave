@@ -13,7 +13,7 @@ import { getLatestSeriesAction, getPopularSeriesAction } from "../_actions/serie
 export default async function HomePage() {
     const getTrendingMovies = getTrendingMoviesAction();
     const getLatestMovies = getLatestMoviesAction({});
-    const getLatestSeries = getPopularSeriesAction({with_origin_country: "US"});
+    const getLatestSeries = getPopularSeriesAction({ with_origin_country: "US" });
     const getComingSoonMovies = getComingSoonMoviesAction();
     const getPopularMovies = getPopularMoviesAction();
 
@@ -45,9 +45,9 @@ export default async function HomePage() {
     return (
         <main id="main-scrollbar" className=" h-screen overflow-y-auto">
             <NavigationBar className="bg-[#18181B] left-0 right-0 z-10 mx-auto w-full " />
-            <div className="relative h-[300px] md:h-[450px] xl:h-[600px]">
+            <section className="relative h-[300px] md:h-[450px] xl:h-[600px]">
                 <HeroSection trending={filteredPopularMovies} />
-            </div>
+            </section>
 
             {/* Trending */}
             <ResourceListingSection

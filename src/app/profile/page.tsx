@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getTrendingMoviesAction, getUserWatchListAction } from "../_actions/movie";
 import WatchListCard from "@/components/cards/WatchListCard";
 import { getAuthSession } from "@/lib/auth";
-import { getCurrentUserAction, getCurrentUserWatchListAction } from "../_actions/user";
+import { getCurrentUserAction, getCurrentUserBookmarksAction } from "../_actions/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getInitials } from "@/lib/utils";
 
@@ -17,12 +17,11 @@ export const dynamic = 'force-dynamic'
 export default async function Profile() {
     const session = await getAuthSession();
     const getTrendingMovies = getTrendingMoviesAction();
-    const getBookmarkedMovies = getCurrentUserWatchListAction();
+    const getBookmarkedMovies = getCurrentUserBookmarksAction();
 
     const [trendingMovies, bookmarkedMovies] = await Promise.all([getTrendingMovies, getBookmarkedMovies]);
 
     const bookmarkedMoviesProgress = (bookmarkedMovies && Math.floor((bookmarkedMovies?.length / TRAIL_BOOKMARKS) * 100)) ?? 0;
-
 
     return (
         <main id="main-scrollbar" className="h-screen overflow-y-scroll bg-[#18181B]">
@@ -85,7 +84,7 @@ export default async function Profile() {
 
                         <MovieGridLayout>
                             {bookmarkedMovies?.map((resource: any) => (
-                                <WatchListCard key={resource.id} resource={resource} />
+                                <WatchListCard key={resource.resource_id} resource={resource.resource} />
                             ))}
                         </MovieGridLayout>
 

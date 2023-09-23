@@ -1,9 +1,7 @@
 'use client'
 
-import { WatchList, addToWatchlistAction } from "@/app/_actions/movie";
-import { Button } from "./ui/button";
-import { toast } from "./ui/use-toast";
-import { useSession } from "next-auth/react";
+import { Button } from "../ui/button";
+import { toast } from "../ui/use-toast";
 
 
 type Props = {
@@ -17,7 +15,7 @@ export default function AddToWatchListButton(resource: Props) {
 
     const handleAddToWatchlist = async (resource: Props) => {
         try {
-            const res = await fetch('/api/watchlist', {
+            const res = await fetch('/api/bookmark', {
                 method: 'POST',
                 body: JSON.stringify({
                     resource_id: resource.resource_id,
