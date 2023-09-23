@@ -16,7 +16,7 @@ export async function getAllSharedListAction() {
 		});
 		return results;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }
 
@@ -35,7 +35,7 @@ export async function findSharedListAction(
 
 		return results;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }
 
@@ -54,6 +54,6 @@ export async function createSharedListAction(title: string, user_id: string) {
 
 		return results;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }

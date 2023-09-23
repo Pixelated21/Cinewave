@@ -34,7 +34,7 @@ export async function generateMetadata({
         description: movieDetails.overview,
         keywords: [
             movieDetails.title,
-            ...movieDetails?.genres.map((g) => g.name),
+            ...movieDetails?.genres?.map((g) => g.name),
             "movies",
         ],
         openGraph: {

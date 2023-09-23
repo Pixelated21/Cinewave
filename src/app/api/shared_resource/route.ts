@@ -25,14 +25,10 @@ export async function POST(req: Request) {
 			return new Response("Already in watchlist", { status: 409 });
 		}
 
-		console.log(shared_list_id, resource_id);
-
 		const createSharedResource = await createSharedResourceAction({
 			resource_id: resource_id,
 			shared_list_id: shared_list_id,
 		});
-
-		console.log(createSharedResource);
 
 		if (!createSharedResource) {
 			return new Response("Something went wrong", { status: 500 });
@@ -40,7 +36,7 @@ export async function POST(req: Request) {
 
 		return new Response("Shared list created", { status: 200 });
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		return new Response("Something went wrong", { status: 500 });
 	}
 }

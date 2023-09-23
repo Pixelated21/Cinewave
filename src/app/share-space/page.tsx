@@ -14,8 +14,6 @@ import TryMeCarrousel from "@/components/sections/tryme/TryMeCarrousel";
 export default async function ShareSpacePage() {
     const allSharedLinks = await getAllSharedListAction()
     const getTrendingMovies = await getTrendingMoviesAction();
-    console.log(getTrendingMovies)
-    console.log(allSharedLinks)
 
     return (
         <main className="h-screen overflow-y-auto bg-[#18181B]">

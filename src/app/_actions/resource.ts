@@ -8,10 +8,9 @@ import { Pool } from "pg";
 export async function addToResourceAction(resource_data: InsertResource) {
 	try {
 		const results = await db.insert(resource).values(resource_data);
-		console.log(results);
 		return results;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }
 
@@ -27,11 +26,8 @@ export async function findResourceAction(
 					eq(resource.resource_type, resource_type)
 				),
 		});
-
-        console.log(results);
-
 		return results;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }

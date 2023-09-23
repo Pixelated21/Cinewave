@@ -15,10 +15,9 @@ export default function AddSharedResource() {
                     'Content-Type': 'application/json',
                 },
             })
-            console.log(res)
         }
         catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
     return (

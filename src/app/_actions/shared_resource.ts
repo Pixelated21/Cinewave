@@ -17,10 +17,9 @@ export async function findSharedResourceAction(
 					eq(sharedResource.resource_id, resource_id)
 				),
 		});
-		console.log(results);
 		return results;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }
 export async function createSharedResourceAction(
@@ -34,6 +33,6 @@ export async function createSharedResourceAction(
 
 		return results;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }

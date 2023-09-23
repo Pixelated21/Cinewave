@@ -22,7 +22,7 @@ export async function getCurrentUserAction(from: "session" | "db" = "session") {
 
 		return currentUser[0];
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }
 
@@ -41,13 +41,10 @@ export async function getCurrentUserBookmarksAction() {
 			},
 			where: (bookmark) => eq(bookmark.user_id, currentUser.id),
 		});
-
-		console.log(userBookmarks);
-
 		return userBookmarks;
 	} catch (error: unknown) {
 		if (error instanceof Error) {
-			console.log(error.message ?? "Something went wrong");
+			console.error(error.message ?? "Something went wrong");
 		}
 	}
 }

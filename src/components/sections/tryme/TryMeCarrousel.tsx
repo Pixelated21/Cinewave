@@ -6,8 +6,6 @@ import Image from "next/image";
 
 
 export default function TryMeCarrousel({ movies }: { movies: Movie[] }) {
-    console.log(movies);
-    console.log(movies)
     return (
         <section className="">
             <div className="relative container  h-[758px]">

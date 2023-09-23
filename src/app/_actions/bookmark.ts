@@ -7,7 +7,7 @@ export async function addToBookmarkAction(resource: InsertBookmark) {
 		const results = await db.insert(bookmark).values(resource);
 		return results;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }
 
@@ -27,6 +27,6 @@ export async function findResourceInBookmarkAction(
 		});
 		return alreadyInBookmarks;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }

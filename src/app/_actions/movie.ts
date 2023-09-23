@@ -48,7 +48,7 @@ export async function searchMoviesAction({ term }: { term: string }) {
 			.map((result) => result.total_results)
 			.reduce((a, b) => a + b);
 	} catch (error) {
-		return console.log(error);
+		return console.error(error);
 	}
 
 	return {
@@ -255,6 +255,6 @@ export async function getUserWatchListAction(userId: string) {
 			.where(eq(bookmark.user_id, userId));
 		return userBookmarks;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 }

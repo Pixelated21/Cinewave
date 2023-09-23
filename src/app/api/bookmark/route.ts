@@ -49,7 +49,6 @@ export async function POST(req: Request) {
 			resource_id,
 			resource_type
 		);
-		console.log(resourceExist);
 
 		if (!resourceExist) {
 			const persistResource = await addToResourceAction({
