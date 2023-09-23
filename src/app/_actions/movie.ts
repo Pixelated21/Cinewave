@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { watchlist } from "@/lib/db/schema/watchlist";
+import { bookmark } from "@/lib/db/schema/bookmark";
 import {
 	daysToSeconds,
 	formatSearchQuery,
@@ -244,47 +244,17 @@ export async function toggleFavoriteMovieAction(id: number) {
 	return data;
 }
 
-export type WatchList = {
-	userId: string;
-	resource_id: string;
-	poster_path: string;
-	title: string;
-	release_date: number;
-	resource_type: string;
-};
-
-export async function addToWatchlistAction(resource: WatchList) {
+export async function getUserWatchListAction(userId: string) {
 	try {
-		const results = await db.insert(watchlist).values(resource);
-		return results;
+		if (!userId) {
+			throw new Error("User id is required");
+		}
+		const userBookmarks = await db
+			.select()
+			.from(bookmark)
+			.where(eq(bookmark.user_id, userId));
+		return userBookmarks;
 	} catch (error) {
 		console.log(error);
 	}
-}
-
-export async function findMovieInWatchListAction(
-	movie_id: string,
-	user_id: string
-) {
-	const alreadyInWatchlist = await db
-		.select()
-		.from(watchlist)
-		.where(
-			and(
-				eq(watchlist.userId, user_id),
-				eq(watchlist.resource_id, movie_id)
-			)
-		);
-
-	return alreadyInWatchlist;
-}
-
-export async function getUserWatchListAction(userId: string) {
-	if (!userId) return [];
-	const userWatchList = await db
-		.select()
-		.from(watchlist)
-		.where(eq(watchlist.userId, userId));
-
-	return userWatchList;
 }

@@ -1,7 +1,7 @@
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { users } from "@/lib/db/schema/users";
-import { watchlist } from "@/lib/db/schema/watchlist";
+import { user } from "@/lib/db/schema/user";
+import { bookmark } from "@/lib/db/schema/bookmark";
 import { eq } from "drizzle-orm";
 
 export async function getCurrentUserAction(from: "session" | "db" = "session") {
@@ -15,28 +15,39 @@ export async function getCurrentUserAction(from: "session" | "db" = "session") {
 			return session?.user;
 		}
 
-		const user = await db.select().from(users).where(eq(users.id, userId));
+		const currentUser = await db
+			.select()
+			.from(user)
+			.where(eq(user.id, userId));
 
-		return user[0];
+		return currentUser[0];
 	} catch (error) {
 		console.log(error);
 	}
 }
 
-export async function getCurrentUserWatchListAction() {
+export async function getCurrentUserBookmarksAction() {
 	try {
 		const currentUser = await getCurrentUserAction("session");
 		if (!currentUser) {
 			throw new Error("Unauthorized");
 		}
-		const userWatchList = await db
-			.select()
-			.from(watchlist)
-			.where(eq(watchlist.userId, currentUser.id));
-		return userWatchList;
+		const userBookmarks = await db.query.bookmark.findMany({
+			columns: {
+				resource_id: true,
+			},
+			with: {
+				resource: true,
+			},
+			where: (bookmark) => eq(bookmark.user_id, currentUser.id),
+		});
+
+		console.log(userBookmarks);
+
+		return userBookmarks;
 	} catch (error: unknown) {
 		if (error instanceof Error) {
-			throw new Error(error.message ?? "Something went wrong");
+			console.log(error.message ?? "Something went wrong");
 		}
 	}
 }
