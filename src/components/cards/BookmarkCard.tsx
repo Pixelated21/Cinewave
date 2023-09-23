@@ -1,12 +1,10 @@
-import { WatchList } from "@/app/_actions/movie";
-import { getYear } from "@/lib/utils";
-import { Movie } from "@/types";
+import { SelectResource } from "@/lib/db/schema/resource";
 import { Bookmark } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 
-export default function WatchListCard({ resource }: { resource: WatchList }) {
+export default function WatchListCard({ resource }: { resource: SelectResource }) {
     return (
         <div className="relative h-[310px] md:h-[410px] overflow-hidden rounded-sm"
         >
@@ -14,7 +12,6 @@ export default function WatchListCard({ resource }: { resource: WatchList }) {
                 href={`/${resource.resource_type}/${resource.resource_id}`}
             >
                 <div className="relative group h-[240px] md:h-[335px] flex w-full flex-col justify-end">
-
                     <Image
                         alt={`Poster for: ${resource.title} | CineWave`}
                         className="absolute group-hover:blur-[4px] duration-200 object-cover"
