@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-export default function WatchListCard({ resource }: { resource: SelectResource }) {
+export default function BookmarkCard({ resource }: { resource: SelectResource }) {
     return (
         <div className="relative h-[310px] md:h-[410px] overflow-hidden rounded-sm"
         >

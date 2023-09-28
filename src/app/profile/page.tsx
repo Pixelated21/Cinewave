@@ -2,7 +2,7 @@ import NavigationBar from "@/components/NavigationBar";
 import MovieGridLayout from "@/components/layouts/LayoutSection";
 import Image from "next/image";
 import { getTrendingMoviesAction, getUserWatchListAction } from "../_actions/movie";
-import WatchListCard from "@/components/cards/BookmarkCard";
+import BookmarkCard from "@/components/cards/BookmarkCard";
 import { getAuthSession } from "@/lib/auth";
 import { getCurrentUserAction, getCurrentUserBookmarksAction } from "../_actions/user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -84,7 +84,7 @@ export default async function Profile() {
 
                         <MovieGridLayout>
                             {bookmarkedMovies?.map((resource: any) => (
-                                <WatchListCard key={resource.resource_id} resource={resource.resource} />
+                                <BookmarkCard key={resource.resource_id} resource={resource.resource} />
                             ))}
                         </MovieGridLayout>
 
