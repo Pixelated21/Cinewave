@@ -40,7 +40,11 @@ export default function MovieCard({ resource }: { resource: Movie }) {
 
             </Link>
             <div className="h-10 w-full mt-3">
-                <Link href={`/movie/${resource.id}`} className="truncate text-sm font-semibold text-white" >{resource.title}</Link>
+                <Link href={`/movie/${resource.id}`}>
+                    <div className="truncate text-sm font-semibold text-white">
+                        {resource.title}
+                    </div>
+                </Link>
                 <div className="text-white text-xs flex flex-row gap-x-2 mt-1.5 items-center">
                     <span>{getYear(resource.release_date)}</span>
                     <div className="h-1 w-1 bg-white rounded-full"></div>
