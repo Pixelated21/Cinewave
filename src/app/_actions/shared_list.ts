@@ -20,17 +20,17 @@ export async function getAllSharedListAction() {
 	}
 }
 
-export async function findSharedListAction(
-	shared_list_id: number,
-	user_id: string
-) {
+export async function findSharedListAction(shared_list_link: string) {
 	try {
 		const results = await db.query.sharedList.findFirst({
-			where: (sharedList) =>
-				and(
-					eq(sharedList.id, shared_list_id),
-					eq(sharedList.user_id, user_id)
-				),
+			where: (sharedList) => and(eq(sharedList.link, shared_list_link)),
+			with: {
+				shared_resources: {
+					with: {
+						resource: true,
+					},
+				},
+			},
 		});
 
 		return results;
