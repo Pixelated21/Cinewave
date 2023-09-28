@@ -137,26 +137,30 @@ export default async function seriesDetails({
                 </div>
             </section>
 
-            <section className="container relative z-10 -mt-[440px] md:-mt-60 mb-20 px-0 sm:px-10">
+            <section className="container relative z-10 -mt-[440px] md:-mt-80 lg:-mt-80 mb-20 px-0 sm:px-10">
                 <div className="flex h-full justify-center sm:justify-start flex-col md:flex-row">
-                    <div className="flex flex-col items-center lg:items-start">
-                        <div className="relative h-[250px] w-[150px] md:h-[350px] md:w-[200px] rounded-sm xl:h-[400px] xl:w-[250px] 2xl:h-[400px] 2xl:w-[300px] duration-300">
+                    <div className="flex flex-col justify-center items-center gap-y-2 lg:justify-start lg:items-start ">
+                        <div className="relative h-[250px] w-[150px] md:h-[300px] md:w-[200px] rounded-sm overflow-hidden xl:h-[400px] xl:w-[250px] 2xl:h-[400px] 2xl:w-[300px] duration-300">
                             <Image
-                                className="absolute rounded-sm object-cover"
-                                height={450}
-                                width={300}
+                                className="absolute object-contain"
+                                fill
                                 sizes=""
                                 src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/w500/${seriesDetails.poster_path}`}
                                 priority
                                 alt={`Poster of: ${seriesDetails.name} | CineWave`}
                             />
                             {seriesDetails.adult && (
-                                <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 bg-orange-600 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
+                                <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
                             )}
                         </div>
-                        {!bookmarkedMovies?.find((bookmarks) => bookmarks.resource_id === seriesDetails.id.toString()) && (
-                            <AddToWatchListButton resource_id={seriesDetails.id.toString()} poster_path={seriesDetails.poster_path} title={seriesDetails.name} release_date={getYear(seriesDetails.first_air_date)} resource_type={'series'} />
-                        )}
+
+                        <div className="px-5 my-2 w-4/5 md:w-full md:px-0 2xl:px-5 ">
+                            {!bookmarkedMovies?.find((bookmarks) => bookmarks.resource_id === seriesDetails.id.toString()) && (
+                                <AddToWatchListButton resource_id={seriesDetails.id.toString()} poster_path={seriesDetails.poster_path} title={seriesDetails.name} release_date={getYear(seriesDetails.first_air_date)} resource_type={'series'} />
+                            )}
+                        </div>
+
+
                         {/* <div className="mt-7 flex flex-row items-center gap-x-7">
                             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#200725]">
                                 <span className="text-3xl font-bold text-white">
@@ -194,13 +198,13 @@ export default async function seriesDetails({
                             {seriesDetails.original_name !==
                                 seriesDetails.name && (
                                     <div className="mt-2.5 text-xs text-center md:text-left">
-                                        <span>Original name: </span>
+                                        <span>Original Title: </span>
                                         <span>{seriesDetails.original_name}</span>
                                     </div>
                                 )}
 
                             <div className="mt-2.5 flex flex-row gap-x-2 text-sm justify-center md:justify-start font-semibold">
-                                <div>Series ({seriesDetails.first_air_date})</div>
+                                <div>Movie ({seriesDetails.first_air_date})</div>
                             </div>
                         </div>
 
@@ -282,6 +286,17 @@ export default async function seriesDetails({
                                             </div>
                                         </div>
                                     )}
+
+                                {/* {seriesDetails.episode_run_time > 0 && (
+                                    <div className="flex items-center gap-x-5 py-2">
+                                        <div className="w-48 text-base">
+                                            Runtime
+                                        </div>
+                                        <Badge
+                                            text={`${seriesDetails.runtime} m`}
+                                        />
+                                    </div>
+                                )} */}
                             </div>
                         </div>
                     </div>
@@ -329,6 +344,36 @@ export default async function seriesDetails({
                                 <div className="h-5 w-5 rounded-full bg-white"></div>
                             </div> */}
                         </div>
+
+                        {/* {seriesDetails.belongs_to_collection && (
+                            <div className="flex flex-col">
+                                <div className="mt-5">
+                                    <div className=" flex w-[211px] flex-col gap-y-4">
+                                        <div className="relative  h-80 overflow-hidden rounded-sm">
+                                            <Image
+                                                alt={`Collection Poster of: ${seriesDetails.belongs_to_collection.name} | CineWave`}
+                                                className="absolute object-cover"
+                                                fill
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                src={`https://image.tmdb.org/t/p/w500/${seriesDetails.belongs_to_collection.poster_path}`}
+                                            />
+                                        </div>
+                                        <div
+                                            // href={`/collection/${seriesDetails.belongs_to_collection.id}`}
+                                            className="text-white duration-300 hover:text-purple-400"
+                                        >
+                                            <p className="text-center text-base font-semibold ">
+                                                {
+                                                    seriesDetails
+                                                        .belongs_to_collection
+                                                        .name
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )} */}
                     </div>
                 </div>
             </section>
@@ -348,10 +393,10 @@ export default async function seriesDetails({
                                 <div className="mt-5 h-full">
                                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
                                         {filteredRecommendations.map(
-                                            (movie: Series) => (
+                                            (resource: Series) => (
                                                 <SeriesCard
-                                                    key={movie.id}
-                                                    resource={movie}
+                                                    key={resource.id}
+                                                    resource={resource}
                                                 />
                                             )
                                         )}
@@ -364,9 +409,9 @@ export default async function seriesDetails({
                     <div className=" hidden lg:flex flex-col gap-y-8 ">
                         <div className="flex flex-col">
                             <h1 className=" text-2xl lg:text-3xl font-semibold text-white">
-                                Popular Series
+                                Popular
                             </h1>
-                            <div className="mt-5 w-[300px] bg-[#121214] p-5 ">
+                            <div className="mt-5 w-[300px] bg-[#121214] p-5 shadow-sm ">
                                 <div className="divide- flex flex-col gap-y-4">
                                     {filteredTrending.map((series: Series) => (
                                         <div className="" key={series.id}>

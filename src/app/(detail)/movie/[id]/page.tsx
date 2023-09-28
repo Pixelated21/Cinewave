@@ -129,9 +129,9 @@ export default async function MovieDetails({
                 </div>
             </section>
 
-            <section className="container relative z-10 -mt-[440px] md:-mt-60 mb-20 px-0 sm:px-10">
+            <section className="container relative z-10 -mt-[440px] md:-mt-80 lg:-mt-80 mb-20 px-0 sm:px-10">
                 <div className="flex h-full justify-center sm:justify-start flex-col md:flex-row">
-                    <div className="flex flex-col justify-center items-center gap-y-2 lg:justify-start lg:items-start">
+                    <div className="flex flex-col justify-center items-center gap-y-2 lg:justify-start lg:items-start ">
                         <div className="relative h-[250px] w-[150px] md:h-[300px] md:w-[200px] rounded-sm overflow-hidden xl:h-[400px] xl:w-[250px] 2xl:h-[400px] 2xl:w-[300px] duration-300">
                             <Image
                                 className="absolute object-contain"
@@ -142,7 +142,7 @@ export default async function MovieDetails({
                                 alt={`Poster of: ${movieDetails.title} | CineWave`}
                             />
                             {movieDetails.adult && (
-                                <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 bg-orange-600 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
+                                <div className="absolute top-2.5 left-2.5 md:top-4 md:left-4 px-1.5 py-0.5 md:px-2 md:py-0.5 text-xs md:text-sm rounded-md text-white font-semibold">18+</div>
                             )}
                         </div>
 
