@@ -147,7 +147,7 @@ export default async function MovieDetails({
                         </div>
 
                         <div className="px-5 my-2 w-4/5 md:w-full md:px-0 2xl:px-5 ">
-                            {!bookmarkedMovies?.find((bookmarks) => bookmarks.resource_id === movieDetails.id.toString()) && (
+                            {!bookmarkedMovies?.find((bookmark) => bookmark.resource_id === movieDetails.id.toString()) && (
                                 <AddToWatchListButton resource_id={movieDetails.id.toString()} poster_path={movieDetails.poster_path} title={movieDetails.title} release_date={getYear(movieDetails.release_date)} resource_type={'movie'} />
                             )}
                         </div>
