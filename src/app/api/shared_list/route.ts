@@ -15,15 +15,14 @@ export async function POST(req: Request) {
 
 		const json = await req.json();
 
-		const { title, shared_list_id } = json;
+		const { title, shared_list_link } = json;
 
 		// TODO: Check is use already have a link with the same title
-		const alreadyInSharedResource = await findSharedListAction(
-			shared_list_id,
-			currentUser.id
+		const alreadyInSharedList = await findSharedListAction(
+			shared_list_link
 		);
 
-		if (alreadyInSharedResource) {
+		if (alreadyInSharedList) {
 			return new Response("Already in resources", { status: 409 });
 		}
 
