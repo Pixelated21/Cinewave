@@ -11,7 +11,9 @@ export const NavigationLinks = async () => {
                 if (link.is_auth && !session) return false
                 if (!link.is_visible) return false
                 if (link.isDisabled) return (
-                    <span className="text-sm text-white/60 px-0 py-0 hover:no-underline cursor-not-allowed">{link.title}</span>
+                    <li key={link.title}>
+                        <span className="text-sm text-white/60 px-0 py-0 hover:no-underline cursor-not-allowed">{link.title}</span>
+                    </li>
                 )
                 return (
                     <li
