@@ -2,7 +2,6 @@ import {
 	createSharedListAction,
 	findSharedListAction,
 } from "@/app/_actions/shared_list";
-import { findSharedResourceAction } from "@/app/_actions/shared_resource";
 import { getCurrentUserAction } from "@/app/_actions/user";
 
 export async function POST(req: Request) {
@@ -17,12 +16,11 @@ export async function POST(req: Request) {
 
 		const { title, shared_list_link } = json;
 
-		// TODO: Check is use already have a link with the same title
-		const alreadyInSharedList = await findSharedListAction(
+		const sharedListExist = await findSharedListAction(
 			shared_list_link
 		);
 
-		if (alreadyInSharedList) {
+		if (sharedListExist) {
 			return new Response("Already in resources", { status: 409 });
 		}
 
