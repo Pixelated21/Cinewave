@@ -1,6 +1,6 @@
 import { getYear } from "@/lib/utils";
 import { Movie } from "@/types";
-import { Bookmark, Heart, MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ export default function MovieCard({ resource }: { resource: Movie }) {
                 href={`/movie/${resource.id}`}
                 className=""
             >
-                <div className="relative group h-[240px] md:h-[335px] flex w-full flex-col justify-end">
+                <div className="relative group h-[240px] overflow-hidden md:h-[335px] flex w-full flex-col justify-end">
 
                     <Image
                         alt={`Poster for: ${resource.title} | CineWave`}
