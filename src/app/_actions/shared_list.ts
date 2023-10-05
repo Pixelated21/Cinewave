@@ -30,6 +30,7 @@ export async function findSharedListAction(shared_list_link: string) {
 						resource: true,
 					},
 				},
+				user: true,
 			},
 		});
 
