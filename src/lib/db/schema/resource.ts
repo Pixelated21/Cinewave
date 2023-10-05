@@ -11,6 +11,7 @@ export const resource = pgTable("resources", {
 	id: serial("id").primaryKey(),
 	resource_id: text("resource_id").unique().notNull(),
 	poster_path: text("poster"),
+	backdrop_path: text("backdrop_path"),
 	title: varchar("title", { length: 256 }).notNull(),
 	release_date: integer("year").notNull(),
 	resource_type: varchar("type", { enum: ["movie", "series"] }),

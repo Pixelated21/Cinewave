@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 		const json = await req.json();
 		const currentUser = await getCurrentUserAction("db");
 
-		const { resource_id, poster_path, title, release_date, resource_type } =
+		const { resource_id, poster_path, backdrop_path, title, release_date, resource_type } =
 			json;
 
 		if (!currentUser || !currentUser.id) {
@@ -54,6 +54,7 @@ export async function POST(req: Request) {
 			const persistResource = await addToResourceAction({
 				resource_id: resource_id,
 				poster_path: poster_path,
+				backdrop_path: backdrop_path,
 				title: title,
 				release_date: release_date,
 				resource_type: resource_type,

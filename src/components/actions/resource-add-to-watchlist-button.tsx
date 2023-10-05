@@ -6,6 +6,7 @@ import { toast } from "../ui/use-toast";
 
 type Props = {
     poster_path: string;
+    backdrop_path: string;
     title: string;
     release_date: string | number;
     resource_type: string;
@@ -20,6 +21,7 @@ export default function AddToWatchListButton(resource: Props) {
                 body: JSON.stringify({
                     resource_id: resource.resource_id,
                     poster_path: resource.poster_path,
+                    backdrop_path: resource.poster_path,
                     title: resource.title,
                     release_date: resource.release_date,
                     resource_type: resource.resource_type
