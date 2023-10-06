@@ -1,7 +1,5 @@
 import { findSharedListAction } from "@/app/_actions/shared_list";
 import NavigationBar from "@/components/NavigationBar";
-import BookmarkCard from "@/components/cards/BookmarkCard";
-import LayoutSection from "@/components/layouts/LayoutSection";
 import { Button } from "@/components/ui/button";
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon } from "lucide-react";
 import Image from "next/image";
@@ -22,9 +20,6 @@ export default async function SharedSpacePage({ params }: { params: { linkId: st
     const resources = sharedList.shared_resources.map(item => item.resource);
     const user = sharedList.user;
 
-    console.log(resources)
-
-
     return (
         <main className="h-screen overflow-y-scroll bg-[#18181B]">
             <section className="relative h-[571px] shadow-md xl:h-[671px] ">
@@ -36,9 +31,9 @@ export default async function SharedSpacePage({ params }: { params: { linkId: st
                             className="absolute h-full w-full object-cover "
                             height={671}
                             width={1280}
-                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${resources[0].backdrop_path}`}
+                            src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${resources[0]?.backdrop_path}`}
                             priority
-                            alt={`Backdrop of: ${resources[0].title} | CineWave`}
+                            alt={`Backdrop of: ${resources[0]?.title} | CineWave`}
                         />
                         <div className="absolute h-full w-full bg-black bg-opacity-50"></div>
                         <div className="absolute h-80 w-full bg-gradient-to-b -bottom-2 from-[#18181B]/0 to-[#18181B]"></div>
@@ -63,7 +58,7 @@ export default async function SharedSpacePage({ params }: { params: { linkId: st
                                                 width={80}
                                                 src={`${user.image}`}
                                                 priority
-                                                alt={`Backdrop of: ${resources[0].title} | CineWave`}
+                                                alt={`Backdrop of: ${resources[0]?.title} | CineWave`}
                                             />
                                         </div>
                                         <div>
@@ -86,9 +81,9 @@ export default async function SharedSpacePage({ params }: { params: { linkId: st
                                 className="absolute h-full w-full object-cover object-right group-hover:scale-105 duration-200 "
                                 height={671}
                                 width={1280}
-                                src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${resources[0].backdrop_path}`}
+                                src={`${process.env.NEXT_PUBLIC_THE_MOVIE_DATABASE_IMAGE_URL}/original/${resources[0]?.backdrop_path}`}
                                 priority
-                                alt={`Backdrop of: ${resources[0].title} | CineWave`}
+                                alt={`Backdrop of: ${resources[0]?.title} | CineWave`}
                             />
                             <div className="h-full w-full absolute bg-black opacity-40">
 
