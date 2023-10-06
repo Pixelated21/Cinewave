@@ -1,7 +1,6 @@
 'use client'
-import { Button, buttonVariants } from "@/components/ui/button";
-import { SelectResource } from "@/lib/db/schema/resource";
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -19,8 +18,8 @@ const PopularSpaceHero = ({ popularSharedList }: PopularSpaceHeroProps) => {
     const [currentPopularSharedList, setCurrentPopularSharedList] = useState(0);
     const [currentDisplayedResourceIndex, setCurrentDisplayedResourceIndex] = useState(0);
 
-    const filteredPopularSharedList = popularSharedList.filter(sharedList => sharedList.shared_resources.length > 0);
-    const sharePopularListResources: SelectResource[] = filteredPopularSharedList[currentPopularSharedList].shared_resources.map((item: SelectResource[]) => item.resource);
+    const filteredPopularSharedList = popularSharedList.filter((sharedList: any) => sharedList.shared_resources.length > 0);
+    const sharePopularListResources: any = filteredPopularSharedList[currentPopularSharedList].shared_resources.map((item: any) => item.resource);
 
     return (
         <section className="relative h-[571px] shadow-md xl:h-[671px] ">
