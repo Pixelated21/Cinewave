@@ -5,7 +5,7 @@ export const navigationLinks: NavLink[] = [
 		title: "Share Space",
 		href: "/share-space",
 		is_visible: true,
-		isDisabled: true,
+		isDisabled: false,
 	},
 	{
 		title: "Try Me",
