@@ -20,6 +20,29 @@ export async function getAllSharedListAction() {
 	}
 }
 
+export async function getPopularSharedListAction() {
+	try {
+		const results = await db.query.sharedList.findMany({
+			with: {
+				shared_resources: {
+					with: {
+						resource: true,
+					},
+				},
+				user: {
+					columns: {
+						name: true,
+						image: true,
+					},
+				},
+			},
+		});
+		return results;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 export async function findSharedListAction(shared_list_link: string) {
 	try {
 		const results = await db.query.sharedList.findFirst({
