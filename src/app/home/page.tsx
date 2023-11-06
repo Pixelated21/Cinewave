@@ -10,6 +10,7 @@ import {
 } from "../_actions/movie";
 import { getLatestSeriesAction, getPopularSeriesAction } from "../_actions/series";
 
+export const dynamic = 'force-dynamic';
 export default async function HomePage() {
     const getTrendingMovies = getTrendingMoviesAction();
     const getLatestMovies = getLatestMoviesAction({});
