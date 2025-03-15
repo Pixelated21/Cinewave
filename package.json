@@ -51,7 +51,7 @@
 		"@commitlint/config-conventional": "^17.6.3",
 		"@faker-js/faker": "^8.1.0",
 		"@types/pg": "^8.10.2",
-		"drizzle-kit": "^0.19.13",
+		"drizzle-kit": "^0.30.0",
 		"husky": "^8.0.0",
 		"prettier": "^2.8.8",
 		"prettier-plugin-tailwindcss": "^0.3.0"
